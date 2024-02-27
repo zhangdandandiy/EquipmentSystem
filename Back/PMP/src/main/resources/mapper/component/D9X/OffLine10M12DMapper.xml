@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.OffLine10M12DMapper">
+
+    <select id="getOffLine10M12DList" parameterType="java.util.List" resultType="OffLine10M12D">
+        select [Stamping_u_FAI30_1]
+        ,[Stamping_u_FAI30_2]
+        ,[Stamping_u_FAI30_3]
+        ,[Stamping_u_FAI30_4]
+        ,[Stamping_u_FAI30_5]
+        ,[Stamping_u_FAI30_6]
+        ,[Stamping_u_FAI30_7]
+        ,[Stamping_u_FAI30_8]
+        ,[Stamping_u_FAI30_9]
+        ,[Stamping_u_FAI30_10]
+        ,[Stamping_u_FAI30_11]
+        ,[Stamping_u_FAI30_12]
+        ,[Stamping_u_FAI30_13]
+        ,[Stamping_u_FAI30_14]
+        from [MESDataCenter].[dbo].[D9X_Off_Line10_01_M1_2D_XXT_v]
+        where Stamping_Lot in
+        <foreach item="OffLine8M1AOIStampingLot" collection="OffLine8M1AOIStampingLotList" open="(" separator=","
+                 close=")">
+            #{OffLine8M1AOIStampingLot}
+        </foreach>
+    </select>
+
+</mapper>

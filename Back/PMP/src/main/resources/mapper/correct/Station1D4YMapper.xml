@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.d4y.Station1D4YMapper">
+
+    <resultMap id="Station1Result" type="com.example.pmp.pojo.correct.d4y.Station1D4Y">
+        <result property="Barcode" column="Barcode"/>
+        <result property="LASER_ETCH_BARCODE" column="LASER ETCH_BARCODE"/>
+        <result property="Barcode_Result" column="Barcode_Result"/>
+        <result property="TestResult" column="TestResult"/>
+        <result property="TestTime" column="TestTime"/>
+        <result property="ModuleID" column="ModuleID"/>
+        <result property="LineID" column="LineID"/>
+        <result property="LineType" column="LineType"/>
+        <result property="rn" column="rn"/>
+    </resultMap>
+
+    <!-- 从视图里捞取需要补正的数据集合,去掉码不符合规则的数据 -->
+    <select id="getStation1ListByTime" parameterType="String" resultMap="Station1Result">
+        SELECT [Barcode]
+             , [LASER ETCH_BARCODE]
+             , [Barcode_Result]
+             , [TestResult]
+             , [TestTime]
+             , [ModuleID]
+             , [LineID]
+             , [LineType]
+             , [rn]
+        FROM [MESDataCenter].[dbo].[m_D4Y_MainLine3_M6_v]
+        WHERE convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode NOT LIKE '%\u0000%'
+          AND Barcode NOT LIKE '%?%'
+          AND Barcode NOT LIKE '%ERROR%'
+          AND Barcode != ''
+    </select>
+
+    <!-- 从补正后的表里捞取SN的测试数据 -->
+    <select id="getStation1BySN" parameterType="String" resultMap="Station1Result">
+        SELECT TOP(1) [Barcode]
+             , [LASER ETCH_BARCODE]
+             , [Barcode_Result]
+             , [TestResult]
+             , [TestTime]
+             , [ModuleID]
+             , [LineID]
+             , [LineType]
+             , [rn]
+        FROM [MESDataCenter].[dbo].[m_D4Y_MainLine3_M6_BZ_t]
+        WHERE convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode = #{Barcode}
+    </select>
+
+    <!-- 插入补正后的数据，插入到补正表里 -->
+    <insert id="insertStation1">
+        insert into [MESDataCenter].[dbo].[m_D4Y_MainLine3_M6_BZ_t]
+        ( [Barcode]
+        , [LASER ETCH_BARCODE]
+        , [Barcode_Result]
+        , [TestResult]
+        , [TestTime]
+        , [ModuleID]
+        , [LineID]
+        , [LineType]
+        , [rn])
+        values (#{Barcode},
+                #{LASER_ETCH_BARCODE},
+                #{Barcode_Result},
+                #{TestResult},
+                #{TestTime},
+                #{ModuleID},
+                #{LineID},
+                #{LineType},
+                #{rn})
+    </insert>
+
+    <!-- 查询第一站所有的条码 -->
+    <select id="getStation1SNList" parameterType="String" resultType="String">
+        select Barcode
+        from [MESDataCenter].[dbo].[m_D4Y_MainLine3_M6_v]
+        where convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode NOT LIKE '%\u0000%'
+          AND Barcode NOT LIKE '%?%'
+          AND Barcode NOT LIKE '%ERROR%'
+          AND Barcode != ''
+    </select>
+
+</mapper>

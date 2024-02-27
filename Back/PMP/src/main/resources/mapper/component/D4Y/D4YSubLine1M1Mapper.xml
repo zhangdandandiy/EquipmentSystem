@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D4Y.D4YSubLine1M1Mapper">
+
+    <select id="getUpperContactIMReelLOTList" resultType="String" parameterType="java.util.List">
+        select [UpperContactIM_Reel_LOT]
+        from [MESDataCenter].[dbo].[m_D4Y_SubassemblyLine1_M1_XXT_v]
+        where Barcode_MidPlate in
+        <foreach item="BarcodeMidPlate" collection="BarcodeMidPlateList" open="(" separator="," close=")">
+            #{BarcodeMidPlate}
+        </foreach>
+    </select>
+
+    <select id="getLowerContactIMReelLOTList" resultType="String" parameterType="java.util.List">
+        select [LowerContactIM_Reel_LOT]
+        from [MESDataCenter].[dbo].[m_D4Y_SubassemblyLine1_M1_XXT_v]
+        where Barcode_MidPlate in
+        <foreach item="BarcodeMidPlate" collection="BarcodeMidPlateList" open="(" separator="," close=")">
+            #{BarcodeMidPlate}
+        </foreach>
+    </select>
+
+</mapper>

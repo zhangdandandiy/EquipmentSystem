@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.station.CaseInfoMapper">
+
+    <resultMap id="caseInfoResultMap" type="com.example.pmp.pojo.station.CaseInfo">
+        <result property="product" column="product"/>
+        <result property="lineType" column="lineType"/>
+        <result property="lineId" column="lineID"></result>
+        <result property="module" column="module"></result>
+        <result property="shift" column="shift"></result>
+        <result property="date" column="date"></result>
+        <result property="moduleInput" column="moduleInput"></result>
+        <result property="moduleOutput" column="moduleOutput"></result>
+        <result property="moduleNG" column="moduleNG"></result>
+        <collection property="stationList" ofType="com.example.pmp.pojo.station.StationInfo">
+            <result property="stationName" column="stationName"/>
+            <result property="stationInput" column="stationInput"></result>
+            <result property="stationOutput" column="stationOutput"></result>
+            <result property="stationNG" column="stationNG"></result>
+            <collection property="senseList" ofType="com.example.pmp.pojo.station.SenseInfo">
+                <result property="senseName" column="senseName"/>
+                <result property="senseInput" column="senseInput"></result>
+                <result property="senseOutput" column="senseOutput"></result>
+                <result property="senseNG" column="senseNG"></result>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="searchAllProduct" resultType="String">
+        SELECT DISTINCT product
+        FROM [MESDB].[dbo].[ProductionStationPlan2023]
+    </select>
+
+    <select id="searchAllLineTypeByProduct" resultType="String" parameterType="String">
+        SELECT DISTINCT lineType
+        FROM [MESDB].[dbo].[ProductionStationPlan2023]
+        <where>
+            <if test="product != null and product != ''">
+                AND product=#{product}
+            </if>
+        </where>
+    </select>
+
+    <select id="searchAllLineIdByLineType" resultType="String" parameterType="String">
+        SELECT DISTINCT lineID
+        FROM [MESDB].[dbo].[ProductionStationPlan2023]
+        <where>
+            <if test="product != null and product != ''">
+                AND product=#{product}
+            </if>
+            <if test="lineType != null and lineType != ''">
+                AND lineType=#{lineType}
+            </if>
+        </where>
+    </select>
+
+    <select id="searchAllModuleByLineId" resultType="String" parameterType="String">
+        SELECT DISTINCT stationID AS module
+        FROM [MESDB].[dbo].[ProductionStationPlan2023]
+        <where>
+            <if test="product != null and product != ''">
+                AND product=#{product}
+            </if>
+            <if test="lineType != null and lineType != ''">
+                AND lineType=#{lineType}
+            </if>
+            <if test="lineId != null and lineId != ''">
+                AND lineId=#{lineId}
+            </if>
+        </where>
+    </select>
+
+    <select id="searchAllCaseInfoList" resultMap="caseInfoResultMap"
+            parameterType="com.example.pmp.pojo.station.dto.CaseInfoSearchListDto">
+        SELECT S.Project AS product,
+        M.lineType AS lineType,
+        M.lineId AS lineId,
+        M.machineId AS module,
+        S.shift AS shift,
+        SUBSTRING(CONVERT(VARCHAR(20), S.createTime, 120), 1, 10) AS date,
+        M.InPut AS moduleInput,
+        M.OutPut AS moduleOutput,
+        M.NG AS moduleNG,
+        S.Station AS stationName,
+        S.InPut AS stationInput,
+        S.OutPut AS stationOutput,
+        S.NG AS stationNG,
+        E.FAIID AS senseName,
+        null AS senseOutput,
+        null AS senseInput,
+        E.CalculateNGNum AS senseNG
+        FROM (-- 模组信息
+        SELECT *
+        FROM [MESDB].[dbo].[Automatic_Testing_log2023]
+        <where>
+            <if test="searchListDto.product != null and searchListDto.product != ''">
+                AND Project = #{searchListDto.product}
+            </if>
+            <if test="searchListDto.lineType != null and searchListDto.lineType != ''">
+                AND lineType = #{searchListDto.lineType}
+            </if>
+            <if test="searchListDto.lineId != null and searchListDto.lineId != ''">
+                AND lineId = #{searchListDto.lineId}
+            </if>
+            <if test="searchListDto.module != null and searchListDto.module != ''">
+                AND machineId = #{searchListDto.module}
+            </if>
+            <if test="searchListDto.shift != null and searchListDto.shift != ''">
+                AND shift = #{searchListDto.shift}
+            </if>
+            <if test="searchListDto.date != null and searchListDto.date != ''">
+                AND SUBSTRING(CONVERT(VARCHAR(20), Time, 120), 1, 10) = #{searchListDto.date}
+            </if>
+            AND Station LIKE 'M%'
+        </where>
+        ) M
+        LEFT JOIN
+        (
+        -- 站点信息
+        SELECT *
+        FROM [MESDB].[dbo].[Automatic_Testing_log2023]
+        <where>
+            <if test="searchListDto.product != null and searchListDto.product != ''">
+                AND Project = #{searchListDto.product}
+            </if>
+            <if test="searchListDto.lineType != null and searchListDto.lineType != ''">
+                AND lineType = #{searchListDto.lineType}
+            </if>
+            <if test="searchListDto.lineId != null and searchListDto.lineId != ''">
+                AND lineId = #{searchListDto.lineId}
+            </if>
+            <if test="searchListDto.module != null and searchListDto.module != ''">
+                AND machineId = #{searchListDto.module}
+            </if>
+
+            <if test="searchListDto.module != null and searchListDto.module != ''">
+                AND Station NOT IN (N'整个模组')
+            </if>
+            <if test="searchListDto.shift != null and searchListDto.shift != ''">
+                AND shift = #{searchListDto.shift}
+            </if>
+            <if test="searchListDto.date != null and searchListDto.date != ''">
+                AND SUBSTRING(CONVERT(VARCHAR(20), Time, 120), 1, 10) = #{searchListDto.date}
+            </if>
+            AND Station NOT LIKE 'M%'
+        </where>
+
+        ) S
+        ON S.machineId=M.machineId
+        LEFT JOIN
+        (
+        -- 检测信息
+        SELECT *
+        FROM [Equment_Scada].[dbo].[AllLine_CalculateNGNum_log2023]
+        <where>
+            <if test="searchListDto.product != null and searchListDto.product != ''">
+                AND ProjectName = #{searchListDto.product}
+            </if>
+            <if test="searchListDto.lineType != null and searchListDto.lineType != ''">
+                AND LineType = #{searchListDto.lineType}
+            </if>
+            <if test="searchListDto.lineId != null and searchListDto.lineId != ''">
+                AND LineID = #{searchListDto.lineId}
+            </if>
+            <if test="searchListDto.module != null and searchListDto.module != ''">
+                AND ModuleID = #{searchListDto.module}
+            </if>
+            <if test="searchListDto.date != null and searchListDto.date != ''">
+                AND SUBSTRING(CONVERT(VARCHAR(20), createTime, 120), 1, 10) = #{searchListDto.date}
+            </if>
+            <if test="searchListDto.shift != null and searchListDto.shift != ''">
+                AND (
+                (#{searchListDto.shift} = 'N' AND SUBSTRING(CONVERT(VARCHAR(20), createTime, 120), 12, 2) &lt; '12') OR
+                (#{searchListDto.shift} = 'D' AND SUBSTRING(CONVERT(VARCHAR(20), createTime, 120), 12, 2) >= '12')
+                )
+            </if>
+        </where>
+        ) E
+        ON CHARINDEX(REPLACE(S.Station,' ',''),REPLACE(E.FAIID,' ','') COLLATE Chinese_Taiwan_Stroke_CI_AS)>0
+        AND CHARINDEX( S.machineId, E.FAIID COLLATE Chinese_Taiwan_Stroke_CI_AS)>0
+        ORDER BY M.machineId,M.Station
+    </select>
+
+</mapper>

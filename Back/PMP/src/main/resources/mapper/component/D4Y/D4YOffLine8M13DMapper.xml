@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D4Y.D4YOffLine8M13DMapper">
+
+    <select id="getD4YOffLine8M13DList" resultType="D4YOffLine8M13D" parameterType="java.util.List">
+        select [FAI580_1D]
+        ,[FAI580_2D]
+        ,[FAI580_3D]
+        ,[FAI580_4D]
+        ,[FAI580_5D]
+        ,[FAI580_6D]
+        ,[FAI580_7D]
+        ,[FAI580_8D]
+        ,[FAI580_9D]
+        ,[FAI580_10D]
+        ,[FAI580_11D]
+        ,[FAI580_12D]
+        ,[FAI580_13D]
+        ,[FAI580_14D]
+        from [MESDataCenter].[dbo].[D4Y_Off_Line8_01_M1_3D_XXT_v]
+        where IM_Lot in
+        <foreach item="UpperContactIMReelLOT" collection="UpperContactIMReelLOTList" open="(" separator="," close=")">
+            #{UpperContactIMReelLOT}
+        </foreach>
+    </select>
+
+    <select id="getD4YOffLine8M13DStampingLotList" resultType="String" parameterType="java.util.List">
+        select [Stamping_Lot]
+        from [MESDataCenter].[dbo].[D4Y_Off_Line8_01_M1_3D_XXT_v]
+        where IM_Lot in
+        <foreach item="UpperContactIMReelLOT" collection="UpperContactIMReelLOTList" open="(" separator="," close=")">
+            #{UpperContactIMReelLOT}
+        </foreach>
+    </select>
+
+</mapper>

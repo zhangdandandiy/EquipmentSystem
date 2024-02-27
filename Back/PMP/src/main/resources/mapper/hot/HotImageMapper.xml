@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.hot.HotImageMapper">
+
+    <resultMap type="HotImage" id="HotImageResult">
+        <result property="id" column="id"/>
+        <result property="Product" column="Product"/>
+        <result property="LineType" column="LineType"/>
+        <result property="ImageURL" column="ImageURL"/>
+    </resultMap>
+
+    <sql id="selectHotImageVo">
+        select id, Product, LineType, ImageURL
+        from [MESDB].[dbo].[m_Thermodynamic_Image_t]
+    </sql>
+
+    <select id="selectHotImageList" parameterType="HotImage" resultMap="HotImageResult">
+        <include refid="selectHotImageVo"/>
+        <where>
+            <if test="Product != null  and Product != ''">and Product = #{Product}</if>
+            <if test="LineType != null  and LineType != ''">and LineType = #{LineType}</if>
+            <if test="ImageURL != null  and ImageURL != ''">and ImageURL = #{ImageURL}</if>
+        </where>
+    </select>
+
+    <select id="selectHotImageById" parameterType="Long" resultMap="HotImageResult">
+        <include refid="selectHotImageVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectHotImageURLList" parameterType="HotImage" resultType="String">
+        select ImageURL
+        from [MESDB].[dbo].[m_Thermodynamic_Image_t]
+        <where>
+            <if test="Product != null  and Product != ''">and Product = #{Product}</if>
+            <if test="LineType != null  and LineType != ''">and LineType = #{LineType}</if>
+            <if test="ImageURL != null  and ImageURL != ''">and ImageURL = #{ImageURL}</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.sense.SenseDataMapper">
+
+    <resultMap id="X3047ResultMap" type="SenseDataX3047">
+        <result property="FAI9_1" column="FAI9-1"/>
+        <result property="FAI9_2" column="FAI9_2"/>
+        <result property="FAI9_3" column="FAI9-3"/>
+        <result property="FAI9_4" column="FAI9_4"/>
+        <result property="FAI9_5" column="FAI9-5"/>
+        <result property="FAI9_6" column="FAI9_6"/>
+        <result property="FAI9_7" column="FAI9-7"/>
+        <result property="FAI9_8" column="FAI9_8"/>
+        <result property="FAI12" column="FAI12"/>
+    </resultMap>
+
+    <resultMap id="X2757ResultMap" type="SenseDataX2757">
+        <result property="FAI9_1" column="3D_FAI9_1"/>
+        <result property="FAI9_2" column="3D_FAI9_2"/>
+        <result property="FAI9_3" column="3D_FAI9_3"/>
+        <result property="FAI9_4" column="3D_FAI9_4"/>
+        <result property="FAI9_5" column="3D_FAI9_5"/>
+        <result property="FAI9_6" column="3D_FAI9_6"/>
+        <result property="FAI9_7" column="3D_FAI9_7"/>
+        <result property="FAI9_8" column="3D_FAI9_8"/>
+        <result property="FAI12" column="3D_FAI12"/>
+    </resultMap>
+
+    <!-- 复用代码 -->
+    <sql id="distinctQuery">
+        <where>
+            <if test="senseDataDto.LineID !=  null and senseDataDto.LineID != ''">and LineID = #{senseDataDto.LineID}
+            </if>
+            <if test="senseDataDto.startTime != null and senseDataDto.startTime != '' and senseDataDto.endTime != null and senseDataDto.endTime != ''">
+                AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+                AND CONVERT (VARCHAR (20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="getD8XAllPins" resultType="SenseDataD8X" parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT [FAI_26_35_Value] AS pin35
+        , [FAI_26_36_Value] AS pin36
+        , [FAI_26_29_Value] AS pin29
+        , [FAI_26_30_Value] AS pin30
+        , [FAI_26_31_Value] AS pin31
+        , [FAI_26_1_Value] AS pin1
+        , [FAI_26_2_Value] AS pin2
+        , [FAI_26_3_Value] AS pin3
+        , [FAI_26_4_Value] AS pin4
+        , [FAI_26_5_Value] AS pin5
+        , [FAI_26_6_Value] AS pin6
+        , [FAI_26_7_Value] AS pin7
+        , [FAI_26_8_Value] AS pin8
+        , [FAI_26_9_Value] AS pin9
+        , [FAI_26_10_Value] AS pin10
+        , [FAI_26_11_Value] AS pin11
+        , [FAI_26_12_Value] AS pin12
+        , [FAI_26_13_Value] AS pin13
+        , [FAI_26_14_Value] AS pin14
+        , [FAI_26_15_Value] AS pin15
+        , [FAI_26_16_Value] AS pin16
+        , [FAI_26_17_Value] AS pin17
+        , [FAI_26_18_Value] AS pin18
+        , [FAI_26_19_Value] AS pin19
+        , [FAI_26_20_Value] AS pin20
+        , [FAI_26_21_Value] AS pin21
+        , [FAI_26_22_Value] AS pin22
+        , [FAI_26_23_Value] AS pin23
+        , [FAI_26_24_Value] AS pin24
+        , [FAI_26_25_Value] AS pin25
+        , [FAI_26_26_Value] AS pin26
+        , [FAI_26_27_Value] AS pin27
+        , [FAI_26_28_Value] AS pin28
+        , [FAI_26_32_Value] AS pin32
+        , [FAI_26_33_Value] AS pin33
+        , [FAI_26_34_Value] AS pin34
+        FROM [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M8_t]
+        <include refid="distinctQuery"/>
+    </select>
+
+    <select id="searchD8XAvgRealSenseData" resultType="SenseDataD8X"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT AVG(pin35) pin35
+             , AVG(pin36) pin36
+
+             , AVG(pin29) pin29
+             , AVG(pin30) pin30
+             , AVG(pin31) pin31
+
+             , AVG(pin1)  pin1
+             , AVG(pin2)  pin2
+             , AVG(pin3)  pin3
+             , AVG(pin4)  pin4
+             , AVG(pin5)  pin5
+             , AVG(pin6)  pin6
+             , AVG(pin7)  pin7
+             , AVG(pin8)  pin8
+             , AVG(pin9)  pin9
+             , AVG(pin10) pin10
+             , AVG(pin11) pin11
+             , AVG(pin12) pin12
+             , AVG(pin13) pin13
+             , AVG(pin14) pin14
+
+             , AVG(pin15) pin15
+             , AVG(pin16) pin16
+             , AVG(pin17) pin17
+             , AVG(pin18) pin18
+             , AVG(pin19) pin19
+             , AVG(pin20) pin20
+             , AVG(pin21) pin21
+             , AVG(pin22) pin22
+             , AVG(pin23) pin23
+             , AVG(pin24) pin24
+             , AVG(pin25) pin25
+             , AVG(pin26) pin26
+             , AVG(pin27) pin27
+             , AVG(pin28) pin28
+
+             , AVG(pin32) pin32
+             , AVG(pin33) pin33
+             , AVG(pin34) pin34
+        FROM (
+                 SELECT CAST([FAI_26_35_Value] AS float) pin35
+                      , CAST([FAI_26_36_Value] AS float) pin36
+
+                      , CAST([FAI_26_29_Value] AS float) pin29
+                      , CAST([FAI_26_30_Value] AS float) pin30
+                      , CAST([FAI_26_31_Value] AS float) pin31
+
+                      , CAST([FAI_26_1_Value] AS float)  pin1
+                      , CAST([FAI_26_2_Value] AS float)  pin2
+                      , CAST([FAI_26_3_Value] AS float)  pin3
+                      , CAST([FAI_26_4_Value] AS float)  pin4
+                      , CAST([FAI_26_5_Value] AS float)  pin5
+                      , CAST([FAI_26_6_Value] AS float)  pin6
+                      , CAST([FAI_26_7_Value] AS float)  pin7
+                      , CAST([FAI_26_8_Value] AS float)  pin8
+                      , CAST([FAI_26_9_Value] AS float)  pin9
+                      , CAST([FAI_26_10_Value] AS float) pin10
+                      , CAST([FAI_26_11_Value] AS float) pin11
+                      , CAST([FAI_26_12_Value] AS float) pin12
+                      , CAST([FAI_26_13_Value] AS float) pin13
+                      , CAST([FAI_26_14_Value] AS float) pin14
+
+                      , CAST([FAI_26_15_Value] AS float) pin15
+                      , CAST([FAI_26_16_Value] AS float) pin16
+                      , CAST([FAI_26_17_Value] AS float) pin17
+                      , CAST([FAI_26_18_Value] AS float) pin18
+                      , CAST([FAI_26_19_Value] AS float) pin19
+                      , CAST([FAI_26_20_Value] AS float) pin20
+                      , CAST([FAI_26_21_Value] AS float) pin21
+                      , CAST([FAI_26_22_Value] AS float) pin22
+                      , CAST([FAI_26_23_Value] AS float) pin23
+                      , CAST([FAI_26_24_Value] AS float) pin24
+                      , CAST([FAI_26_25_Value] AS float) pin25
+                      , CAST([FAI_26_26_Value] AS float) pin26
+                      , CAST([FAI_26_27_Value] AS float) pin27
+                      , CAST([FAI_26_28_Value] AS float) pin28
+
+                      , CAST([FAI_26_32_Value] AS float) pin32
+                      , CAST([FAI_26_33_Value] AS float) pin33
+                      , CAST([FAI_26_34_Value] AS float) pin34
+                 FROM [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M8_t]
+                 WHERE LineID = #{senseDataDto.LineID}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+                   AND Barcode != ''
+                   AND FAI_12_Value != '999'
+             ) A
+    </select>
+
+    <select id="searchX3047AvgRealSenseData" resultType="SenseDataX3047"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT AVG(pin1)    'FAI9_1'
+             , AVG(pin2)    'FAI9_2'
+             , AVG(pin3)    'FAI9_3'
+             , AVG(pin4)    'FAI9_4'
+             , AVG(pin5)    'FAI9_5'
+             , AVG(pin6)    'FAI9_6'
+             , AVG(pin7)    'FAI9_7'
+             , AVG(pin8)    'FAI9_8'
+             , AVG(pin1_28) FAI12
+        FROM (
+                 SELECT CAST([FAI9-1_Value] AS float) pin1
+                      , CAST([FAI9-2_Value] AS float) pin2
+
+                      , CAST([FAI9-3_Value] AS float) pin3
+                      , CAST([FAI9-4_Value] AS float) pin4
+                      , CAST([FAI9-5_Value] AS float) pin5
+
+                      , CAST([FAI9-6_Value] AS float) pin6
+                      , CAST([FAI9-7_Value] AS float) pin7
+                      , CAST([FAI9-8_Value] AS float) pin8
+                      , CAST([FAI12_Value] AS float)  pin1_28
+                 FROM [MESDataCenter].[dbo].[X3047_Main_Line1_01_M1_AOI456]
+                 WHERE LineID = #{senseDataDto.LineID}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+                   AND Barcode != ''
+             ) A
+    </select>
+
+    <select id="searchX2757AvgRealSenseData" resultType="SenseDataX2757"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT AVG(pin1)    'FAI9_1'
+             , AVG(pin2)    'FAI9_2'
+             , AVG(pin3)    'FAI9_3'
+             , AVG(pin4)    'FAI9_4'
+             , AVG(pin5)    'FAI9_5'
+             , AVG(pin6)    'FAI9_6'
+             , AVG(pin7)    'FAI9_7'
+             , AVG(pin8)    'FAI9_8'
+             , AVG(pin1_28) FAI12
+        FROM (
+                 SELECT CAST([3D_FAI9_1] AS float) pin1
+                      , CAST([3D_FAI9_2] AS float) pin2
+                      , CAST([3D_FAI9_3] AS float) pin3
+                      , CAST([3D_FAI9_4] AS float) pin4
+                      , CAST([3D_FAI9_5] AS float) pin5
+                      , CAST([3D_FAI9_6] AS float) pin6
+                      , CAST([3D_FAI9_7] AS float) pin7
+                      , CAST([3D_FAI9_8] AS float) pin8
+                      , CAST([3D_FAI12] AS float)  pin1_28
+                 FROM [MESDataCenter].[dbo].[m_A90_M3_2_t]
+                 WHERE LineName like concat('%', #{senseDataDto.LineID}, '%')
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+                   AND SN != ''
+             ) A
+    </select>
+
+    <select id="getX2757AllPins" resultType="SenseDataX2757"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT [3D_FAI9_1] AS 'FAI9_1',
+               [3D_FAI12]  AS 'FAI12',
+               [3D_FAI9_8] AS 'FAI9_8',
+               [3D_FAI9_7] AS 'FAI9_7',
+               [3D_FAI9_6] AS 'FAI9_6',
+               [3D_FAI9_5] AS 'FAI9_5',
+               [3D_FAI9_4] AS 'FAI9_4',
+               [3D_FAI9_3] AS 'FAI9_3',
+               [3D_FAI9_2] AS 'FAI9_2'
+        FROM [MESDataCenter].[dbo].[m_A90_M3_2_t]
+        WHERE CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+    </select>
+
+    <select id="getX2987AllPins" resultType="String" parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT DISTINCT [3D_FAI17] AS pin
+        FROM [MESDataCenter].[dbo].[m_X2987_DATA_t]
+        WHERE CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+    </select>
+
+    <select id="getX3047AllPins" resultType="SenseDataX3047"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT [FAI9-1_Value] AS 'FAI9_1',
+               [FAI9-2_Value] AS 'FAI9_2',
+               [FAI9-3_Value] AS 'FAI9_3',
+               [FAI9-4_Value] AS 'FAI9_4',
+               [FAI9-5_Value] AS 'FAI9_5',
+               [FAI9-6_Value] AS 'FAI9_6',
+               [FAI9-7_Value] AS 'FAI9_7',
+               [FAI9-8_Value] AS 'FAI9_8',
+               [FAI12_Value]  AS 'FAI12'
+        FROM [MESDataCenter].[dbo].[X3047_Main_Line1_01_M1_AOI456]
+        WHERE CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+    </select>
+
+</mapper>

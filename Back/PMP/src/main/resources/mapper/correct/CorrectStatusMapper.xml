@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.CorrectStatusMapper">
+
+    <resultMap id="CorrectStatusResult" type="CorrectStatus">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="lid" column="lid"/>
+        <result property="module" column="module"/>
+        <result property="station" column="station"/>
+        <result property="name" column="name"/>
+        <result property="sort" column="sort"/>
+        <result property="complete" column="complete"/>
+        <result property="flag" column="flag"/>
+        <result property="updateTime" column="updateTime"/>
+    </resultMap>
+
+    <select id="getCorrectStatusList" resultMap="CorrectStatusResult" parameterType="String">
+        select id,
+               pid,
+               lid,
+               module,
+               station,
+               name,
+               sort,
+               complete,
+               flag,
+               updateTime
+        from [MESDB].[dbo].[Correct_Status]
+        where pid = #{pid}
+    </select>
+
+    <update id="updateCorrectStatusByName" parameterType="CorrectStatus">
+        update [MESDB].[dbo].[Correct_Status]
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="complete != null and complete != ''">complete = 1,</if>
+            updateTime = GETDATE(),
+        </trim>
+        where id=#{id}
+    </update>
+
+    <update id="updateCorrectStatus" parameterType="String">
+        update [MESDB].[dbo].[Correct_Status]
+        set complete   = 0,
+            updateTime = GETDATE()
+        where pid = #{pid}
+    </update>
+
+</mapper>

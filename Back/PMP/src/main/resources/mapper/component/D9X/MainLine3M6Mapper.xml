@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.MainLine3M6Mapper">
+
+    <select id="getMainLine3M6List" resultType="MainLine3M6" parameterType="java.util.List">
+        select [Barcode_HSG]
+        , [Barcode]
+        , [TestTime]
+        from MESDataCenter.dbo.m_D9X_MainLine3_M6_XXT_v
+        where Barcode in
+        <foreach item="Barcode" collection="BarCodeList" open="(" separator="," close=")">
+            #{Barcode}
+        </foreach>
+    </select>
+
+    <select id="getMainLine3M6BarcodeHSGList" resultType="String" parameterType="java.util.List">
+        select [Barcode_HSG]
+        from MESDataCenter.dbo.m_D9X_MainLine3_M6_XXT_v
+        where Barcode in
+        <foreach item="Barcode" collection="BarCodeList" open="(" separator="," close=")">
+            #{Barcode}
+        </foreach>
+    </select>
+
+</mapper>

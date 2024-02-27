@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.OffLine8M13DMapper">
+
+    <select id="getOffLine8M13DList" resultType="OffLine8M13D" parameterType="java.util.List">
+        select [FAI175_1D]
+        from [MESDataCenter].[dbo].[D9X_Off_Line8_01_M1_3D_XXT_v]
+        where IM_Lot in
+        <foreach item="UpperContactIMReelLOT" collection="UpperContactIMReelLOTList" open="(" separator="," close=")">
+            #{UpperContactIMReelLOT}
+        </foreach>
+    </select>
+
+    <select id="getOffLine8M13DStampingLotList" resultType="String" parameterType="java.util.List">
+        select [Stamping_Lot]
+        from [MESDataCenter].[dbo].[D9X_Off_Line8_01_M1_3D_XXT_v]
+        where IM_Lot in
+        <foreach item="UpperContactIMReelLOT" collection="UpperContactIMReelLOTList" open="(" separator="," close=")">
+            #{UpperContactIMReelLOT}
+        </foreach>
+    </select>
+
+</mapper>

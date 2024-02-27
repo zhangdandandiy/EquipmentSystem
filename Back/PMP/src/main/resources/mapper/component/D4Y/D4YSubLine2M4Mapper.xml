@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D4Y.D4YSubLine2M4Mapper">
+
+    <select id="getD4YSubLine2M4List" resultType="D4YSubLine2M4" parameterType="java.util.List">
+        select [FAI121_1_Value]
+        ,[FAI121_2_Value]
+        ,[FAI121_3_Value]
+        ,[FAI121_4_Value]
+        ,[FAI121_5_Value]
+        ,[FAI121_6_Value]
+        ,[FAI121_7_Value]
+        ,[FAI121_8_Value]
+        ,[FAI121_9_Value]
+        ,[FAI121_10_Value]
+        ,[FAI121_11_Value]
+        ,[FAI121_12_Value]
+        ,[FAI121_13_Value]
+        ,[FAI121_14_Value]
+        ,[FAI121_15_Value]
+        ,[FAI121_16_Value]
+        ,[FAI121_17_Value]
+        ,[FAI121_18_Value]
+        ,[FAI121_19_Value]
+        ,[FAI121_20_Value]
+        ,[FAI121_21_Value]
+        ,[FAI121_22_Value]
+        ,[FAI121_23_Value]
+        ,[FAI121_24_Value]
+        ,[FAI121_25_Value]
+        ,[FAI121_26_Value]
+        ,[FAI121_27_Value]
+        ,[FAI121_28_Value]
+        ,[FAI121_29_Value]
+        ,[FAI121_30_Value]
+        ,[FAI121_31_Value]
+        ,[FAI121_32_Value]
+        ,[FAI121_33_Value]
+        ,[FAI121_34_Value]
+        from [MESDataCenter].[dbo].[m_D4Y_SubassemblyLine2_M4_XXT_v]
+        where Barcode_EMI in
+        <foreach item="BarcodeEMI" collection="BarcodeEMIList" open="(" separator="," close=")">
+            #{BarcodeEMI}
+        </foreach>
+    </select>
+
+</mapper>

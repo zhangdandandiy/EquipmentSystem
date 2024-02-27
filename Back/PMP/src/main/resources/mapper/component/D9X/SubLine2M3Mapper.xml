@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.SubLine2M3Mapper">
+
+    <select id="getSubLine2M3TPXList" resultType="SubLine2M3TPX" parameterType="java.util.List">
+        select [FAI11_1_Value]
+        ,[FAI11_2_Value]
+        ,[FAI11_3_Value]
+        ,[FAI11_4_Value]
+        ,[FAI11_5_Value]
+        ,[FAI11_6_Value]
+        ,[FAI11_7_Value]
+        ,[FAI11_8_Value]
+        ,[FAI11_9_Value]
+        ,[FAI11_10_Value]
+        ,[FAI11_11_Value]
+        ,[FAI11_12_Value]
+        ,[FAI11_13_Value]
+        ,[FAI11_14_Value]
+        ,[FAI11_15_Value]
+        ,[FAI11_16_Value]
+        ,[FAI11_17_Value]
+        ,[FAI11_18_Value]
+        ,[FAI11_19_Value]
+        ,[FAI11_20_Value]
+        ,[FAI11_21_Value]
+        ,[FAI11_22_Value]
+        ,[FAI11_23_Value]
+        ,[FAI11_24_Value]
+        ,[FAI11_25_Value]
+        ,[FAI11_26_Value]
+        ,[FAI11_27_Value]
+        ,[FAI11_28_Value]
+        from [MESDataCenter].[dbo].[m_D9X_SubassemblyLine2_M3_XXT_v]
+        where Barcode_EMI in
+        <foreach item="BarcodeEMI" collection="BarcodeEMIList" open="(" separator="," close=")">
+            #{BarcodeEMI}
+        </foreach>
+    </select>
+
+    <select id="getSubLine2M3TPYList" resultType="SubLine2M3TPY" parameterType="java.util.List">
+        select [FAI27_1_Value]
+        ,[FAI27_2_Value]
+        ,[FAI27_3_Value]
+        ,[FAI27_4_Value]
+        ,[FAI27_5_Value]
+        ,[FAI27_6_Value]
+        ,[FAI27_7_Value]
+        ,[FAI27_8_Value]
+        ,[FAI27_9_Value]
+        ,[FAI27_10_Value]
+        ,[FAI27_11_Value]
+        ,[FAI27_12_Value]
+        ,[FAI27_13_Value]
+        ,[FAI27_14_Value]
+        ,[FAI28_1_Value]
+        ,[FAI28_2_Value]
+        ,[FAI28_3_Value]
+        ,[FAI28_4_Value]
+        ,[FAI28_5_Value]
+        ,[FAI28_6_Value]
+        ,[FAI28_7_Value]
+        ,[FAI28_8_Value]
+        ,[FAI28_9_Value]
+        ,[FAI28_10_Value]
+        ,[FAI28_11_Value]
+        ,[FAI28_12_Value]
+        ,[FAI28_13_Value]
+        ,[FAI28_14_Value]
+        from [MESDataCenter].[dbo].[m_D9X_SubassemblyLine2_M3_XXT_v]
+        where Barcode_EMI in
+        <foreach item="BarcodeEMI" collection="BarcodeEMIList" open="(" separator="," close=")">
+            #{BarcodeEMI}
+        </foreach>
+    </select>
+
+</mapper>

@@ -1,0 +1,1634 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.fox.D8xMapper">
+
+    <select id="selectD8XAll" resultType="d8x">
+        select top (2) *
+        from [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M5_t];
+    </select>
+
+    <insert id="insertMD8xMainLine301M5T" parameterType="D8XMainLine301M5">
+        insert into E85_FOX.dbo.m_D8X_Main_Line3_01_M5_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="items != null">items,</if>
+            <if test="Testpcid != null">Testpcid,</if>
+            <if test="Collecttime != null">Collecttime,</if>
+            <if test="FileName != null">FileName,</if>
+            <if test="Barcode != null">Barcode,</if>
+            <if test="Barcode_Level != null">Barcode_Level,</if>
+            <if test="Barcode_Result != null">Barcode_Result,</if>
+            <if test="TestResult != null">TestResult,</if>
+            <if test="TestTime != null">TestTime,</if>
+            <if test="ModuleID != null">ModuleID,</if>
+            <if test="LineID != null">LineID,</if>
+            <if test="LineType != null">LineType,</if>
+            <if test="ProjectID != null">ProjectID,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="items != null">#{items},</if>
+            <if test="Testpcid != null">#{Testpcid},</if>
+            <if test="Collecttime != null">#{Collecttime},</if>
+            <if test="FileName != null">#{FileName},</if>
+            <if test="Barcode != null">#{Barcode},</if>
+            <if test="Barcode_Level != null">#{Barcode_Level},</if>
+            <if test="Barcode_Result != null">#{Barcode_Result},</if>
+            <if test="TestResult != null">#{TestResult},</if>
+            <if test="TestTime != null">#{TestTime},</if>
+            <if test="ModuleID != null">#{ModuleID},</if>
+            <if test="LineID != null">#{LineID},</if>
+            <if test="LineType != null">#{LineType},</if>
+            <if test="ProjectID != null">#{ProjectID},</if>
+        </trim>
+    </insert>
+
+    <select id="searchMD8xMainLine301M5T" parameterType="String" resultType="D8XMainLine301M5Search">
+        SELECT items
+        , Testpcid
+        , Collecttime
+        , FileName
+        , Barcode
+        , Barcode_Level
+        , Barcode_Result
+        , TestResult
+        , CONVERT(VARCHAR(50), TestTime, 120) AS 'TestTime'
+        , ModuleID
+        , LineID
+        , LineType
+        , 'D8X' AS ProjectID
+        FROM MESDataCenter.dbo.m_D8X_Main_Line3_01_M5_t
+        <where>
+            <if test="Barcode!=null and Barcode!=''">AND Barcode = #{Barcode}</if>
+            <if test="StartTime!=null and StartTime!='' and EndTime!=null and EndTime!=''">
+                AND CONVERT(VARCHAR(50), TestTime, 120) BETWEEN #{StartTime} AND #{EndTime}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertMD8xMainLine301M6T" parameterType="D8XMainLine301M6">
+        insert into E85_FOX.dbo.m_D8X_Main_Line3_01_M6_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="items != null">items,</if>
+            <if test="Testpcid != null">Testpcid,</if>
+            <if test="Collecttime != null">Collecttime,</if>
+            <if test="FileName != null">FileName,</if>
+            <if test="Barcode != null">Barcode,</if>
+            <if test="Open_Result != null">Open_Result,</if>
+            <if test="Short_Result != null">Short_Result,</if>
+            <if test="TestResult != null">TestResult,</if>
+            <if test="TestTime != null">TestTime,</if>
+            <if test="ModuleID != null">ModuleID,</if>
+            <if test="LineID != null">LineID,</if>
+            <if test="LineType != null">LineType,</if>
+            <if test="ProjectID != null">ProjectID,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="items != null">#{items},</if>
+            <if test="Testpcid != null">#{Testpcid},</if>
+            <if test="Collecttime != null">#{Collecttime},</if>
+            <if test="FileName != null">#{FileName},</if>
+            <if test="Barcode != null">#{Barcode},</if>
+            <if test="Open_Result != null">#{Open_Result},</if>
+            <if test="Short_Result != null">#{Short_Result},</if>
+            <if test="TestResult != null">#{TestResult},</if>
+            <if test="TestTime != null">#{TestTime},</if>
+            <if test="ModuleID != null">#{ModuleID},</if>
+            <if test="LineID != null">#{LineID},</if>
+            <if test="LineType != null">#{LineType},</if>
+            <if test="ProjectID != null">#{ProjectID},</if>
+        </trim>
+    </insert>
+
+    <select id="searchMD8xMainLine301M6T" parameterType="String" resultType="D8XMainLine301M6Search">
+        SELECT [items]
+        ,[Testpcid]
+        ,[Collecttime]
+        ,[FileName]
+        ,[Barcode]
+        ,[Open_Result]
+        ,[Short_Result]
+        ,[TestResult]
+        ,convert(varchar(50),[TestTime],120) as 'TestTime'
+        ,[ModuleID]
+        ,[LineID]
+        ,[LineType]
+        ,'D8X' AS ProjectID
+        FROM [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M6_t]
+        <where>
+            <if test="Barcode!=null and Barcode!=''">AND Barcode = #{Barcode}</if>
+            <if test="StartTime!=null and StartTime!='' and EndTime!=null and EndTime!=''">
+                AND CONVERT(VARCHAR(50), TestTime, 120) BETWEEN #{StartTime} AND #{EndTime}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertMD8xMainLine301M7T" parameterType="D8XMainLine301M7">
+        insert into E85_FOX.dbo.m_D8X_Main_Line3_01_M7_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="items != null">items,</if>
+            <if test="Testpcid != null">Testpcid,</if>
+            <if test="Collecttime != null">Collecttime,</if>
+            <if test="FileName != null">FileName,</if>
+            <if test="Barcode != null">Barcode,</if>
+            <if test="AirLeak_Data != null">AirLeak_Data,</if>
+            <if test="TestResult != null">TestResult,</if>
+            <if test="TestTime != null">TestTime,</if>
+            <if test="ModuleID != null">ModuleID,</if>
+            <if test="LineID != null">LineID,</if>
+            <if test="LineType != null">LineType,</if>
+            <if test="ProjectID != null">ProjectID,</if>
+            <if test="AirLeak_Up != null">AirLeak_Up,</if>
+            <if test="AirLeak_Target != null">AirLeak_Target,</if>
+            <if test="AirLeak_Down != null">AirLeak_Down,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="items != null">#{items},</if>
+            <if test="Testpcid != null">#{Testpcid},</if>
+            <if test="Collecttime != null">#{Collecttime},</if>
+            <if test="FileName != null">#{FileName},</if>
+            <if test="Barcode != null">#{Barcode},</if>
+            <if test="AirLeak_Data != null">#{AirLeak_Data},</if>
+            <if test="TestResult != null">#{TestResult},</if>
+            <if test="TestTime != null">#{TestTime},</if>
+            <if test="ModuleID != null">#{ModuleID},</if>
+            <if test="LineID != null">#{LineID},</if>
+            <if test="LineType != null">#{LineType},</if>
+            <if test="ProjectID != null">#{ProjectID},</if>
+            <if test="AirLeak_Up != null">#{AirLeak_Up},</if>
+            <if test="AirLeak_Target != null">#{AirLeak_Target},</if>
+            <if test="AirLeak_Down != null">#{AirLeak_Down},</if>
+        </trim>
+    </insert>
+
+    <select id="searchMD8xMainLine301M7T" parameterType="String" resultType="D8XMainLine301M7Search">
+        SELECT [items]
+        ,[Testpcid]
+        ,[Collecttime]
+        ,[FileName]
+        ,[Barcode]
+        ,[AirLeak_Data]
+        ,[TestResult]
+        ,convert(varchar(50),[TestTime],120) as 'TestTime'
+        ,[ModuleID]
+        ,[LineID]
+        ,[LineType]
+        ,'D8X' AS ProjectID
+        ,'0.04' AS 'AirLeak_Up'
+        ,'0' AS 'AirLeak_Target'
+        ,'-0.01' AS 'AirLeak_Down'
+        FROM [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M7_t]
+        <where>
+            <if test="Barcode!=null and Barcode!=''">AND Barcode = #{Barcode}</if>
+            <if test="StartTime!=null and StartTime!='' and EndTime!=null and EndTime!=''">
+                AND CONVERT(VARCHAR(50), TestTime, 120) BETWEEN #{StartTime} AND #{EndTime}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertMD8xMainLine301M8T" parameterType="D8XMainLine301M8">
+        insert into E85_FOX.dbo.m_D8X_Main_Line3_01_M8_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="items!= null">items,</if>
+            <if test="Testpcid!= null">Testpcid,</if>
+            <if test="Collecttime!= null">Collecttime,</if>
+            <if test="FileName!= null">FileName,</if>
+            <if test="Num!= null">Num,</if>
+            <if test="Barcode!= null">Barcode,</if>
+            <if test="cav_No!= null">cav_No,</if>
+            <if test="FAI_12_Value!= null">FAI_12_Value,</if>
+            <if test="FAI_13_Value!= null">FAI_13_Value,</if>
+            <if test="FAI_23_Value!= null">FAI_23_Value,</if>
+            <if test="FAI_32_1_Value!= null">FAI_32_1_Value,</if>
+            <if test="FAI_32_2_Value!= null">FAI_32_2_Value,</if>
+            <if test="FAI_32_3_Value!= null">FAI_32_3_Value,</if>
+            <if test="FAI_32_4_Value!= null">FAI_32_4_Value,</if>
+            <if test="FAI_32_5_Value!= null">FAI_32_5_Value,</if>
+            <if test="FAI_32_6_Value!= null">FAI_32_6_Value,</if>
+            <if test="FAI_32_7_Value!= null">FAI_32_7_Value,</if>
+            <if test="FAI_32_8_Value!= null">FAI_32_8_Value,</if>
+            <if test="FAI_32_9_Value!= null">FAI_32_9_Value,</if>
+            <if test="FAI_32_10_Value!= null">FAI_32_10_Value,</if>
+            <if test="FAI_32_11_Value!= null">FAI_32_11_Value,</if>
+            <if test="FAI_32_12_Value!= null">FAI_32_12_Value,</if>
+            <if test="FAI_33_1_Value!= null">FAI_33_1_Value,</if>
+            <if test="FAI_33_2_Value!= null">FAI_33_2_Value,</if>
+            <if test="FAI_33_3_Value!= null">FAI_33_3_Value,</if>
+            <if test="FAI_33_4_Value!= null">FAI_33_4_Value,</if>
+            <if test="FAI_33_5_Value!= null">FAI_33_5_Value,</if>
+            <if test="FAI_33_6_Value!= null">FAI_33_6_Value,</if>
+            <if test="FAI_33_7_Value!= null">FAI_33_7_Value,</if>
+            <if test="FAI_33_8_Value!= null">FAI_33_8_Value,</if>
+            <if test="FAI_33_9_Value!= null">FAI_33_9_Value,</if>
+            <if test="FAI_33_10_Value!= null">FAI_33_10_Value,</if>
+            <if test="FAI_33_11_Value!= null">FAI_33_11_Value,</if>
+            <if test="FAI_33_12_Value!= null">FAI_33_12_Value,</if>
+            <if test="FAI_37_1_Value!= null">FAI_37_1_Value,</if>
+            <if test="FAI_37_2_Value!= null">FAI_37_2_Value,</if>
+            <if test="FAI_520_Value!= null">FAI_520_Value,</if>
+            <if test="FAI_223_Value!= null">FAI_223_Value,</if>
+            <if test="FAI_16_3_Value!= null">FAI_16_3_Value,</if>
+            <if test="FAI_16_2_Value!= null">FAI_16_2_Value,</if>
+            <if test="FAI_16_1_Value!= null">FAI_16_1_Value,</if>
+            <if test="FAI_26!= null">FAI_26,</if>
+            <if test="FAI_26_1_Value!= null">FAI_26_1_Value,</if>
+            <if test="FAI_26_2_Value!= null">FAI_26_2_Value,</if>
+            <if test="FAI_26_3_Value!= null">FAI_26_3_Value,</if>
+            <if test="FAI_26_4_Value!= null">FAI_26_4_Value,</if>
+            <if test="FAI_26_5_Value!= null">FAI_26_5_Value,</if>
+            <if test="FAI_26_6_Value!= null">FAI_26_6_Value,</if>
+            <if test="FAI_26_7_Value!= null">FAI_26_7_Value,</if>
+            <if test="FAI_26_8_Value!= null">FAI_26_8_Value,</if>
+            <if test="FAI_26_9_Value!= null">FAI_26_9_Value,</if>
+            <if test="FAI_26_10_Value!= null">FAI_26_10_Value,</if>
+            <if test="FAI_26_11_Value!= null">FAI_26_11_Value,</if>
+            <if test="FAI_26_12_Value!= null">FAI_26_12_Value,</if>
+            <if test="FAI_26_13_Value!= null">FAI_26_13_Value,</if>
+            <if test="FAI_26_14_Value!= null">FAI_26_14_Value,</if>
+            <if test="FAI_26_15_Value!= null">FAI_26_15_Value,</if>
+            <if test="FAI_26_16_Value!= null">FAI_26_16_Value,</if>
+            <if test="FAI_26_17_Value!= null">FAI_26_17_Value,</if>
+            <if test="FAI_26_18_Value!= null">FAI_26_18_Value,</if>
+            <if test="FAI_26_19_Value!= null">FAI_26_19_Value,</if>
+            <if test="FAI_26_20_Value!= null">FAI_26_20_Value,</if>
+            <if test="FAI_26_21_Value!= null">FAI_26_21_Value,</if>
+            <if test="FAI_26_22_Value!= null">FAI_26_22_Value,</if>
+            <if test="FAI_26_23_Value!= null">FAI_26_23_Value,</if>
+            <if test="FAI_26_24_Value!= null">FAI_26_24_Value,</if>
+            <if test="FAI_26_25_Value!= null">FAI_26_25_Value,</if>
+            <if test="FAI_26_26_Value!= null">FAI_26_26_Value,</if>
+            <if test="FAI_26_27_Value!= null">FAI_26_27_Value,</if>
+            <if test="FAI_26_28_Value!= null">FAI_26_28_Value,</if>
+            <if test="FAI_26_29_Value!= null">FAI_26_29_Value,</if>
+            <if test="FAI_26_30_Value!= null">FAI_26_30_Value,</if>
+            <if test="FAI_26_31_Value!= null">FAI_26_31_Value,</if>
+            <if test="FAI_26_32_Value!= null">FAI_26_32_Value,</if>
+            <if test="FAI_26_33_Value!= null">FAI_26_33_Value,</if>
+            <if test="FAI_26_34_Value!= null">FAI_26_34_Value,</if>
+            <if test="FAI_26_35_Value!= null">FAI_26_35_Value,</if>
+            <if test="FAI_26_36_Value!= null">FAI_26_36_Value,</if>
+            <if test="TestResult!= null">TestResult,</if>
+            <if test="TestTime!= null">TestTime,</if>
+            <if test="ModuleID!= null">ModuleID,</if>
+            <if test="LineID!= null">LineID,</if>
+            <if test="LineType!= null">LineType,</if>
+            <if test="ProjectID!= null">ProjectID,</if>
+            <if test="FAI_12_Up!= null">FAI_12_Up,</if>
+            <if test="FAI_12_Target!= null">FAI_12_Target,</if>
+            <if test="FAI_12_Down!= null">FAI_12_Down,</if>
+            <if test="FAI_13_Up!= null">FAI_13_Up,</if>
+            <if test="FAI_13_Target!= null">FAI_13_Target,</if>
+            <if test="FAI_13_Down!= null">FAI_13_Down,</if>
+            <if test="FAI_23_Up!= null">FAI_23_Up,</if>
+            <if test="FAI_23_Target!= null">FAI_23_Target,</if>
+            <if test="FAI_23_Down!= null">FAI_23_Down,</if>
+            <if test="FAI_32_1_Up!= null">FAI_32_1_Up,</if>
+            <if test="FAI_32_1_Target!= null">FAI_32_1_Target,</if>
+            <if test="FAI_32_1_Down!= null">FAI_32_1_Down,</if>
+            <if test="FAI_32_2_Up!= null">FAI_32_2_Up,</if>
+            <if test="FAI_32_2_Target!= null">FAI_32_2_Target,</if>
+            <if test="FAI_32_2_Down!= null">FAI_32_2_Down,</if>
+            <if test="FAI_32_3_Up!= null">FAI_32_3_Up,</if>
+            <if test="FAI_32_3_Target!= null">FAI_32_3_Target,</if>
+            <if test="FAI_32_3_Down!= null">FAI_32_3_Down,</if>
+            <if test="FAI_32_4_Up!= null">FAI_32_4_Up,</if>
+            <if test="FAI_32_4_Target!= null">FAI_32_4_Target,</if>
+            <if test="FAI_32_4_Down!= null">FAI_32_4_Down,</if>
+            <if test="FAI_32_5_Up!= null">FAI_32_5_Up,</if>
+            <if test="FAI_32_5_Target!= null">FAI_32_5_Target,</if>
+            <if test="FAI_32_5_Down!= null">FAI_32_5_Down,</if>
+            <if test="FAI_32_6_Up!= null">FAI_32_6_Up,</if>
+            <if test="FAI_32_6_Target!= null">FAI_32_6_Target,</if>
+            <if test="FAI_32_6_Down!= null">FAI_32_6_Down,</if>
+            <if test="FAI_32_7_Up!= null">FAI_32_7_Up,</if>
+            <if test="FAI_32_7_Target!= null">FAI_32_7_Target,</if>
+            <if test="FAI_32_7_Down!= null">FAI_32_7_Down,</if>
+            <if test="FAI_32_8_Up!= null">FAI_32_8_Up,</if>
+            <if test="FAI_32_8_Target!= null">FAI_32_8_Target,</if>
+            <if test="FAI_32_8_Down!= null">FAI_32_8_Down,</if>
+            <if test="FAI_32_9_Up!= null">FAI_32_9_Up,</if>
+            <if test="FAI_32_9_Target!= null">FAI_32_9_Target,</if>
+            <if test="FAI_32_9_Down!= null">FAI_32_9_Down,</if>
+            <if test="FAI_32_10_Up!= null">FAI_32_10_Up,</if>
+            <if test="FAI_32_10_Target!= null">FAI_32_10_Target,</if>
+            <if test="FAI_32_10_Down!= null">FAI_32_10_Down,</if>
+            <if test="FAI_32_11_Up!= null">FAI_32_11_Up,</if>
+            <if test="FAI_32_11_Target!= null">FAI_32_11_Target,</if>
+            <if test="FAI_32_11_Down!= null">FAI_32_11_Down,</if>
+            <if test="FAI_32_12_Up!= null">FAI_32_12_Up,</if>
+            <if test="FAI_32_12_Target!= null">FAI_32_12_Target,</if>
+            <if test="FAI_32_12_Down!= null">FAI_32_12_Down,</if>
+            <if test="FAI_33_1_Up!= null">FAI_33_1_Up,</if>
+            <if test="FAI_33_1_Target!= null">FAI_33_1_Target,</if>
+            <if test="FAI_33_1_Down!= null">FAI_33_1_Down,</if>
+            <if test="FAI_33_2_Up!= null">FAI_33_2_Up,</if>
+            <if test="FAI_33_2_Target!= null">FAI_33_2_Target,</if>
+            <if test="FAI_33_2_Down!= null">FAI_33_2_Down,</if>
+            <if test="FAI_33_3_Up!= null">FAI_33_3_Up,</if>
+            <if test="FAI_33_3_Target!= null">FAI_33_3_Target,</if>
+            <if test="FAI_33_3_Down!= null">FAI_33_3_Down,</if>
+            <if test="FAI_33_4_Up!= null">FAI_33_4_Up,</if>
+            <if test="FAI_33_4_Target!= null">FAI_33_4_Target,</if>
+            <if test="FAI_33_4_Down!= null">FAI_33_4_Down,</if>
+            <if test="FAI_33_5_Up!= null">FAI_33_5_Up,</if>
+            <if test="FAI_33_5_Target!= null">FAI_33_5_Target,</if>
+            <if test="FAI_33_5_Down!= null">FAI_33_5_Down,</if>
+            <if test="FAI_33_6_Up!= null">FAI_33_6_Up,</if>
+            <if test="FAI_33_6_Target!= null">FAI_33_6_Target,</if>
+            <if test="FAI_33_6_Down!= null">FAI_33_6_Down,</if>
+            <if test="FAI_33_7_Up!= null">FAI_33_7_Up,</if>
+            <if test="FAI_33_7_Target!= null">FAI_33_7_Target,</if>
+            <if test="FAI_33_7_Down!= null">FAI_33_7_Down,</if>
+            <if test="FAI_33_8_Up!= null">FAI_33_8_Up,</if>
+            <if test="FAI_33_8_Target!= null">FAI_33_8_Target,</if>
+            <if test="FAI_33_8_Down!= null">FAI_33_8_Down,</if>
+            <if test="FAI_33_9_Up!= null">FAI_33_9_Up,</if>
+            <if test="FAI_33_9_Target!= null">FAI_33_9_Target,</if>
+            <if test="FAI_33_9_Down!= null">FAI_33_9_Down,</if>
+            <if test="FAI_33_10_Up!= null">FAI_33_10_Up,</if>
+            <if test="FAI_33_10_Target!= null">FAI_33_10_Target,</if>
+            <if test="FAI_33_10_Down!= null">FAI_33_10_Down,</if>
+            <if test="FAI_33_11_Up!= null">FAI_33_11_Up,</if>
+            <if test="FAI_33_11_Target!= null">FAI_33_11_Target,</if>
+            <if test="FAI_33_11_Down!= null">FAI_33_11_Down,</if>
+            <if test="FAI_33_12_Up!= null">FAI_33_12_Up,</if>
+            <if test="FAI_33_12_Target!= null">FAI_33_12_Target,</if>
+            <if test="FAI_33_12_Down!= null">FAI_33_12_Down,</if>
+            <if test="FAI_37_1_Up!= null">FAI_37_1_Up,</if>
+            <if test="FAI_37_1_Target!= null">FAI_37_1_Target,</if>
+            <if test="FAI_37_1_Down!= null">FAI_37_1_Down,</if>
+            <if test="FAI_37_2_Up!= null">FAI_37_2_Up,</if>
+            <if test="FAI_37_2_Target!= null">FAI_37_2_Target,</if>
+            <if test="FAI_37_2_Down!= null">FAI_37_2_Down,</if>
+            <if test="FAI_520_Up!= null">FAI_520_Up,</if>
+            <if test="FAI_520_Target!= null">FAI_520_Target,</if>
+            <if test="FAI_520_Down!= null">FAI_520_Down,</if>
+            <if test="FAI_223_Up!= null">FAI_223_Up,</if>
+            <if test="FAI_223_Target!= null">FAI_223_Target,</if>
+            <if test="FAI_223_Down!= null">FAI_223_Down,</if>
+            <if test="FAI_16_3_Up!= null">FAI_16_3_Up,</if>
+            <if test="FAI_16_3_Target!= null">FAI_16_3_Target,</if>
+            <if test="FAI_16_3_Down!= null">FAI_16_3_Down,</if>
+            <if test="FAI_16_2_Up!= null">FAI_16_2_Up,</if>
+            <if test="FAI_16_2_Target!= null">FAI_16_2_Target,</if>
+            <if test="FAI_16_2_Down!= null">FAI_16_2_Down,</if>
+            <if test="FAI_16_1_Up!= null">FAI_16_1_Up,</if>
+            <if test="FAI_16_1_Target!= null">FAI_16_1_Target,</if>
+            <if test="FAI_16_1_Down!= null">FAI_16_1_Down,</if>
+            <if test="FAI_26_Up!= null">FAI_26_Up,</if>
+            <if test="FAI_26_Target!= null">FAI_26_Target,</if>
+            <if test="FAI_26_Down!= null">FAI_26_Down,</if>
+            <if test="FAI_26_1_Up!= null">FAI_26_1_Up,</if>
+            <if test="FAI_26_1_Target!= null">FAI_26_1_Target,</if>
+            <if test="FAI_26_1_Down!= null">FAI_26_1_Down,</if>
+            <if test="FAI_26_2_Up!= null">FAI_26_2_Up,</if>
+            <if test="FAI_26_2_Target!= null">FAI_26_2_Target,</if>
+            <if test="FAI_26_2_Down!= null">FAI_26_2_Down,</if>
+            <if test="FAI_26_3_Up!= null">FAI_26_3_Up,</if>
+            <if test="FAI_26_3_Target!= null">FAI_26_3_Target,</if>
+            <if test="FAI_26_3_Down!= null">FAI_26_3_Down,</if>
+            <if test="FAI_26_4_Up!= null">FAI_26_4_Up,</if>
+            <if test="FAI_26_4_Target!= null">FAI_26_4_Target,</if>
+            <if test="FAI_26_4_Down!= null">FAI_26_4_Down,</if>
+            <if test="FAI_26_5_Up!= null">FAI_26_5_Up,</if>
+            <if test="FAI_26_5_Target!= null">FAI_26_5_Target,</if>
+            <if test="FAI_26_5_Down!= null">FAI_26_5_Down,</if>
+            <if test="FAI_26_6_Up!= null">FAI_26_6_Up,</if>
+            <if test="FAI_26_6_Target!= null">FAI_26_6_Target,</if>
+            <if test="FAI_26_6_Down!= null">FAI_26_6_Down,</if>
+            <if test="FAI_26_7_Up!= null">FAI_26_7_Up,</if>
+            <if test="FAI_26_7_Target!= null">FAI_26_7_Target,</if>
+            <if test="FAI_26_7_Down!= null">FAI_26_7_Down,</if>
+            <if test="FAI_26_8_Up!= null">FAI_26_8_Up,</if>
+            <if test="FAI_26_8_Target!= null">FAI_26_8_Target,</if>
+            <if test="FAI_26_8_Down!= null">FAI_26_8_Down,</if>
+            <if test="FAI_26_9_Up!= null">FAI_26_9_Up,</if>
+            <if test="FAI_26_9_Target!= null">FAI_26_9_Target,</if>
+            <if test="FAI_26_9_Down!= null">FAI_26_9_Down,</if>
+            <if test="FAI_26_10_Up!= null">FAI_26_10_Up,</if>
+            <if test="FAI_26_10_Target!= null">FAI_26_10_Target,</if>
+            <if test="FAI_26_10_Down!= null">FAI_26_10_Down,</if>
+            <if test="FAI_26_11_Up!= null">FAI_26_11_Up,</if>
+            <if test="FAI_26_11_Target!= null">FAI_26_11_Target,</if>
+            <if test="FAI_26_11_Down!= null">FAI_26_11_Down,</if>
+            <if test="FAI_26_12_Up!= null">FAI_26_12_Up,</if>
+            <if test="FAI_26_12_Target!= null">FAI_26_12_Target,</if>
+            <if test="FAI_26_12_Down!= null">FAI_26_12_Down,</if>
+            <if test="FAI_26_13_Up!= null">FAI_26_13_Up,</if>
+            <if test="FAI_26_13_Target!= null">FAI_26_13_Target,</if>
+            <if test="FAI_26_13_Down!= null">FAI_26_13_Down,</if>
+            <if test="FAI_26_14_Up!= null">FAI_26_14_Up,</if>
+            <if test="FAI_26_14_Target!= null">FAI_26_14_Target,</if>
+            <if test="FAI_26_14_Down!= null">FAI_26_14_Down,</if>
+            <if test="FAI_26_15_Up!= null">FAI_26_15_Up,</if>
+            <if test="FAI_26_15_Target!= null">FAI_26_15_Target,</if>
+            <if test="FAI_26_15_Down!= null">FAI_26_15_Down,</if>
+            <if test="FAI_26_16_Up!= null">FAI_26_16_Up,</if>
+            <if test="FAI_26_16_Target!= null">FAI_26_16_Target,</if>
+            <if test="FAI_26_16_Down!= null">FAI_26_16_Down,</if>
+            <if test="FAI_26_17_Up!= null">FAI_26_17_Up,</if>
+            <if test="FAI_26_17_Target!= null">FAI_26_17_Target,</if>
+            <if test="FAI_26_17_Down!= null">FAI_26_17_Down,</if>
+            <if test="FAI_26_18_Up!= null">FAI_26_18_Up,</if>
+            <if test="FAI_26_18_Target!= null">FAI_26_18_Target,</if>
+            <if test="FAI_26_18_Down!= null">FAI_26_18_Down,</if>
+            <if test="FAI_26_19_Up!= null">FAI_26_19_Up,</if>
+            <if test="FAI_26_19_Target!= null">FAI_26_19_Target,</if>
+            <if test="FAI_26_19_Down!= null">FAI_26_19_Down,</if>
+            <if test="FAI_26_20_Up!= null">FAI_26_20_Up,</if>
+            <if test="FAI_26_20_Target!= null">FAI_26_20_Target,</if>
+            <if test="FAI_26_20_Down!= null">FAI_26_20_Down,</if>
+            <if test="FAI_26_21_Up!= null">FAI_26_21_Up,</if>
+            <if test="FAI_26_21_Target!= null">FAI_26_21_Target,</if>
+            <if test="FAI_26_21_Down!= null">FAI_26_21_Down,</if>
+            <if test="FAI_26_22_Up!= null">FAI_26_22_Up,</if>
+            <if test="FAI_26_22_Target!= null">FAI_26_22_Target,</if>
+            <if test="FAI_26_22_Down!= null">FAI_26_22_Down,</if>
+            <if test="FAI_26_23_Up!= null">FAI_26_23_Up,</if>
+            <if test="FAI_26_23_Target!= null">FAI_26_23_Target,</if>
+            <if test="FAI_26_23_Down!= null">FAI_26_23_Down,</if>
+            <if test="FAI_26_24_Up!= null">FAI_26_24_Up,</if>
+            <if test="FAI_26_24_Target!= null">FAI_26_24_Target,</if>
+            <if test="FAI_26_24_Down!= null">FAI_26_24_Down,</if>
+            <if test="FAI_26_25_Up!= null">FAI_26_25_Up,</if>
+            <if test="FAI_26_25_Target!= null">FAI_26_25_Target,</if>
+            <if test="FAI_26_25_Down!= null">FAI_26_25_Down,</if>
+            <if test="FAI_26_26_Up!= null">FAI_26_26_Up,</if>
+            <if test="FAI_26_26_Target!= null">FAI_26_26_Target,</if>
+            <if test="FAI_26_26_Down!= null">FAI_26_26_Down,</if>
+            <if test="FAI_26_27_Up!= null">FAI_26_27_Up,</if>
+            <if test="FAI_26_27_Target!= null">FAI_26_27_Target,</if>
+            <if test="FAI_26_27_Down!= null">FAI_26_27_Down,</if>
+            <if test="FAI_26_28_Up!= null">FAI_26_28_Up,</if>
+            <if test="FAI_26_28_Target!= null">FAI_26_28_Target,</if>
+            <if test="FAI_26_28_Down!= null">FAI_26_28_Down,</if>
+            <if test="FAI_26_29_Up!= null">FAI_26_29_Up,</if>
+            <if test="FAI_26_29_Target!= null">FAI_26_29_Target,</if>
+            <if test="FAI_26_29_Down!= null">FAI_26_29_Down,</if>
+            <if test="FAI_26_30_Up!= null">FAI_26_30_Up,</if>
+            <if test="FAI_26_30_Target!= null">FAI_26_30_Target,</if>
+            <if test="FAI_26_30_Down!= null">FAI_26_30_Down,</if>
+            <if test="FAI_26_31_Up!= null">FAI_26_31_Up,</if>
+            <if test="FAI_26_31_Target!= null">FAI_26_31_Target,</if>
+            <if test="FAI_26_31_Down!= null">FAI_26_31_Down,</if>
+            <if test="FAI_26_32_Up!= null">FAI_26_32_Up,</if>
+            <if test="FAI_26_32_Target!= null">FAI_26_32_Target,</if>
+            <if test="FAI_26_32_Down!= null">FAI_26_32_Down,</if>
+            <if test="FAI_26_33_Up!= null">FAI_26_33_Up,</if>
+            <if test="FAI_26_33_Target!= null">FAI_26_33_Target,</if>
+            <if test="FAI_26_33_Down!= null">FAI_26_33_Down,</if>
+            <if test="FAI_26_34_Up!= null">FAI_26_34_Up,</if>
+            <if test="FAI_26_34_Target!= null">FAI_26_34_Target,</if>
+            <if test="FAI_26_34_Down!= null">FAI_26_34_Down,</if>
+            <if test="FAI_26_35_Up!= null">FAI_26_35_Up,</if>
+            <if test="FAI_26_35_Target!= null">FAI_26_35_Target,</if>
+            <if test="FAI_26_35_Down!= null">FAI_26_35_Down,</if>
+            <if test="FAI_26_36_Up!= null">FAI_26_36_Up,</if>
+            <if test="FAI_26_36_Target!= null">FAI_26_36_Target,</if>
+            <if test="FAI_26_36_Down!= null">FAI_26_36_Down,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="items!= null">#{items},</if>
+            <if test="Testpcid!= null">#{Testpcid},</if>
+            <if test="Collecttime!= null">#{Collecttime},</if>
+            <if test="FileName!= null">#{FileName},</if>
+            <if test="Num!= null">#{Num},</if>
+            <if test="Barcode!= null">#{Barcode},</if>
+            <if test="cav_No!= null">#{cav_No},</if>
+            <if test="FAI_12_Value!= null">#{FAI_12_Value},</if>
+            <if test="FAI_13_Value!= null">#{FAI_13_Value},</if>
+            <if test="FAI_23_Value!= null">#{FAI_23_Value},</if>
+            <if test="FAI_32_1_Value!= null">#{FAI_32_1_Value},</if>
+            <if test="FAI_32_2_Value!= null">#{FAI_32_2_Value},</if>
+            <if test="FAI_32_3_Value!= null">#{FAI_32_3_Value},</if>
+            <if test="FAI_32_4_Value!= null">#{FAI_32_4_Value},</if>
+            <if test="FAI_32_5_Value!= null">#{FAI_32_5_Value},</if>
+            <if test="FAI_32_6_Value!= null">#{FAI_32_6_Value},</if>
+            <if test="FAI_32_7_Value!= null">#{FAI_32_7_Value},</if>
+            <if test="FAI_32_8_Value!= null">#{FAI_32_8_Value},</if>
+            <if test="FAI_32_9_Value!= null">#{FAI_32_9_Value},</if>
+            <if test="FAI_32_10_Value!= null">#{FAI_32_10_Value},</if>
+            <if test="FAI_32_11_Value!= null">#{FAI_32_11_Value},</if>
+            <if test="FAI_32_12_Value!= null">#{FAI_32_12_Value},</if>
+            <if test="FAI_33_1_Value!= null">#{FAI_33_1_Value},</if>
+            <if test="FAI_33_2_Value!= null">#{FAI_33_2_Value},</if>
+            <if test="FAI_33_3_Value!= null">#{FAI_33_3_Value},</if>
+            <if test="FAI_33_4_Value!= null">#{FAI_33_4_Value},</if>
+            <if test="FAI_33_5_Value!= null">#{FAI_33_5_Value},</if>
+            <if test="FAI_33_6_Value!= null">#{FAI_33_6_Value},</if>
+            <if test="FAI_33_7_Value!= null">#{FAI_33_7_Value},</if>
+            <if test="FAI_33_8_Value!= null">#{FAI_33_8_Value},</if>
+            <if test="FAI_33_9_Value!= null">#{FAI_33_9_Value},</if>
+            <if test="FAI_33_10_Value!= null">#{FAI_33_10_Value},</if>
+            <if test="FAI_33_11_Value!= null">#{FAI_33_11_Value},</if>
+            <if test="FAI_33_12_Value!= null">#{FAI_33_12_Value},</if>
+            <if test="FAI_37_1_Value!= null">#{FAI_37_1_Value},</if>
+            <if test="FAI_37_2_Value!= null">#{FAI_37_2_Value},</if>
+            <if test="FAI_520_Value!= null">#{FAI_520_Value},</if>
+            <if test="FAI_223_Value!= null">#{FAI_223_Value},</if>
+            <if test="FAI_16_3_Value!= null">#{FAI_16_3_Value},</if>
+            <if test="FAI_16_2_Value!= null">#{FAI_16_2_Value},</if>
+            <if test="FAI_16_1_Value!= null">#{FAI_16_1_Value},</if>
+            <if test="FAI_26!= null">#{FAI_26},</if>
+            <if test="FAI_26_1_Value!= null">#{FAI_26_1_Value},</if>
+            <if test="FAI_26_2_Value!= null">#{FAI_26_2_Value},</if>
+            <if test="FAI_26_3_Value!= null">#{FAI_26_3_Value},</if>
+            <if test="FAI_26_4_Value!= null">#{FAI_26_4_Value},</if>
+            <if test="FAI_26_5_Value!= null">#{FAI_26_5_Value},</if>
+            <if test="FAI_26_6_Value!= null">#{FAI_26_6_Value},</if>
+            <if test="FAI_26_7_Value!= null">#{FAI_26_7_Value},</if>
+            <if test="FAI_26_8_Value!= null">#{FAI_26_8_Value},</if>
+            <if test="FAI_26_9_Value!= null">#{FAI_26_9_Value},</if>
+            <if test="FAI_26_10_Value!= null">#{FAI_26_10_Value},</if>
+            <if test="FAI_26_11_Value!= null">#{FAI_26_11_Value},</if>
+            <if test="FAI_26_12_Value!= null">#{FAI_26_12_Value},</if>
+            <if test="FAI_26_13_Value!= null">#{FAI_26_13_Value},</if>
+            <if test="FAI_26_14_Value!= null">#{FAI_26_14_Value},</if>
+            <if test="FAI_26_15_Value!= null">#{FAI_26_15_Value},</if>
+            <if test="FAI_26_16_Value!= null">#{FAI_26_16_Value},</if>
+            <if test="FAI_26_17_Value!= null">#{FAI_26_17_Value},</if>
+            <if test="FAI_26_18_Value!= null">#{FAI_26_18_Value},</if>
+            <if test="FAI_26_19_Value!= null">#{FAI_26_19_Value},</if>
+            <if test="FAI_26_20_Value!= null">#{FAI_26_20_Value},</if>
+            <if test="FAI_26_21_Value!= null">#{FAI_26_21_Value},</if>
+            <if test="FAI_26_22_Value!= null">#{FAI_26_22_Value},</if>
+            <if test="FAI_26_23_Value!= null">#{FAI_26_23_Value},</if>
+            <if test="FAI_26_24_Value!= null">#{FAI_26_24_Value},</if>
+            <if test="FAI_26_25_Value!= null">#{FAI_26_25_Value},</if>
+            <if test="FAI_26_26_Value!= null">#{FAI_26_26_Value},</if>
+            <if test="FAI_26_27_Value!= null">#{FAI_26_27_Value},</if>
+            <if test="FAI_26_28_Value!= null">#{FAI_26_28_Value},</if>
+            <if test="FAI_26_29_Value!= null">#{FAI_26_29_Value},</if>
+            <if test="FAI_26_30_Value!= null">#{FAI_26_30_Value},</if>
+            <if test="FAI_26_31_Value!= null">#{FAI_26_31_Value},</if>
+            <if test="FAI_26_32_Value!= null">#{FAI_26_32_Value},</if>
+            <if test="FAI_26_33_Value!= null">#{FAI_26_33_Value},</if>
+            <if test="FAI_26_34_Value!= null">#{FAI_26_34_Value},</if>
+            <if test="FAI_26_35_Value!= null">#{FAI_26_35_Value},</if>
+            <if test="FAI_26_36_Value!= null">#{FAI_26_36_Value},</if>
+            <if test="TestResult!= null">#{TestResult},</if>
+            <if test="TestTime!= null">#{TestTime},</if>
+            <if test="ModuleID!= null">#{ModuleID},</if>
+            <if test="LineID!= null">#{LineID},</if>
+            <if test="LineType!= null">#{LineType},</if>
+            <if test="ProjectID!= null">#{ProjectID},</if>
+            <if test="FAI_12_Up!= null">#{FAI_12_Up},</if>
+            <if test="FAI_12_Target!= null">#{FAI_12_Target},</if>
+            <if test="FAI_12_Down!= null">#{FAI_12_Down},</if>
+            <if test="FAI_13_Up!= null">#{FAI_13_Up},</if>
+            <if test="FAI_13_Target!= null">#{FAI_13_Target},</if>
+            <if test="FAI_13_Down!= null">#{FAI_13_Down},</if>
+            <if test="FAI_23_Up!= null">#{FAI_23_Up},</if>
+            <if test="FAI_23_Target!= null">#{FAI_23_Target},</if>
+            <if test="FAI_23_Down!= null">#{FAI_23_Down},</if>
+            <if test="FAI_32_1_Up!= null">#{FAI_32_1_Up},</if>
+            <if test="FAI_32_1_Target!= null">#{FAI_32_1_Target},</if>
+            <if test="FAI_32_1_Down!= null">#{FAI_32_1_Down},</if>
+            <if test="FAI_32_2_Up!= null">#{FAI_32_2_Up},</if>
+            <if test="FAI_32_2_Target!= null">#{FAI_32_2_Target},</if>
+            <if test="FAI_32_2_Down!= null">#{FAI_32_2_Down},</if>
+            <if test="FAI_32_3_Up!= null">#{FAI_32_3_Up},</if>
+            <if test="FAI_32_3_Target!= null">#{FAI_32_3_Target},</if>
+            <if test="FAI_32_3_Down!= null">#{FAI_32_3_Down},</if>
+            <if test="FAI_32_4_Up!= null">#{FAI_32_4_Up},</if>
+            <if test="FAI_32_4_Target!= null">#{FAI_32_4_Target},</if>
+            <if test="FAI_32_4_Down!= null">#{FAI_32_4_Down},</if>
+            <if test="FAI_32_5_Up!= null">#{FAI_32_5_Up},</if>
+            <if test="FAI_32_5_Target!= null">#{FAI_32_5_Target},</if>
+            <if test="FAI_32_5_Down!= null">#{FAI_32_5_Down},</if>
+            <if test="FAI_32_6_Up!= null">#{FAI_32_6_Up},</if>
+            <if test="FAI_32_6_Target!= null">#{FAI_32_6_Target},</if>
+            <if test="FAI_32_6_Down!= null">#{FAI_32_6_Down},</if>
+            <if test="FAI_32_7_Up!= null">#{FAI_32_7_Up},</if>
+            <if test="FAI_32_7_Target!= null">#{FAI_32_7_Target},</if>
+            <if test="FAI_32_7_Down!= null">#{FAI_32_7_Down},</if>
+            <if test="FAI_32_8_Up!= null">#{FAI_32_8_Up},</if>
+            <if test="FAI_32_8_Target!= null">#{FAI_32_8_Target},</if>
+            <if test="FAI_32_8_Down!= null">#{FAI_32_8_Down},</if>
+            <if test="FAI_32_9_Up!= null">#{FAI_32_9_Up},</if>
+            <if test="FAI_32_9_Target!= null">#{FAI_32_9_Target},</if>
+            <if test="FAI_32_9_Down!= null">#{FAI_32_9_Down},</if>
+            <if test="FAI_32_10_Up!= null">#{FAI_32_10_Up},</if>
+            <if test="FAI_32_10_Target!= null">#{FAI_32_10_Target},</if>
+            <if test="FAI_32_10_Down!= null">#{FAI_32_10_Down},</if>
+            <if test="FAI_32_11_Up!= null">#{FAI_32_11_Up},</if>
+            <if test="FAI_32_11_Target!= null">#{FAI_32_11_Target},</if>
+            <if test="FAI_32_11_Down!= null">#{FAI_32_11_Down},</if>
+            <if test="FAI_32_12_Up!= null">#{FAI_32_12_Up},</if>
+            <if test="FAI_32_12_Target!= null">#{FAI_32_12_Target},</if>
+            <if test="FAI_32_12_Down!= null">#{FAI_32_12_Down},</if>
+            <if test="FAI_33_1_Up!= null">#{FAI_33_1_Up},</if>
+            <if test="FAI_33_1_Target!= null">#{FAI_33_1_Target},</if>
+            <if test="FAI_33_1_Down!= null">#{FAI_33_1_Down},</if>
+            <if test="FAI_33_2_Up!= null">#{FAI_33_2_Up},</if>
+            <if test="FAI_33_2_Target!= null">#{FAI_33_2_Target},</if>
+            <if test="FAI_33_2_Down!= null">#{FAI_33_2_Down},</if>
+            <if test="FAI_33_3_Up!= null">#{FAI_33_3_Up},</if>
+            <if test="FAI_33_3_Target!= null">#{FAI_33_3_Target},</if>
+            <if test="FAI_33_3_Down!= null">#{FAI_33_3_Down},</if>
+            <if test="FAI_33_4_Up!= null">#{FAI_33_4_Up},</if>
+            <if test="FAI_33_4_Target!= null">#{FAI_33_4_Target},</if>
+            <if test="FAI_33_4_Down!= null">#{FAI_33_4_Down},</if>
+            <if test="FAI_33_5_Up!= null">#{FAI_33_5_Up},</if>
+            <if test="FAI_33_5_Target!= null">#{FAI_33_5_Target},</if>
+            <if test="FAI_33_5_Down!= null">#{FAI_33_5_Down},</if>
+            <if test="FAI_33_6_Up!= null">#{FAI_33_6_Up},</if>
+            <if test="FAI_33_6_Target!= null">#{FAI_33_6_Target},</if>
+            <if test="FAI_33_6_Down!= null">#{FAI_33_6_Down},</if>
+            <if test="FAI_33_7_Up!= null">#{FAI_33_7_Up},</if>
+            <if test="FAI_33_7_Target!= null">#{FAI_33_7_Target},</if>
+            <if test="FAI_33_7_Down!= null">#{FAI_33_7_Down},</if>
+            <if test="FAI_33_8_Up!= null">#{FAI_33_8_Up},</if>
+            <if test="FAI_33_8_Target!= null">#{FAI_33_8_Target},</if>
+            <if test="FAI_33_8_Down!= null">#{FAI_33_8_Down},</if>
+            <if test="FAI_33_9_Up!= null">#{FAI_33_9_Up},</if>
+            <if test="FAI_33_9_Target!= null">#{FAI_33_9_Target},</if>
+            <if test="FAI_33_9_Down!= null">#{FAI_33_9_Down},</if>
+            <if test="FAI_33_10_Up!= null">#{FAI_33_10_Up},</if>
+            <if test="FAI_33_10_Target!= null">#{FAI_33_10_Target},</if>
+            <if test="FAI_33_10_Down!= null">#{FAI_33_10_Down},</if>
+            <if test="FAI_33_11_Up!= null">#{FAI_33_11_Up},</if>
+            <if test="FAI_33_11_Target!= null">#{FAI_33_11_Target},</if>
+            <if test="FAI_33_11_Down!= null">#{FAI_33_11_Down},</if>
+            <if test="FAI_33_12_Up!= null">#{FAI_33_12_Up},</if>
+            <if test="FAI_33_12_Target!= null">#{FAI_33_12_Target},</if>
+            <if test="FAI_33_12_Down!= null">#{FAI_33_12_Down},</if>
+            <if test="FAI_37_1_Up!= null">#{FAI_37_1_Up},</if>
+            <if test="FAI_37_1_Target!= null">#{FAI_37_1_Target},</if>
+            <if test="FAI_37_1_Down!= null">#{FAI_37_1_Down},</if>
+            <if test="FAI_37_2_Up!= null">#{FAI_37_2_Up},</if>
+            <if test="FAI_37_2_Target!= null">#{FAI_37_2_Target},</if>
+            <if test="FAI_37_2_Down!= null">#{FAI_37_2_Down},</if>
+            <if test="FAI_520_Up!= null">#{FAI_520_Up},</if>
+            <if test="FAI_520_Target!= null">#{FAI_520_Target},</if>
+            <if test="FAI_520_Down!= null">#{FAI_520_Down},</if>
+            <if test="FAI_223_Up!= null">#{FAI_223_Up},</if>
+            <if test="FAI_223_Target!= null">#{FAI_223_Target},</if>
+            <if test="FAI_223_Down!= null">#{FAI_223_Down},</if>
+            <if test="FAI_16_3_Up!= null">#{FAI_16_3_Up},</if>
+            <if test="FAI_16_3_Target!= null">#{FAI_16_3_Target},</if>
+            <if test="FAI_16_3_Down!= null">#{FAI_16_3_Down},</if>
+            <if test="FAI_16_2_Up!= null">#{FAI_16_2_Up},</if>
+            <if test="FAI_16_2_Target!= null">#{FAI_16_2_Target},</if>
+            <if test="FAI_16_2_Down!= null">#{FAI_16_2_Down},</if>
+            <if test="FAI_16_1_Up!= null">#{FAI_16_1_Up},</if>
+            <if test="FAI_16_1_Target!= null">#{FAI_16_1_Target},</if>
+            <if test="FAI_16_1_Down!= null">#{FAI_16_1_Down},</if>
+            <if test="FAI_26_Up!= null">#{FAI_26_Up},</if>
+            <if test="FAI_26_Target!= null">#{FAI_26_Target},</if>
+            <if test="FAI_26_Down!= null">#{FAI_26_Down},</if>
+            <if test="FAI_26_1_Up!= null">#{FAI_26_1_Up},</if>
+            <if test="FAI_26_1_Target!= null">#{FAI_26_1_Target},</if>
+            <if test="FAI_26_1_Down!= null">#{FAI_26_1_Down},</if>
+            <if test="FAI_26_2_Up!= null">#{FAI_26_2_Up},</if>
+            <if test="FAI_26_2_Target!= null">#{FAI_26_2_Target},</if>
+            <if test="FAI_26_2_Down!= null">#{FAI_26_2_Down},</if>
+            <if test="FAI_26_3_Up!= null">#{FAI_26_3_Up},</if>
+            <if test="FAI_26_3_Target!= null">#{FAI_26_3_Target},</if>
+            <if test="FAI_26_3_Down!= null">#{FAI_26_3_Down},</if>
+            <if test="FAI_26_4_Up!= null">#{FAI_26_4_Up},</if>
+            <if test="FAI_26_4_Target!= null">#{FAI_26_4_Target},</if>
+            <if test="FAI_26_4_Down!= null">#{FAI_26_4_Down},</if>
+            <if test="FAI_26_5_Up!= null">#{FAI_26_5_Up},</if>
+            <if test="FAI_26_5_Target!= null">#{FAI_26_5_Target},</if>
+            <if test="FAI_26_5_Down!= null">#{FAI_26_5_Down},</if>
+            <if test="FAI_26_6_Up!= null">#{FAI_26_6_Up},</if>
+            <if test="FAI_26_6_Target!= null">#{FAI_26_6_Target},</if>
+            <if test="FAI_26_6_Down!= null">#{FAI_26_6_Down},</if>
+            <if test="FAI_26_7_Up!= null">#{FAI_26_7_Up},</if>
+            <if test="FAI_26_7_Target!= null">#{FAI_26_7_Target},</if>
+            <if test="FAI_26_7_Down!= null">#{FAI_26_7_Down},</if>
+            <if test="FAI_26_8_Up!= null">#{FAI_26_8_Up},</if>
+            <if test="FAI_26_8_Target!= null">#{FAI_26_8_Target},</if>
+            <if test="FAI_26_8_Down!= null">#{FAI_26_8_Down},</if>
+            <if test="FAI_26_9_Up!= null">#{FAI_26_9_Up},</if>
+            <if test="FAI_26_9_Target!= null">#{FAI_26_9_Target},</if>
+            <if test="FAI_26_9_Down!= null">#{FAI_26_9_Down},</if>
+            <if test="FAI_26_10_Up!= null">#{FAI_26_10_Up},</if>
+            <if test="FAI_26_10_Target!= null">#{FAI_26_10_Target},</if>
+            <if test="FAI_26_10_Down!= null">#{FAI_26_10_Down},</if>
+            <if test="FAI_26_11_Up!= null">#{FAI_26_11_Up},</if>
+            <if test="FAI_26_11_Target!= null">#{FAI_26_11_Target},</if>
+            <if test="FAI_26_11_Down!= null">#{FAI_26_11_Down},</if>
+            <if test="FAI_26_12_Up!= null">#{FAI_26_12_Up},</if>
+            <if test="FAI_26_12_Target!= null">#{FAI_26_12_Target},</if>
+            <if test="FAI_26_12_Down!= null">#{FAI_26_12_Down},</if>
+            <if test="FAI_26_13_Up!= null">#{FAI_26_13_Up},</if>
+            <if test="FAI_26_13_Target!= null">#{FAI_26_13_Target},</if>
+            <if test="FAI_26_13_Down!= null">#{FAI_26_13_Down},</if>
+            <if test="FAI_26_14_Up!= null">#{FAI_26_14_Up},</if>
+            <if test="FAI_26_14_Target!= null">#{FAI_26_14_Target},</if>
+            <if test="FAI_26_14_Down!= null">#{FAI_26_14_Down},</if>
+            <if test="FAI_26_15_Up!= null">#{FAI_26_15_Up},</if>
+            <if test="FAI_26_15_Target!= null">#{FAI_26_15_Target},</if>
+            <if test="FAI_26_15_Down!= null">#{FAI_26_15_Down},</if>
+            <if test="FAI_26_16_Up!= null">#{FAI_26_16_Up},</if>
+            <if test="FAI_26_16_Target!= null">#{FAI_26_16_Target},</if>
+            <if test="FAI_26_16_Down!= null">#{FAI_26_16_Down},</if>
+            <if test="FAI_26_17_Up!= null">#{FAI_26_17_Up},</if>
+            <if test="FAI_26_17_Target!= null">#{FAI_26_17_Target},</if>
+            <if test="FAI_26_17_Down!= null">#{FAI_26_17_Down},</if>
+            <if test="FAI_26_18_Up!= null">#{FAI_26_18_Up},</if>
+            <if test="FAI_26_18_Target!= null">#{FAI_26_18_Target},</if>
+            <if test="FAI_26_18_Down!= null">#{FAI_26_18_Down},</if>
+            <if test="FAI_26_19_Up!= null">#{FAI_26_19_Up},</if>
+            <if test="FAI_26_19_Target!= null">#{FAI_26_19_Target},</if>
+            <if test="FAI_26_19_Down!= null">#{FAI_26_19_Down},</if>
+            <if test="FAI_26_20_Up!= null">#{FAI_26_20_Up},</if>
+            <if test="FAI_26_20_Target!= null">#{FAI_26_20_Target},</if>
+            <if test="FAI_26_20_Down!= null">#{FAI_26_20_Down},</if>
+            <if test="FAI_26_21_Up!= null">#{FAI_26_21_Up},</if>
+            <if test="FAI_26_21_Target!= null">#{FAI_26_21_Target},</if>
+            <if test="FAI_26_21_Down!= null">#{FAI_26_21_Down},</if>
+            <if test="FAI_26_22_Up!= null">#{FAI_26_22_Up},</if>
+            <if test="FAI_26_22_Target!= null">#{FAI_26_22_Target},</if>
+            <if test="FAI_26_22_Down!= null">#{FAI_26_22_Down},</if>
+            <if test="FAI_26_23_Up!= null">#{FAI_26_23_Up},</if>
+            <if test="FAI_26_23_Target!= null">#{FAI_26_23_Target},</if>
+            <if test="FAI_26_23_Down!= null">#{FAI_26_23_Down},</if>
+            <if test="FAI_26_24_Up!= null">#{FAI_26_24_Up},</if>
+            <if test="FAI_26_24_Target!= null">#{FAI_26_24_Target},</if>
+            <if test="FAI_26_24_Down!= null">#{FAI_26_24_Down},</if>
+            <if test="FAI_26_25_Up!= null">#{FAI_26_25_Up},</if>
+            <if test="FAI_26_25_Target!= null">#{FAI_26_25_Target},</if>
+            <if test="FAI_26_25_Down!= null">#{FAI_26_25_Down},</if>
+            <if test="FAI_26_26_Up!= null">#{FAI_26_26_Up},</if>
+            <if test="FAI_26_26_Target!= null">#{FAI_26_26_Target},</if>
+            <if test="FAI_26_26_Down!= null">#{FAI_26_26_Down},</if>
+            <if test="FAI_26_27_Up!= null">#{FAI_26_27_Up},</if>
+            <if test="FAI_26_27_Target!= null">#{FAI_26_27_Target},</if>
+            <if test="FAI_26_27_Down!= null">#{FAI_26_27_Down},</if>
+            <if test="FAI_26_28_Up!= null">#{FAI_26_28_Up},</if>
+            <if test="FAI_26_28_Target!= null">#{FAI_26_28_Target},</if>
+            <if test="FAI_26_28_Down!= null">#{FAI_26_28_Down},</if>
+            <if test="FAI_26_29_Up!= null">#{FAI_26_29_Up},</if>
+            <if test="FAI_26_29_Target!= null">#{FAI_26_29_Target},</if>
+            <if test="FAI_26_29_Down!= null">#{FAI_26_29_Down},</if>
+            <if test="FAI_26_30_Up!= null">#{FAI_26_30_Up},</if>
+            <if test="FAI_26_30_Target!= null">#{FAI_26_30_Target},</if>
+            <if test="FAI_26_30_Down!= null">#{FAI_26_30_Down},</if>
+            <if test="FAI_26_31_Up!= null">#{FAI_26_31_Up},</if>
+            <if test="FAI_26_31_Target!= null">#{FAI_26_31_Target},</if>
+            <if test="FAI_26_31_Down!= null">#{FAI_26_31_Down},</if>
+            <if test="FAI_26_32_Up!= null">#{FAI_26_32_Up},</if>
+            <if test="FAI_26_32_Target!= null">#{FAI_26_32_Target},</if>
+            <if test="FAI_26_32_Down!= null">#{FAI_26_32_Down},</if>
+            <if test="FAI_26_33_Up!= null">#{FAI_26_33_Up},</if>
+            <if test="FAI_26_33_Target!= null">#{FAI_26_33_Target},</if>
+            <if test="FAI_26_33_Down!= null">#{FAI_26_33_Down},</if>
+            <if test="FAI_26_34_Up!= null">#{FAI_26_34_Up},</if>
+            <if test="FAI_26_34_Target!= null">#{FAI_26_34_Target},</if>
+            <if test="FAI_26_34_Down!= null">#{FAI_26_34_Down},</if>
+            <if test="FAI_26_35_Up!= null">#{FAI_26_35_Up},</if>
+            <if test="FAI_26_35_Target!= null">#{FAI_26_35_Target},</if>
+            <if test="FAI_26_35_Down!= null">#{FAI_26_35_Down},</if>
+            <if test="FAI_26_36_Up!= null">#{FAI_26_36_Up},</if>
+            <if test="FAI_26_36_Target!= null">#{FAI_26_36_Target},</if>
+            <if test="FAI_26_36_Down!= null">#{FAI_26_36_Down},</if>
+        </trim>
+    </insert>
+
+    <select id="searchMD8xMainLine301M8T" parameterType="String"
+            resultType="com.example.pmp.pojo.fox.D8XMainLine301M8Search">
+        SELECT * FROM (
+        SELECT [items]
+        ,[Testpcid]
+        ,[Collecttime]
+        ,[FileName]
+        ,[Num]
+        ,[Barcode]
+        ,[cav_No]
+        ,[FAI_12_Value]
+        ,[FAI_13_Value]
+        ,[FAI_23_Value]
+        ,[FAI_32_1_Value]
+        ,[FAI_32_2_Value]
+        ,[FAI_32_3_Value]
+        ,[FAI_32_4_Value]
+        ,[FAI_32_5_Value]
+        ,[FAI_32_6_Value]
+        ,[FAI_32_7_Value]
+        ,[FAI_32_8_Value]
+        ,[FAI_32_9_Value]
+        ,[FAI_32_10_Value]
+        ,[FAI_32_11_Value]
+        ,[FAI_32_12_Value]
+        ,[FAI_33_1_Value]
+        ,[FAI_33_2_Value]
+        ,[FAI_33_3_Value]
+        ,[FAI_33_4_Value]
+        ,[FAI_33_5_Value]
+        ,[FAI_33_6_Value]
+        ,[FAI_33_7_Value]
+        ,[FAI_33_8_Value]
+        ,[FAI_33_9_Value]
+        ,[FAI_33_10_Value]
+        ,[FAI_33_11_Value]
+        ,[FAI_33_12_Value]
+        ,[FAI_37_1_Value]
+        ,[FAI_37_2_Value]
+        ,[FAI_520_Value]
+        ,[FAI_223_Value]
+        ,[FAI_16_3_Value]
+        ,[FAI_16_2_Value]
+        ,[FAI_16_1_Value]
+        ,[FAI_26]
+        ,[FAI_26_1_Value]
+        ,[FAI_26_2_Value]
+        ,[FAI_26_3_Value]
+        ,[FAI_26_4_Value]
+        ,[FAI_26_5_Value]
+        ,[FAI_26_6_Value]
+        ,[FAI_26_7_Value]
+        ,[FAI_26_8_Value]
+        ,[FAI_26_9_Value]
+        ,[FAI_26_10_Value]
+        ,[FAI_26_11_Value]
+        ,[FAI_26_12_Value]
+        ,[FAI_26_13_Value]
+        ,[FAI_26_14_Value]
+        ,[FAI_26_15_Value]
+        ,[FAI_26_16_Value]
+        ,[FAI_26_17_Value]
+        ,[FAI_26_18_Value]
+        ,[FAI_26_19_Value]
+        ,[FAI_26_20_Value]
+        ,[FAI_26_21_Value]
+        ,[FAI_26_22_Value]
+        ,[FAI_26_23_Value]
+        ,[FAI_26_24_Value]
+        ,[FAI_26_25_Value]
+        ,[FAI_26_26_Value]
+        ,[FAI_26_27_Value]
+        ,[FAI_26_28_Value]
+        ,[FAI_26_29_Value]
+        ,[FAI_26_30_Value]
+        ,[FAI_26_31_Value]
+        ,[FAI_26_32_Value]
+        ,[FAI_26_33_Value]
+        ,[FAI_26_34_Value]
+        ,[FAI_26_35_Value]
+        ,[FAI_26_36_Value]
+        ,[TestResult]
+        ,convert(varchar(50),[TestTime],120) as 'TestTime'
+        ,[ModuleID]
+        ,[LineID]
+        ,[LineType]
+        ,'D8X' ProjectID
+        FROM [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M8_t] )a
+        left join (select top 1 * from [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M8-Target2_t])b on 1=1
+        <where>
+            <if test="Barcode!=null and Barcode!=''">AND a.Barcode = #{Barcode}</if>
+            <if test="StartTime!=null and StartTime!='' and EndTime!=null and EndTime!=''">
+                AND CONVERT(VARCHAR(50), a.TestTime, 120) BETWEEN #{StartTime} AND #{EndTime}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertMD8xMainLine301M9T" parameterType="D8XMainLine301M9">
+        insert into E85_FOX.dbo.m_D8X_Main_Line3_01_M9_t
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="items!= null">items,</if>
+            <if test="Testpcid!= null">Testpcid,</if>
+            <if test="Collecttime!= null">Collecttime,</if>
+            <if test="FileName!= null">FileName,</if>
+            <if test="Num!= null">Num,</if>
+            <if test="Barcode!= null">Barcode,</if>
+            <if test="FAI10_Value!= null">FAI10_Value,</if>
+            <if test="FAI_195_U_1_Value!= null">FAI_195_U_1_Value,</if>
+            <if test="FAI_195_U_2_Value!= null">FAI_195_U_2_Value,</if>
+            <if test="FAI_195_U_3_Value!= null">FAI_195_U_3_Value,</if>
+            <if test="FAI_195_U_4_Value!= null">FAI_195_U_4_Value,</if>
+            <if test="FAI_195_U_5_Value!= null">FAI_195_U_5_Value,</if>
+            <if test="FAI_195_U_6_Value!= null">FAI_195_U_6_Value,</if>
+            <if test="FAI_195_U_7_Value!= null">FAI_195_U_7_Value,</if>
+            <if test="FAI_195_U_8_Value!= null">FAI_195_U_8_Value,</if>
+            <if test="FAI_195_U_9_Value!= null">FAI_195_U_9_Value,</if>
+            <if test="FAI_195_U_10_Value!= null">FAI_195_U_10_Value,</if>
+            <if test="FAI_195_U_11_Value!= null">FAI_195_U_11_Value,</if>
+            <if test="FAI_195_U_12_Value!= null">FAI_195_U_12_Value,</if>
+            <if test="FAI_195_U_13_Value!= null">FAI_195_U_13_Value,</if>
+            <if test="FAI_195_U_14_Value!= null">FAI_195_U_14_Value,</if>
+            <if test="FAI_195_Z_1_Value!= null">FAI_195_Z_1_Value,</if>
+            <if test="FAI_195_Z_2_Value!= null">FAI_195_Z_2_Value,</if>
+            <if test="FAI_195_Z_3_Value!= null">FAI_195_Z_3_Value,</if>
+            <if test="FAI_195_Z_4_Value!= null">FAI_195_Z_4_Value,</if>
+            <if test="FAI_195_Z_5_Value!= null">FAI_195_Z_5_Value,</if>
+            <if test="FAI_195_Z_6_Value!= null">FAI_195_Z_6_Value,</if>
+            <if test="FAI_195_Z_7_Value!= null">FAI_195_Z_7_Value,</if>
+            <if test="FAI_195_Z_8_Value!= null">FAI_195_Z_8_Value,</if>
+            <if test="FAI_195_Z_9_Value!= null">FAI_195_Z_9_Value,</if>
+            <if test="FAI_195_Z_10_Value!= null">FAI_195_Z_10_Value,</if>
+            <if test="FAI_195_Z_11_Value!= null">FAI_195_Z_11_Value,</if>
+            <if test="FAI_195_Z_12_Value!= null">FAI_195_Z_12_Value,</if>
+            <if test="FAI_195_Z_13_Value!= null">FAI_195_Z_13_Value,</if>
+            <if test="FAI_195_Z_14_Value!= null">FAI_195_Z_14_Value,</if>
+            <if test="FAI_191_1_Value!= null">FAI_191_1_Value,</if>
+            <if test="FAI_191_2_Value!= null">FAI_191_2_Value,</if>
+            <if test="FAI_191_3_Value!= null">FAI_191_3_Value,</if>
+            <if test="FAI_191_4_Value!= null">FAI_191_4_Value,</if>
+            <if test="FAI_191_5_Value!= null">FAI_191_5_Value,</if>
+            <if test="FAI_191_6_Value!= null">FAI_191_6_Value,</if>
+            <if test="FAI_191_7_Value!= null">FAI_191_7_Value,</if>
+            <if test="FAI_191_8_Value!= null">FAI_191_8_Value,</if>
+            <if test="FAI_191_9_Value!= null">FAI_191_9_Value,</if>
+            <if test="FAI_191_10_Value!= null">FAI_191_10_Value,</if>
+            <if test="FAI_191_11_Value!= null">FAI_191_11_Value,</if>
+            <if test="FAI_191_12_Value!= null">FAI_191_12_Value,</if>
+            <if test="FAI_191_13_Value!= null">FAI_191_13_Value,</if>
+            <if test="FAI_191_14_Value!= null">FAI_191_14_Value,</if>
+            <if test="FAI_193_15_Value!= null">FAI_193_15_Value,</if>
+            <if test="FAI_193_16_Value!= null">FAI_193_16_Value,</if>
+            <if test="FAI_193_17_Value!= null">FAI_193_17_Value,</if>
+            <if test="FAI_193_18_Value!= null">FAI_193_18_Value,</if>
+            <if test="FAI_193_19_Value!= null">FAI_193_19_Value,</if>
+            <if test="FAI_193_20_Value!= null">FAI_193_20_Value,</if>
+            <if test="FAI_193_21_Value!= null">FAI_193_21_Value,</if>
+            <if test="FAI_193_22_Value!= null">FAI_193_22_Value,</if>
+            <if test="FAI_193_23_Value!= null">FAI_193_23_Value,</if>
+            <if test="FAI_193_24_Value!= null">FAI_193_24_Value,</if>
+            <if test="FAI_193_25_Value!= null">FAI_193_25_Value,</if>
+            <if test="FAI_193_26_Value!= null">FAI_193_26_Value,</if>
+            <if test="FAI_193_27_Value!= null">FAI_193_27_Value,</if>
+            <if test="FAI_193_28_Value!= null">FAI_193_28_Value,</if>
+            <if test="TP_FAI_189!= null">TP_FAI_189,</if>
+            <if test="TP_FAI_133!= null">TP_FAI_133,</if>
+            <if test="TP_FAI224_1!= null">TP_FAI224_1,</if>
+            <if test="TP_FAI224_2!= null">TP_FAI224_2,</if>
+            <if test="FAI132_1!= null">FAI132_1,</if>
+            <if test="FAI132_2!= null">FAI132_2,</if>
+            <if test="FAI17_1!= null">FAI17_1,</if>
+            <if test="FAI17_2!= null">FAI17_2,</if>
+            <if test="FAI6_Value!= null">FAI6_Value,</if>
+            <if test="FAI9_1!= null">FAI9_1,</if>
+            <if test="FAI9_2!= null">FAI9_2,</if>
+            <if test="FAI19_1!= null">FAI19_1,</if>
+            <if test="FAI19_2!= null">FAI19_2,</if>
+            <if test="FAI5_1!= null">FAI5_1,</if>
+            <if test="FAI5_2!= null">FAI5_2,</if>
+            <if test="FAI129_1!= null">FAI129_1,</if>
+            <if test="FAI129_2!= null">FAI129_2,</if>
+            <if test="Pin0p27_1!= null">Pin0p27_1,</if>
+            <if test="Pin0p27_2!= null">Pin0p27_2,</if>
+            <if test="TestResult!= null">TestResult,</if>
+            <if test="TestTime!= null">TestTime,</if>
+            <if test="ModuleID!= null">ModuleID,</if>
+            <if test="LineID!= null">LineID,</if>
+            <if test="LineType!= null">LineType,</if>
+            <if test="ProjectID!= null">ProjectID,</if>
+            <if test="FAI10_Up!= null">FAI10_Up,</if>
+            <if test="FAI10_Target!= null">FAI10_Target,</if>
+            <if test="FAI10_Down!= null">FAI10_Down,</if>
+            <if test="FAI_195_U_1_Up!= null">FAI_195_U_1_Up,</if>
+            <if test="FAI_195_U_1_Target!= null">FAI_195_U_1_Target,</if>
+            <if test="FAI_195_U_1_Down!= null">FAI_195_U_1_Down,</if>
+            <if test="FAI_195_U_2_Up!= null">FAI_195_U_2_Up,</if>
+            <if test="FAI_195_U_2_Target!= null">FAI_195_U_2_Target,</if>
+            <if test="FAI_195_U_2_Down!= null">FAI_195_U_2_Down,</if>
+            <if test="FAI_195_U_3_Up!= null">FAI_195_U_3_Up,</if>
+            <if test="FAI_195_U_3_Target!= null">FAI_195_U_3_Target,</if>
+            <if test="FAI_195_U_3_Down!= null">FAI_195_U_3_Down,</if>
+            <if test="FAI_195_U_4_Up!= null">FAI_195_U_4_Up,</if>
+            <if test="FAI_195_U_4_Target!= null">FAI_195_U_4_Target,</if>
+            <if test="FAI_195_U_4_Down!= null">FAI_195_U_4_Down,</if>
+            <if test="FAI_195_U_5_Up!= null">FAI_195_U_5_Up,</if>
+            <if test="FAI_195_U_5_Target!= null">FAI_195_U_5_Target,</if>
+            <if test="FAI_195_U_5_Down!= null">FAI_195_U_5_Down,</if>
+            <if test="FAI_195_U_6_Up!= null">FAI_195_U_6_Up,</if>
+            <if test="FAI_195_U_6_Target!= null">FAI_195_U_6_Target,</if>
+            <if test="FAI_195_U_6_Down!= null">FAI_195_U_6_Down,</if>
+            <if test="FAI_195_U_7_Up!= null">FAI_195_U_7_Up,</if>
+            <if test="FAI_195_U_7_Target!= null">FAI_195_U_7_Target,</if>
+            <if test="FAI_195_U_7_Down!= null">FAI_195_U_7_Down,</if>
+            <if test="FAI_195_U_8_Up!= null">FAI_195_U_8_Up,</if>
+            <if test="FAI_195_U_8_Target!= null">FAI_195_U_8_Target,</if>
+            <if test="FAI_195_U_8_Down!= null">FAI_195_U_8_Down,</if>
+            <if test="FAI_195_U_9_Up!= null">FAI_195_U_9_Up,</if>
+            <if test="FAI_195_U_9_Target!= null">FAI_195_U_9_Target,</if>
+            <if test="FAI_195_U_9_Down!= null">FAI_195_U_9_Down,</if>
+            <if test="FAI_195_U_10_Up!= null">FAI_195_U_10_Up,</if>
+            <if test="FAI_195_U_10_Target!= null">FAI_195_U_10_Target,</if>
+            <if test="FAI_195_U_10_Down!= null">FAI_195_U_10_Down,</if>
+            <if test="FAI_195_U_11_Up!= null">FAI_195_U_11_Up,</if>
+            <if test="FAI_195_U_11_Target!= null">FAI_195_U_11_Target,</if>
+            <if test="FAI_195_U_11_Down!= null">FAI_195_U_11_Down,</if>
+            <if test="FAI_195_U_12_Up!= null">FAI_195_U_12_Up,</if>
+            <if test="FAI_195_U_12_Target!= null">FAI_195_U_12_Target,</if>
+            <if test="FAI_195_U_12_Down!= null">FAI_195_U_12_Down,</if>
+            <if test="FAI_195_U_13_Up!= null">FAI_195_U_13_Up,</if>
+            <if test="FAI_195_U_13_Target!= null">FAI_195_U_13_Target,</if>
+            <if test="FAI_195_U_13_Down!= null">FAI_195_U_13_Down,</if>
+            <if test="FAI_195_U_14_Up!= null">FAI_195_U_14_Up,</if>
+            <if test="FAI_195_U_14_Target!= null">FAI_195_U_14_Target,</if>
+            <if test="FAI_195_U_14_Down!= null">FAI_195_U_14_Down,</if>
+            <if test="FAI_195_Z_1_Up!= null">FAI_195_Z_1_Up,</if>
+            <if test="FAI_195_Z_1_Target!= null">FAI_195_Z_1_Target,</if>
+            <if test="FAI_195_Z_1_Down!= null">FAI_195_Z_1_Down,</if>
+            <if test="FAI_195_Z_2_Up!= null">FAI_195_Z_2_Up,</if>
+            <if test="FAI_195_Z_2_Target!= null">FAI_195_Z_2_Target,</if>
+            <if test="FAI_195_Z_2_Down!= null">FAI_195_Z_2_Down,</if>
+            <if test="FAI_195_Z_3_Up!= null">FAI_195_Z_3_Up,</if>
+            <if test="FAI_195_Z_3_Target!= null">FAI_195_Z_3_Target,</if>
+            <if test="FAI_195_Z_3_Down!= null">FAI_195_Z_3_Down,</if>
+            <if test="FAI_195_Z_4_Up!= null">FAI_195_Z_4_Up,</if>
+            <if test="FAI_195_Z_4_Target!= null">FAI_195_Z_4_Target,</if>
+            <if test="FAI_195_Z_4_Down!= null">FAI_195_Z_4_Down,</if>
+            <if test="FAI_195_Z_5_Up!= null">FAI_195_Z_5_Up,</if>
+            <if test="FAI_195_Z_5_Target!= null">FAI_195_Z_5_Target,</if>
+            <if test="FAI_195_Z_5_Down!= null">FAI_195_Z_5_Down,</if>
+            <if test="FAI_195_Z_6_Up!= null">FAI_195_Z_6_Up,</if>
+            <if test="FAI_195_Z_6_Target!= null">FAI_195_Z_6_Target,</if>
+            <if test="FAI_195_Z_6_Down!= null">FAI_195_Z_6_Down,</if>
+            <if test="FAI_195_Z_7_Up!= null">FAI_195_Z_7_Up,</if>
+            <if test="FAI_195_Z_7_Target!= null">FAI_195_Z_7_Target,</if>
+            <if test="FAI_195_Z_7_Down!= null">FAI_195_Z_7_Down,</if>
+            <if test="FAI_195_Z_8_Up!= null">FAI_195_Z_8_Up,</if>
+            <if test="FAI_195_Z_8_Target!= null">FAI_195_Z_8_Target,</if>
+            <if test="FAI_195_Z_8_Down!= null">FAI_195_Z_8_Down,</if>
+            <if test="FAI_195_Z_9_Up!= null">FAI_195_Z_9_Up,</if>
+            <if test="FAI_195_Z_9_Target!= null">FAI_195_Z_9_Target,</if>
+            <if test="FAI_195_Z_9_Down!= null">FAI_195_Z_9_Down,</if>
+            <if test="FAI_195_Z_10_Up!= null">FAI_195_Z_10_Up,</if>
+            <if test="FAI_195_Z_10_Target!= null">FAI_195_Z_10_Target,</if>
+            <if test="FAI_195_Z_10_Down!= null">FAI_195_Z_10_Down,</if>
+            <if test="FAI_195_Z_11_Up!= null">FAI_195_Z_11_Up,</if>
+            <if test="FAI_195_Z_11_Target!= null">FAI_195_Z_11_Target,</if>
+            <if test="FAI_195_Z_11_Down!= null">FAI_195_Z_11_Down,</if>
+            <if test="FAI_195_Z_12_Up!= null">FAI_195_Z_12_Up,</if>
+            <if test="FAI_195_Z_12_Target!= null">FAI_195_Z_12_Target,</if>
+            <if test="FAI_195_Z_12_Down!= null">FAI_195_Z_12_Down,</if>
+            <if test="FAI_195_Z_13_Up!= null">FAI_195_Z_13_Up,</if>
+            <if test="FAI_195_Z_13_Target!= null">FAI_195_Z_13_Target,</if>
+            <if test="FAI_195_Z_13_Down!= null">FAI_195_Z_13_Down,</if>
+            <if test="FAI_195_Z_14_Up!= null">FAI_195_Z_14_Up,</if>
+            <if test="FAI_195_Z_14_Target!= null">FAI_195_Z_14_Target,</if>
+            <if test="FAI_195_Z_14_Down!= null">FAI_195_Z_14_Down,</if>
+            <if test="FAI_191_1_Up!= null">FAI_191_1_Up,</if>
+            <if test="FAI_191_1_Target!= null">FAI_191_1_Target,</if>
+            <if test="FAI_191_1_Down!= null">FAI_191_1_Down,</if>
+            <if test="FAI_191_2_Up!= null">FAI_191_2_Up,</if>
+            <if test="FAI_191_2_Target!= null">FAI_191_2_Target,</if>
+            <if test="FAI_191_2_Down!= null">FAI_191_2_Down,</if>
+            <if test="FAI_191_3_Up!= null">FAI_191_3_Up,</if>
+            <if test="FAI_191_3_Target!= null">FAI_191_3_Target,</if>
+            <if test="FAI_191_3_Down!= null">FAI_191_3_Down,</if>
+            <if test="FAI_191_4_Up!= null">FAI_191_4_Up,</if>
+            <if test="FAI_191_4_Target!= null">FAI_191_4_Target,</if>
+            <if test="FAI_191_4_Down!= null">FAI_191_4_Down,</if>
+            <if test="FAI_191_5_Up!= null">FAI_191_5_Up,</if>
+            <if test="FAI_191_5_Target!= null">FAI_191_5_Target,</if>
+            <if test="FAI_191_5_Down!= null">FAI_191_5_Down,</if>
+            <if test="FAI_191_6_Up!= null">FAI_191_6_Up,</if>
+            <if test="FAI_191_6_Target!= null">FAI_191_6_Target,</if>
+            <if test="FAI_191_6_Down!= null">FAI_191_6_Down,</if>
+            <if test="FAI_191_7_Up!= null">FAI_191_7_Up,</if>
+            <if test="FAI_191_7_Target!= null">FAI_191_7_Target,</if>
+            <if test="FAI_191_7_Down!= null">FAI_191_7_Down,</if>
+            <if test="FAI_191_8_Up!= null">FAI_191_8_Up,</if>
+            <if test="FAI_191_8_Target!= null">FAI_191_8_Target,</if>
+            <if test="FAI_191_8_Down!= null">FAI_191_8_Down,</if>
+            <if test="FAI_191_9_Up!= null">FAI_191_9_Up,</if>
+            <if test="FAI_191_9_Target!= null">FAI_191_9_Target,</if>
+            <if test="FAI_191_9_Down!= null">FAI_191_9_Down,</if>
+            <if test="FAI_191_10_Up!= null">FAI_191_10_Up,</if>
+            <if test="FAI_191_10_Target!= null">FAI_191_10_Target,</if>
+            <if test="FAI_191_10_Down!= null">FAI_191_10_Down,</if>
+            <if test="FAI_191_11_Up!= null">FAI_191_11_Up,</if>
+            <if test="FAI_191_11_Target!= null">FAI_191_11_Target,</if>
+            <if test="FAI_191_11_Down!= null">FAI_191_11_Down,</if>
+            <if test="FAI_191_12_Up!= null">FAI_191_12_Up,</if>
+            <if test="FAI_191_12_Target!= null">FAI_191_12_Target,</if>
+            <if test="FAI_191_12_Down!= null">FAI_191_12_Down,</if>
+            <if test="FAI_191_13_Up!= null">FAI_191_13_Up,</if>
+            <if test="FAI_191_13_Target!= null">FAI_191_13_Target,</if>
+            <if test="FAI_191_13_Down!= null">FAI_191_13_Down,</if>
+            <if test="FAI_191_14_Up!= null">FAI_191_14_Up,</if>
+            <if test="FAI_191_14_Target!= null">FAI_191_14_Target,</if>
+            <if test="FAI_191_14_Down!= null">FAI_191_14_Down,</if>
+            <if test="FAI_193_15_Up!= null">FAI_193_15_Up,</if>
+            <if test="FAI_193_15_Target!= null">FAI_193_15_Target,</if>
+            <if test="FAI_193_15_Down!= null">FAI_193_15_Down,</if>
+            <if test="FAI_193_16_Up!= null">FAI_193_16_Up,</if>
+            <if test="FAI_193_16_Target!= null">FAI_193_16_Target,</if>
+            <if test="FAI_193_16_Down!= null">FAI_193_16_Down,</if>
+            <if test="FAI_193_17_Up!= null">FAI_193_17_Up,</if>
+            <if test="FAI_193_17_Target!= null">FAI_193_17_Target,</if>
+            <if test="FAI_193_17_Down!= null">FAI_193_17_Down,</if>
+            <if test="FAI_193_18_Up!= null">FAI_193_18_Up,</if>
+            <if test="FAI_193_18_Target!= null">FAI_193_18_Target,</if>
+            <if test="FAI_193_18_Down!= null">FAI_193_18_Down,</if>
+            <if test="FAI_193_19_Up!= null">FAI_193_19_Up,</if>
+            <if test="FAI_193_19_Target!= null">FAI_193_19_Target,</if>
+            <if test="FAI_193_19_Down!= null">FAI_193_19_Down,</if>
+            <if test="FAI_193_20_Up!= null">FAI_193_20_Up,</if>
+            <if test="FAI_193_20_Target!= null">FAI_193_20_Target,</if>
+            <if test="FAI_193_20_Down!= null">FAI_193_20_Down,</if>
+            <if test="FAI_193_21_Up!= null">FAI_193_21_Up,</if>
+            <if test="FAI_193_21_Target!= null">FAI_193_21_Target,</if>
+            <if test="FAI_193_21_Down!= null">FAI_193_21_Down,</if>
+            <if test="FAI_193_22_Up!= null">FAI_193_22_Up,</if>
+            <if test="FAI_193_22_Target!= null">FAI_193_22_Target,</if>
+            <if test="FAI_193_22_Down!= null">FAI_193_22_Down,</if>
+            <if test="FAI_193_23_Up!= null">FAI_193_23_Up,</if>
+            <if test="FAI_193_23_Target!= null">FAI_193_23_Target,</if>
+            <if test="FAI_193_23_Down!= null">FAI_193_23_Down,</if>
+            <if test="FAI_193_24_Up!= null">FAI_193_24_Up,</if>
+            <if test="FAI_193_24_Target!= null">FAI_193_24_Target,</if>
+            <if test="FAI_193_24_Down!= null">FAI_193_24_Down,</if>
+            <if test="FAI_193_25_Up!= null">FAI_193_25_Up,</if>
+            <if test="FAI_193_25_Target!= null">FAI_193_25_Target,</if>
+            <if test="FAI_193_25_Down!= null">FAI_193_25_Down,</if>
+            <if test="FAI_193_26_Up!= null">FAI_193_26_Up,</if>
+            <if test="FAI_193_26_Target!= null">FAI_193_26_Target,</if>
+            <if test="FAI_193_26_Down!= null">FAI_193_26_Down,</if>
+            <if test="FAI_193_27_Up!= null">FAI_193_27_Up,</if>
+            <if test="FAI_193_27_Target!= null">FAI_193_27_Target,</if>
+            <if test="FAI_193_27_Down!= null">FAI_193_27_Down,</if>
+            <if test="FAI_193_28_Up!= null">FAI_193_28_Up,</if>
+            <if test="FAI_193_28_Target!= null">FAI_193_28_Target,</if>
+            <if test="FAI_193_28_Down!= null">FAI_193_28_Down,</if>
+            <if test="TP_FAI_189_Up!= null">TP_FAI_189_Up,</if>
+            <if test="TP_FAI_189_Target!= null">TP_FAI_189_Target,</if>
+            <if test="TP_FAI_189_Down!= null">TP_FAI_189_Down,</if>
+            <if test="TP_FAI_133_Up!= null">TP_FAI_133_Up,</if>
+            <if test="TP_FAI_133_Target!= null">TP_FAI_133_Target,</if>
+            <if test="TP_FAI_133_Down!= null">TP_FAI_133_Down,</if>
+            <if test="TP_FAI224_1_Up!= null">TP_FAI224_1_Up,</if>
+            <if test="TP_FAI224_1_Target!= null">TP_FAI224_1_Target,</if>
+            <if test="TP_FAI224_1_Down!= null">TP_FAI224_1_Down,</if>
+            <if test="TP_FAI224_2_Up!= null">TP_FAI224_2_Up,</if>
+            <if test="TP_FAI224_2_Target!= null">TP_FAI224_2_Target,</if>
+            <if test="TP_FAI224_2_Down!= null">TP_FAI224_2_Down,</if>
+            <if test="FAI132_1_Up!= null">FAI132_1_Up,</if>
+            <if test="FAI132_1_Target!= null">FAI132_1_Target,</if>
+            <if test="FAI132_1_Down!= null">FAI132_1_Down,</if>
+            <if test="FAI132_2_Up!= null">FAI132_2_Up,</if>
+            <if test="FAI132_2_Target!= null">FAI132_2_Target,</if>
+            <if test="FAI132_2_Down!= null">FAI132_2_Down,</if>
+            <if test="FAI17_1_Up!= null">FAI17_1_Up,</if>
+            <if test="FAI17_1_Target!= null">FAI17_1_Target,</if>
+            <if test="FAI17_1_Down!= null">FAI17_1_Down,</if>
+            <if test="FAI17_2_Up!= null">FAI17_2_Up,</if>
+            <if test="FAI17_2_Target!= null">FAI17_2_Target,</if>
+            <if test="FAI17_2_Down!= null">FAI17_2_Down,</if>
+            <if test="FAI6_Up!= null">FAI6_Up,</if>
+            <if test="FAI6_Target!= null">FAI6_Target,</if>
+            <if test="FAI6_Down!= null">FAI6_Down,</if>
+            <if test="FAI9_1_Up!= null">FAI9_1_Up,</if>
+            <if test="FAI9_1_Target!= null">FAI9_1_Target,</if>
+            <if test="FAI9_1_Down!= null">FAI9_1_Down,</if>
+            <if test="FAI9_2_Up!= null">FAI9_2_Up,</if>
+            <if test="FAI9_2_Target!= null">FAI9_2_Target,</if>
+            <if test="FAI9_2_Down!= null">FAI9_2_Down,</if>
+            <if test="FAI19_1_Up!= null">FAI19_1_Up,</if>
+            <if test="FAI19_1_Target!= null">FAI19_1_Target,</if>
+            <if test="FAI19_1_Down!= null">FAI19_1_Down,</if>
+            <if test="FAI19_2_Up!= null">FAI19_2_Up,</if>
+            <if test="FAI19_2_Target!= null">FAI19_2_Target,</if>
+            <if test="FAI19_2_Down!= null">FAI19_2_Down,</if>
+            <if test="FAI5_1_Up!= null">FAI5_1_Up,</if>
+            <if test="FAI5_1_Target!= null">FAI5_1_Target,</if>
+            <if test="FAI5_1_Down!= null">FAI5_1_Down,</if>
+            <if test="FAI5_2_Up!= null">FAI5_2_Up,</if>
+            <if test="FAI5_2_Target!= null">FAI5_2_Target,</if>
+            <if test="FAI5_2_Down!= null">FAI5_2_Down,</if>
+            <if test="FAI129_1_Up!= null">FAI129_1_Up,</if>
+            <if test="FAI129_1_Target!= null">FAI129_1_Target,</if>
+            <if test="FAI129_1_Down!= null">FAI129_1_Down,</if>
+            <if test="FAI129_2_Up!= null">FAI129_2_Up,</if>
+            <if test="FAI129_2_Target!= null">FAI129_2_Target,</if>
+            <if test="FAI129_2_Down!= null">FAI129_2_Down,</if>
+            <if test="FAI544_1_Up!= null">FAI544_1_Up,</if>
+            <if test="FAI544_1_Target!= null">FAI544_1_Target,</if>
+            <if test="FAI544_1_Down!= null">FAI544_1_Down,</if>
+            <if test="FAI544_2_Up!= null">FAI544_2_Up,</if>
+            <if test="FAI544_2_Target!= null">FAI544_2_Target,</if>
+            <if test="FAI544_2_Down!= null">FAI544_2_Down,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="items!= null">#{items},</if>
+            <if test="Testpcid!= null">#{Testpcid},</if>
+            <if test="Collecttime!= null">#{Collecttime},</if>
+            <if test="FileName!= null">#{FileName},</if>
+            <if test="Num!= null">#{Num},</if>
+            <if test="Barcode!= null">#{Barcode},</if>
+            <if test="FAI10_Value!= null">#{FAI10_Value},</if>
+            <if test="FAI_195_U_1_Value!= null">#{FAI_195_U_1_Value},</if>
+            <if test="FAI_195_U_2_Value!= null">#{FAI_195_U_2_Value},</if>
+            <if test="FAI_195_U_3_Value!= null">#{FAI_195_U_3_Value},</if>
+            <if test="FAI_195_U_4_Value!= null">#{FAI_195_U_4_Value},</if>
+            <if test="FAI_195_U_5_Value!= null">#{FAI_195_U_5_Value},</if>
+            <if test="FAI_195_U_6_Value!= null">#{FAI_195_U_6_Value},</if>
+            <if test="FAI_195_U_7_Value!= null">#{FAI_195_U_7_Value},</if>
+            <if test="FAI_195_U_8_Value!= null">#{FAI_195_U_8_Value},</if>
+            <if test="FAI_195_U_9_Value!= null">#{FAI_195_U_9_Value},</if>
+            <if test="FAI_195_U_10_Value!= null">#{FAI_195_U_10_Value},</if>
+            <if test="FAI_195_U_11_Value!= null">#{FAI_195_U_11_Value},</if>
+            <if test="FAI_195_U_12_Value!= null">#{FAI_195_U_12_Value},</if>
+            <if test="FAI_195_U_13_Value!= null">#{FAI_195_U_13_Value},</if>
+            <if test="FAI_195_U_14_Value!= null">#{FAI_195_U_14_Value},</if>
+            <if test="FAI_195_Z_1_Value!= null">#{FAI_195_Z_1_Value},</if>
+            <if test="FAI_195_Z_2_Value!= null">#{FAI_195_Z_2_Value},</if>
+            <if test="FAI_195_Z_3_Value!= null">#{FAI_195_Z_3_Value},</if>
+            <if test="FAI_195_Z_4_Value!= null">#{FAI_195_Z_4_Value},</if>
+            <if test="FAI_195_Z_5_Value!= null">#{FAI_195_Z_5_Value},</if>
+            <if test="FAI_195_Z_6_Value!= null">#{FAI_195_Z_6_Value},</if>
+            <if test="FAI_195_Z_7_Value!= null">#{FAI_195_Z_7_Value},</if>
+            <if test="FAI_195_Z_8_Value!= null">#{FAI_195_Z_8_Value},</if>
+            <if test="FAI_195_Z_9_Value!= null">#{FAI_195_Z_9_Value},</if>
+            <if test="FAI_195_Z_10_Value!= null">#{FAI_195_Z_10_Value},</if>
+            <if test="FAI_195_Z_11_Value!= null">#{FAI_195_Z_11_Value},</if>
+            <if test="FAI_195_Z_12_Value!= null">#{FAI_195_Z_12_Value},</if>
+            <if test="FAI_195_Z_13_Value!= null">#{FAI_195_Z_13_Value},</if>
+            <if test="FAI_195_Z_14_Value!= null">#{FAI_195_Z_14_Value},</if>
+            <if test="FAI_191_1_Value!= null">#{FAI_191_1_Value},</if>
+            <if test="FAI_191_2_Value!= null">#{FAI_191_2_Value},</if>
+            <if test="FAI_191_3_Value!= null">#{FAI_191_3_Value},</if>
+            <if test="FAI_191_4_Value!= null">#{FAI_191_4_Value},</if>
+            <if test="FAI_191_5_Value!= null">#{FAI_191_5_Value},</if>
+            <if test="FAI_191_6_Value!= null">#{FAI_191_6_Value},</if>
+            <if test="FAI_191_7_Value!= null">#{FAI_191_7_Value},</if>
+            <if test="FAI_191_8_Value!= null">#{FAI_191_8_Value},</if>
+            <if test="FAI_191_9_Value!= null">#{FAI_191_9_Value},</if>
+            <if test="FAI_191_10_Value!= null">#{FAI_191_10_Value},</if>
+            <if test="FAI_191_11_Value!= null">#{FAI_191_11_Value},</if>
+            <if test="FAI_191_12_Value!= null">#{FAI_191_12_Value},</if>
+            <if test="FAI_191_13_Value!= null">#{FAI_191_13_Value},</if>
+            <if test="FAI_191_14_Value!= null">#{FAI_191_14_Value},</if>
+            <if test="FAI_193_15_Value!= null">#{FAI_193_15_Value},</if>
+            <if test="FAI_193_16_Value!= null">#{FAI_193_16_Value},</if>
+            <if test="FAI_193_17_Value!= null">#{FAI_193_17_Value},</if>
+            <if test="FAI_193_18_Value!= null">#{FAI_193_18_Value},</if>
+            <if test="FAI_193_19_Value!= null">#{FAI_193_19_Value},</if>
+            <if test="FAI_193_20_Value!= null">#{FAI_193_20_Value},</if>
+            <if test="FAI_193_21_Value!= null">#{FAI_193_21_Value},</if>
+            <if test="FAI_193_22_Value!= null">#{FAI_193_22_Value},</if>
+            <if test="FAI_193_23_Value!= null">#{FAI_193_23_Value},</if>
+            <if test="FAI_193_24_Value!= null">#{FAI_193_24_Value},</if>
+            <if test="FAI_193_25_Value!= null">#{FAI_193_25_Value},</if>
+            <if test="FAI_193_26_Value!= null">#{FAI_193_26_Value},</if>
+            <if test="FAI_193_27_Value!= null">#{FAI_193_27_Value},</if>
+            <if test="FAI_193_28_Value!= null">#{FAI_193_28_Value},</if>
+            <if test="TP_FAI_189!= null">#{TP_FAI_189},</if>
+            <if test="TP_FAI_133!= null">#{TP_FAI_133},</if>
+            <if test="TP_FAI224_1!= null">#{TP_FAI224_1},</if>
+            <if test="TP_FAI224_2!= null">#{TP_FAI224_2},</if>
+            <if test="FAI132_1!= null">#{FAI132_1},</if>
+            <if test="FAI132_2!= null">#{FAI132_2},</if>
+            <if test="FAI17_1!= null">#{FAI17_1},</if>
+            <if test="FAI17_2!= null">#{FAI17_2},</if>
+            <if test="FAI6_Value!= null">#{FAI6_Value},</if>
+            <if test="FAI9_1!= null">#{FAI9_1},</if>
+            <if test="FAI9_2!= null">#{FAI9_2},</if>
+            <if test="FAI19_1!= null">#{FAI19_1},</if>
+            <if test="FAI19_2!= null">#{FAI19_2},</if>
+            <if test="FAI5_1!= null">#{FAI5_1},</if>
+            <if test="FAI5_2!= null">#{FAI5_2},</if>
+            <if test="FAI129_1!= null">#{FAI129_1},</if>
+            <if test="FAI129_2!= null">#{FAI129_2},</if>
+            <if test="Pin0p27_1!= null">#{Pin0p27_1},</if>
+            <if test="Pin0p27_2!= null">#{Pin0p27_2},</if>
+            <if test="TestResult!= null">#{TestResult},</if>
+            <if test="TestTime!= null">#{TestTime},</if>
+            <if test="ModuleID!= null">#{ModuleID},</if>
+            <if test="LineID!= null">#{LineID},</if>
+            <if test="LineType!= null">#{LineType},</if>
+            <if test="ProjectID!= null">#{ProjectID},</if>
+            <if test="FAI10_Up!= null">#{FAI10_Up},</if>
+            <if test="FAI10_Target!= null">#{FAI10_Target},</if>
+            <if test="FAI10_Down!= null">#{FAI10_Down},</if>
+            <if test="FAI_195_U_1_Up!= null">#{FAI_195_U_1_Up},</if>
+            <if test="FAI_195_U_1_Target!= null">#{FAI_195_U_1_Target},</if>
+            <if test="FAI_195_U_1_Down!= null">#{FAI_195_U_1_Down},</if>
+            <if test="FAI_195_U_2_Up!= null">#{FAI_195_U_2_Up},</if>
+            <if test="FAI_195_U_2_Target!= null">#{FAI_195_U_2_Target},</if>
+            <if test="FAI_195_U_2_Down!= null">#{FAI_195_U_2_Down},</if>
+            <if test="FAI_195_U_3_Up!= null">#{FAI_195_U_3_Up},</if>
+            <if test="FAI_195_U_3_Target!= null">#{FAI_195_U_3_Target},</if>
+            <if test="FAI_195_U_3_Down!= null">#{FAI_195_U_3_Down},</if>
+            <if test="FAI_195_U_4_Up!= null">#{FAI_195_U_4_Up},</if>
+            <if test="FAI_195_U_4_Target!= null">#{FAI_195_U_4_Target},</if>
+            <if test="FAI_195_U_4_Down!= null">#{FAI_195_U_4_Down},</if>
+            <if test="FAI_195_U_5_Up!= null">#{FAI_195_U_5_Up},</if>
+            <if test="FAI_195_U_5_Target!= null">#{FAI_195_U_5_Target},</if>
+            <if test="FAI_195_U_5_Down!= null">#{FAI_195_U_5_Down},</if>
+            <if test="FAI_195_U_6_Up!= null">#{FAI_195_U_6_Up},</if>
+            <if test="FAI_195_U_6_Target!= null">#{FAI_195_U_6_Target},</if>
+            <if test="FAI_195_U_6_Down!= null">#{FAI_195_U_6_Down},</if>
+            <if test="FAI_195_U_7_Up!= null">#{FAI_195_U_7_Up},</if>
+            <if test="FAI_195_U_7_Target!= null">#{FAI_195_U_7_Target},</if>
+            <if test="FAI_195_U_7_Down!= null">#{FAI_195_U_7_Down},</if>
+            <if test="FAI_195_U_8_Up!= null">#{FAI_195_U_8_Up},</if>
+            <if test="FAI_195_U_8_Target!= null">#{FAI_195_U_8_Target},</if>
+            <if test="FAI_195_U_8_Down!= null">#{FAI_195_U_8_Down},</if>
+            <if test="FAI_195_U_9_Up!= null">#{FAI_195_U_9_Up},</if>
+            <if test="FAI_195_U_9_Target!= null">#{FAI_195_U_9_Target},</if>
+            <if test="FAI_195_U_9_Down!= null">#{FAI_195_U_9_Down},</if>
+            <if test="FAI_195_U_10_Up!= null">#{FAI_195_U_10_Up},</if>
+            <if test="FAI_195_U_10_Target!= null">#{FAI_195_U_10_Target},</if>
+            <if test="FAI_195_U_10_Down!= null">#{FAI_195_U_10_Down},</if>
+            <if test="FAI_195_U_11_Up!= null">#{FAI_195_U_11_Up},</if>
+            <if test="FAI_195_U_11_Target!= null">#{FAI_195_U_11_Target},</if>
+            <if test="FAI_195_U_11_Down!= null">#{FAI_195_U_11_Down},</if>
+            <if test="FAI_195_U_12_Up!= null">#{FAI_195_U_12_Up},</if>
+            <if test="FAI_195_U_12_Target!= null">#{FAI_195_U_12_Target},</if>
+            <if test="FAI_195_U_12_Down!= null">#{FAI_195_U_12_Down},</if>
+            <if test="FAI_195_U_13_Up!= null">#{FAI_195_U_13_Up},</if>
+            <if test="FAI_195_U_13_Target!= null">#{FAI_195_U_13_Target},</if>
+            <if test="FAI_195_U_13_Down!= null">#{FAI_195_U_13_Down},</if>
+            <if test="FAI_195_U_14_Up!= null">#{FAI_195_U_14_Up},</if>
+            <if test="FAI_195_U_14_Target!= null">#{FAI_195_U_14_Target},</if>
+            <if test="FAI_195_U_14_Down!= null">#{FAI_195_U_14_Down},</if>
+            <if test="FAI_195_Z_1_Up!= null">#{FAI_195_Z_1_Up},</if>
+            <if test="FAI_195_Z_1_Target!= null">#{FAI_195_Z_1_Target},</if>
+            <if test="FAI_195_Z_1_Down!= null">#{FAI_195_Z_1_Down},</if>
+            <if test="FAI_195_Z_2_Up!= null">#{FAI_195_Z_2_Up},</if>
+            <if test="FAI_195_Z_2_Target!= null">#{FAI_195_Z_2_Target},</if>
+            <if test="FAI_195_Z_2_Down!= null">#{FAI_195_Z_2_Down},</if>
+            <if test="FAI_195_Z_3_Up!= null">#{FAI_195_Z_3_Up},</if>
+            <if test="FAI_195_Z_3_Target!= null">#{FAI_195_Z_3_Target},</if>
+            <if test="FAI_195_Z_3_Down!= null">#{FAI_195_Z_3_Down},</if>
+            <if test="FAI_195_Z_4_Up!= null">#{FAI_195_Z_4_Up},</if>
+            <if test="FAI_195_Z_4_Target!= null">#{FAI_195_Z_4_Target},</if>
+            <if test="FAI_195_Z_4_Down!= null">#{FAI_195_Z_4_Down},</if>
+            <if test="FAI_195_Z_5_Up!= null">#{FAI_195_Z_5_Up},</if>
+            <if test="FAI_195_Z_5_Target!= null">#{FAI_195_Z_5_Target},</if>
+            <if test="FAI_195_Z_5_Down!= null">#{FAI_195_Z_5_Down},</if>
+            <if test="FAI_195_Z_6_Up!= null">#{FAI_195_Z_6_Up},</if>
+            <if test="FAI_195_Z_6_Target!= null">#{FAI_195_Z_6_Target},</if>
+            <if test="FAI_195_Z_6_Down!= null">#{FAI_195_Z_6_Down},</if>
+            <if test="FAI_195_Z_7_Up!= null">#{FAI_195_Z_7_Up},</if>
+            <if test="FAI_195_Z_7_Target!= null">#{FAI_195_Z_7_Target},</if>
+            <if test="FAI_195_Z_7_Down!= null">#{FAI_195_Z_7_Down},</if>
+            <if test="FAI_195_Z_8_Up!= null">#{FAI_195_Z_8_Up},</if>
+            <if test="FAI_195_Z_8_Target!= null">#{FAI_195_Z_8_Target},</if>
+            <if test="FAI_195_Z_8_Down!= null">#{FAI_195_Z_8_Down},</if>
+            <if test="FAI_195_Z_9_Up!= null">#{FAI_195_Z_9_Up},</if>
+            <if test="FAI_195_Z_9_Target!= null">#{FAI_195_Z_9_Target},</if>
+            <if test="FAI_195_Z_9_Down!= null">#{FAI_195_Z_9_Down},</if>
+            <if test="FAI_195_Z_10_Up!= null">#{FAI_195_Z_10_Up},</if>
+            <if test="FAI_195_Z_10_Target!= null">#{FAI_195_Z_10_Target},</if>
+            <if test="FAI_195_Z_10_Down!= null">#{FAI_195_Z_10_Down},</if>
+            <if test="FAI_195_Z_11_Up!= null">#{FAI_195_Z_11_Up},</if>
+            <if test="FAI_195_Z_11_Target!= null">#{FAI_195_Z_11_Target},</if>
+            <if test="FAI_195_Z_11_Down!= null">#{FAI_195_Z_11_Down},</if>
+            <if test="FAI_195_Z_12_Up!= null">#{FAI_195_Z_12_Up},</if>
+            <if test="FAI_195_Z_12_Target!= null">#{FAI_195_Z_12_Target},</if>
+            <if test="FAI_195_Z_12_Down!= null">#{FAI_195_Z_12_Down},</if>
+            <if test="FAI_195_Z_13_Up!= null">#{FAI_195_Z_13_Up},</if>
+            <if test="FAI_195_Z_13_Target!= null">#{FAI_195_Z_13_Target},</if>
+            <if test="FAI_195_Z_13_Down!= null">#{FAI_195_Z_13_Down},</if>
+            <if test="FAI_195_Z_14_Up!= null">#{FAI_195_Z_14_Up},</if>
+            <if test="FAI_195_Z_14_Target!= null">#{FAI_195_Z_14_Target},</if>
+            <if test="FAI_195_Z_14_Down!= null">#{FAI_195_Z_14_Down},</if>
+            <if test="FAI_191_1_Up!= null">#{FAI_191_1_Up},</if>
+            <if test="FAI_191_1_Target!= null">#{FAI_191_1_Target},</if>
+            <if test="FAI_191_1_Down!= null">#{FAI_191_1_Down},</if>
+            <if test="FAI_191_2_Up!= null">#{FAI_191_2_Up},</if>
+            <if test="FAI_191_2_Target!= null">#{FAI_191_2_Target},</if>
+            <if test="FAI_191_2_Down!= null">#{FAI_191_2_Down},</if>
+            <if test="FAI_191_3_Up!= null">#{FAI_191_3_Up},</if>
+            <if test="FAI_191_3_Target!= null">#{FAI_191_3_Target},</if>
+            <if test="FAI_191_3_Down!= null">#{FAI_191_3_Down},</if>
+            <if test="FAI_191_4_Up!= null">#{FAI_191_4_Up},</if>
+            <if test="FAI_191_4_Target!= null">#{FAI_191_4_Target},</if>
+            <if test="FAI_191_4_Down!= null">#{FAI_191_4_Down},</if>
+            <if test="FAI_191_5_Up!= null">#{FAI_191_5_Up},</if>
+            <if test="FAI_191_5_Target!= null">#{FAI_191_5_Target},</if>
+            <if test="FAI_191_5_Down!= null">#{FAI_191_5_Down},</if>
+            <if test="FAI_191_6_Up!= null">#{FAI_191_6_Up},</if>
+            <if test="FAI_191_6_Target!= null">#{FAI_191_6_Target},</if>
+            <if test="FAI_191_6_Down!= null">#{FAI_191_6_Down},</if>
+            <if test="FAI_191_7_Up!= null">#{FAI_191_7_Up},</if>
+            <if test="FAI_191_7_Target!= null">#{FAI_191_7_Target},</if>
+            <if test="FAI_191_7_Down!= null">#{FAI_191_7_Down},</if>
+            <if test="FAI_191_8_Up!= null">#{FAI_191_8_Up},</if>
+            <if test="FAI_191_8_Target!= null">#{FAI_191_8_Target},</if>
+            <if test="FAI_191_8_Down!= null">#{FAI_191_8_Down},</if>
+            <if test="FAI_191_9_Up!= null">#{FAI_191_9_Up},</if>
+            <if test="FAI_191_9_Target!= null">#{FAI_191_9_Target},</if>
+            <if test="FAI_191_9_Down!= null">#{FAI_191_9_Down},</if>
+            <if test="FAI_191_10_Up!= null">#{FAI_191_10_Up},</if>
+            <if test="FAI_191_10_Target!= null">#{FAI_191_10_Target},</if>
+            <if test="FAI_191_10_Down!= null">#{FAI_191_10_Down},</if>
+            <if test="FAI_191_11_Up!= null">#{FAI_191_11_Up},</if>
+            <if test="FAI_191_11_Target!= null">#{FAI_191_11_Target},</if>
+            <if test="FAI_191_11_Down!= null">#{FAI_191_11_Down},</if>
+            <if test="FAI_191_12_Up!= null">#{FAI_191_12_Up},</if>
+            <if test="FAI_191_12_Target!= null">#{FAI_191_12_Target},</if>
+            <if test="FAI_191_12_Down!= null">#{FAI_191_12_Down},</if>
+            <if test="FAI_191_13_Up!= null">#{FAI_191_13_Up},</if>
+            <if test="FAI_191_13_Target!= null">#{FAI_191_13_Target},</if>
+            <if test="FAI_191_13_Down!= null">#{FAI_191_13_Down},</if>
+            <if test="FAI_191_14_Up!= null">#{FAI_191_14_Up},</if>
+            <if test="FAI_191_14_Target!= null">#{FAI_191_14_Target},</if>
+            <if test="FAI_191_14_Down!= null">#{FAI_191_14_Down},</if>
+            <if test="FAI_193_15_Up!= null">#{FAI_193_15_Up},</if>
+            <if test="FAI_193_15_Target!= null">#{FAI_193_15_Target},</if>
+            <if test="FAI_193_15_Down!= null">#{FAI_193_15_Down},</if>
+            <if test="FAI_193_16_Up!= null">#{FAI_193_16_Up},</if>
+            <if test="FAI_193_16_Target!= null">#{FAI_193_16_Target},</if>
+            <if test="FAI_193_16_Down!= null">#{FAI_193_16_Down},</if>
+            <if test="FAI_193_17_Up!= null">#{FAI_193_17_Up},</if>
+            <if test="FAI_193_17_Target!= null">#{FAI_193_17_Target},</if>
+            <if test="FAI_193_17_Down!= null">#{FAI_193_17_Down},</if>
+            <if test="FAI_193_18_Up!= null">#{FAI_193_18_Up},</if>
+            <if test="FAI_193_18_Target!= null">#{FAI_193_18_Target},</if>
+            <if test="FAI_193_18_Down!= null">#{FAI_193_18_Down},</if>
+            <if test="FAI_193_19_Up!= null">#{FAI_193_19_Up},</if>
+            <if test="FAI_193_19_Target!= null">#{FAI_193_19_Target},</if>
+            <if test="FAI_193_19_Down!= null">#{FAI_193_19_Down},</if>
+            <if test="FAI_193_20_Up!= null">#{FAI_193_20_Up},</if>
+            <if test="FAI_193_20_Target!= null">#{FAI_193_20_Target},</if>
+            <if test="FAI_193_20_Down!= null">#{FAI_193_20_Down},</if>
+            <if test="FAI_193_21_Up!= null">#{FAI_193_21_Up},</if>
+            <if test="FAI_193_21_Target!= null">#{FAI_193_21_Target},</if>
+            <if test="FAI_193_21_Down!= null">#{FAI_193_21_Down},</if>
+            <if test="FAI_193_22_Up!= null">#{FAI_193_22_Up},</if>
+            <if test="FAI_193_22_Target!= null">#{FAI_193_22_Target},</if>
+            <if test="FAI_193_22_Down!= null">#{FAI_193_22_Down},</if>
+            <if test="FAI_193_23_Up!= null">#{FAI_193_23_Up},</if>
+            <if test="FAI_193_23_Target!= null">#{FAI_193_23_Target},</if>
+            <if test="FAI_193_23_Down!= null">#{FAI_193_23_Down},</if>
+            <if test="FAI_193_24_Up!= null">#{FAI_193_24_Up},</if>
+            <if test="FAI_193_24_Target!= null">#{FAI_193_24_Target},</if>
+            <if test="FAI_193_24_Down!= null">#{FAI_193_24_Down},</if>
+            <if test="FAI_193_25_Up!= null">#{FAI_193_25_Up},</if>
+            <if test="FAI_193_25_Target!= null">#{FAI_193_25_Target},</if>
+            <if test="FAI_193_25_Down!= null">#{FAI_193_25_Down},</if>
+            <if test="FAI_193_26_Up!= null">#{FAI_193_26_Up},</if>
+            <if test="FAI_193_26_Target!= null">#{FAI_193_26_Target},</if>
+            <if test="FAI_193_26_Down!= null">#{FAI_193_26_Down},</if>
+            <if test="FAI_193_27_Up!= null">#{FAI_193_27_Up},</if>
+            <if test="FAI_193_27_Target!= null">#{FAI_193_27_Target},</if>
+            <if test="FAI_193_27_Down!= null">#{FAI_193_27_Down},</if>
+            <if test="FAI_193_28_Up!= null">#{FAI_193_28_Up},</if>
+            <if test="FAI_193_28_Target!= null">#{FAI_193_28_Target},</if>
+            <if test="FAI_193_28_Down!= null">#{FAI_193_28_Down},</if>
+            <if test="TP_FAI_189_Up!= null">#{TP_FAI_189_Up},</if>
+            <if test="TP_FAI_189_Target!= null">#{TP_FAI_189_Target},</if>
+            <if test="TP_FAI_189_Down!= null">#{TP_FAI_189_Down},</if>
+            <if test="TP_FAI_133_Up!= null">#{TP_FAI_133_Up},</if>
+            <if test="TP_FAI_133_Target!= null">#{TP_FAI_133_Target},</if>
+            <if test="TP_FAI_133_Down!= null">#{TP_FAI_133_Down},</if>
+            <if test="TP_FAI224_1_Up!= null">#{TP_FAI224_1_Up},</if>
+            <if test="TP_FAI224_1_Target!= null">#{TP_FAI224_1_Target},</if>
+            <if test="TP_FAI224_1_Down!= null">#{TP_FAI224_1_Down},</if>
+            <if test="TP_FAI224_2_Up!= null">#{TP_FAI224_2_Up},</if>
+            <if test="TP_FAI224_2_Target!= null">#{TP_FAI224_2_Target},</if>
+            <if test="TP_FAI224_2_Down!= null">#{TP_FAI224_2_Down},</if>
+            <if test="FAI132_1_Up!= null">#{FAI132_1_Up},</if>
+            <if test="FAI132_1_Target!= null">#{FAI132_1_Target},</if>
+            <if test="FAI132_1_Down!= null">#{FAI132_1_Down},</if>
+            <if test="FAI132_2_Up!= null">#{FAI132_2_Up},</if>
+            <if test="FAI132_2_Target!= null">#{FAI132_2_Target},</if>
+            <if test="FAI132_2_Down!= null">#{FAI132_2_Down},</if>
+            <if test="FAI17_1_Up!= null">#{FAI17_1_Up},</if>
+            <if test="FAI17_1_Target!= null">#{FAI17_1_Target},</if>
+            <if test="FAI17_1_Down!= null">#{FAI17_1_Down},</if>
+            <if test="FAI17_2_Up!= null">#{FAI17_2_Up},</if>
+            <if test="FAI17_2_Target!= null">#{FAI17_2_Target},</if>
+            <if test="FAI17_2_Down!= null">#{FAI17_2_Down},</if>
+            <if test="FAI6_Up!= null">#{FAI6_Up},</if>
+            <if test="FAI6_Target!= null">#{FAI6_Target},</if>
+            <if test="FAI6_Down!= null">#{FAI6_Down},</if>
+            <if test="FAI9_1_Up!= null">#{FAI9_1_Up},</if>
+            <if test="FAI9_1_Target!= null">#{FAI9_1_Target},</if>
+            <if test="FAI9_1_Down!= null">#{FAI9_1_Down},</if>
+            <if test="FAI9_2_Up!= null">#{FAI9_2_Up},</if>
+            <if test="FAI9_2_Target!= null">#{FAI9_2_Target},</if>
+            <if test="FAI9_2_Down!= null">#{FAI9_2_Down},</if>
+            <if test="FAI19_1_Up!= null">#{FAI19_1_Up},</if>
+            <if test="FAI19_1_Target!= null">#{FAI19_1_Target},</if>
+            <if test="FAI19_1_Down!= null">#{FAI19_1_Down},</if>
+            <if test="FAI19_2_Up!= null">#{FAI19_2_Up},</if>
+            <if test="FAI19_2_Target!= null">#{FAI19_2_Target},</if>
+            <if test="FAI19_2_Down!= null">#{FAI19_2_Down},</if>
+            <if test="FAI5_1_Up!= null">#{FAI5_1_Up},</if>
+            <if test="FAI5_1_Target!= null">#{FAI5_1_Target},</if>
+            <if test="FAI5_1_Down!= null">#{FAI5_1_Down},</if>
+            <if test="FAI5_2_Up!= null">#{FAI5_2_Up},</if>
+            <if test="FAI5_2_Target!= null">#{FAI5_2_Target},</if>
+            <if test="FAI5_2_Down!= null">#{FAI5_2_Down},</if>
+            <if test="FAI129_1_Up!= null">#{FAI129_1_Up},</if>
+            <if test="FAI129_1_Target!= null">#{FAI129_1_Target},</if>
+            <if test="FAI129_1_Down!= null">#{FAI129_1_Down},</if>
+            <if test="FAI129_2_Up!= null">#{FAI129_2_Up},</if>
+            <if test="FAI129_2_Target!= null">#{FAI129_2_Target},</if>
+            <if test="FAI129_2_Down!= null">#{FAI129_2_Down},</if>
+            <if test="FAI544_1_Up!= null">#{FAI544_1_Up},</if>
+            <if test="FAI544_1_Target!= null">#{FAI544_1_Target},</if>
+            <if test="FAI544_1_Down!= null">#{FAI544_1_Down},</if>
+            <if test="FAI544_2_Up!= null">#{FAI544_2_Up},</if>
+            <if test="FAI544_2_Target!= null">#{FAI544_2_Target},</if>
+            <if test="FAI544_2_Down!= null">#{FAI544_2_Down},</if>
+        </trim>
+    </insert>
+
+    <select id="searchMD8xMainLine301M9T" parameterType="String"
+            resultType="com.example.pmp.pojo.fox.D8XMainLine301M9Search">
+        select * from (
+        SELECT [items]
+        ,[Testpcid]
+        ,[Collecttime]
+        ,[FileName]
+        ,[Num]
+        ,[Barcode]
+        ,[cav_No]
+        ,[FAI10_Value]
+        ,[FAI_195_U_1_Value]
+        ,[FAI_195_U_2_Value]
+        ,[FAI_195_U_3_Value]
+        ,[FAI_195_U_4_Value]
+        ,[FAI_195_U_5_Value]
+        ,[FAI_195_U_6_Value]
+        ,[FAI_195_U_7_Value]
+        ,[FAI_195_U_8_Value]
+        ,[FAI_195_U_9_Value]
+        ,[FAI_195_U_10_Value]
+        ,[FAI_195_U_11_Value]
+        ,[FAI_195_U_12_Value]
+        ,[FAI_195_U_13_Value]
+        ,[FAI_195_U_14_Value]
+        ,[FAI_195_Z_1_Value]
+        ,[FAI_195_Z_2_Value]
+        ,[FAI_195_Z_3_Value]
+        ,[FAI_195_Z_4_Value]
+        ,[FAI_195_Z_5_Value]
+        ,[FAI_195_Z_6_Value]
+        ,[FAI_195_Z_7_Value]
+        ,[FAI_195_Z_8_Value]
+        ,[FAI_195_Z_9_Value]
+        ,[FAI_195_Z_10_Value]
+        ,[FAI_195_Z_11_Value]
+        ,[FAI_195_Z_12_Value]
+        ,[FAI_195_Z_13_Value]
+        ,[FAI_195_Z_14_Value]
+
+        ,[FAI_191_1_Value]
+        ,[FAI_191_2_Value]
+        ,[FAI_191_3_Value]
+        ,[FAI_191_4_Value]
+        ,[FAI_191_5_Value]
+        ,[FAI_191_6_Value]
+        ,[FAI_191_7_Value]
+        ,[FAI_191_8_Value]
+        ,[FAI_191_9_Value]
+        ,[FAI_191_10_Value]
+        ,[FAI_191_11_Value]
+        ,[FAI_191_12_Value]
+        ,[FAI_191_13_Value]
+        ,[FAI_191_14_Value]
+        ,[FAI_193_15_Value]
+        ,[FAI_193_16_Value]
+        ,[FAI_193_17_Value]
+        ,[FAI_193_18_Value]
+        ,[FAI_193_19_Value]
+        ,[FAI_193_20_Value]
+        ,[FAI_193_21_Value]
+        ,[FAI_193_22_Value]
+        ,[FAI_193_23_Value]
+        ,[FAI_193_24_Value]
+        ,[FAI_193_25_Value]
+        ,[FAI_193_26_Value]
+        ,[FAI_193_27_Value]
+        ,[FAI_193_28_Value]
+        ,[TP_FAI_189]
+        ,[TP_FAI_133]
+        ,[TP_FAI224_1]
+        ,[TP_FAI224_2]
+        ,[FAI_189_Value]
+        ,[FAI132_1]
+        ,[FAI132_2]
+        ,[FAI17_1]
+        ,[FAI17_2]
+
+        ,[FAI6_Value]
+        ,[FAI9_1]
+        ,[FAI9_2]
+        ,[FAI19_1]
+        ,[FAI19_2]
+        ,[FAI5_1]
+        ,[FAI5_2]
+        ,[FAI129_1]
+        ,[FAI129_2]
+        ,[Pin0p27_1]
+        ,[Pin0p27_2]
+
+        ,[TestResult]
+        ,convert(varchar(50),[TestTime],120) as 'TestTime'
+        ,[ModuleID]
+        ,[LineID]
+        ,[LineType]
+        ,'D8X' AS ProjectID
+        FROM [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M9_t] )a
+        left join (select top 1 * from [MESDataCenter].[dbo].[m_D8X_Main_Line3_01_M9-Target2_t])b on 1=1
+        <where>
+            <if test="Barcode!=null and Barcode!=''">AND a.Barcode = #{Barcode}</if>
+            <if test="StartTime!=null and StartTime!='' and EndTime!=null and EndTime!=''">
+                AND CONVERT(VARCHAR(50), a.TestTime, 120) BETWEEN #{StartTime} AND #{EndTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

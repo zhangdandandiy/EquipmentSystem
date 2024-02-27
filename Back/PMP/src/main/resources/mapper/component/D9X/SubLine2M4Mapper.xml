@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.SubLine2M4Mapper">
+
+    <select id="getSubLine2M4List" resultType="SubLine2M4TPZ" parameterType="java.util.List">
+        select [FAI32_1_Value]
+        ,[FAI32_2_Value]
+        ,[FAI32_3_Value]
+        ,[FAI32_4_Value]
+        ,[FAI32_5_Value]
+        ,[FAI32_6_Value]
+        ,[FAI32_7_Value]
+        ,[FAI32_8_Value]
+        ,[FAI32_9_Value]
+        ,[FAI32_10_Value]
+        ,[FAI32_11_Value]
+        ,[FAI32_12_Value]
+        ,[FAI32_13_Value]
+        ,[FAI32_14_Value]
+        ,[FAI32_15_Value]
+        ,[FAI32_16_Value]
+        ,[FAI32_17_Value]
+        ,[FAI32_18_Value]
+        ,[FAI32_19_Value]
+        ,[FAI32_20_Value]
+        ,[FAI32_21_Value]
+        ,[FAI32_22_Value]
+        ,[FAI32_23_Value]
+        ,[FAI32_24_Value]
+        ,[FAI32_25_Value]
+        ,[FAI32_26_Value]
+        ,[FAI32_27_Value]
+        ,[FAI32_28_Value]
+        ,[FAI32_29_Value]
+        ,[FAI32_30_Value]
+        ,[FAI32_31_Value]
+        ,[FAI32_32_Value]
+        ,[FAI32_33_Value]
+        ,[FAI32_34_Value]
+        from MESDataCenter.dbo.m_D9X_SubassemblyLine2_M4_XXT_v
+        where Barcode_EMI in
+        <foreach item="BarcodeEMI" collection="BarcodeEMIList" open="(" separator="," close=")">
+            #{BarcodeEMI}
+        </foreach>
+    </select>
+
+</mapper>

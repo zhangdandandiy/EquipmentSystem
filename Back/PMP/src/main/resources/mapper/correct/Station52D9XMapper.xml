@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.d9x.Station52D9XMapper">
+
+    <resultMap id="Station52Result" type="com.example.pmp.pojo.correct.d9x.Station52D9X">
+        <result property="Barcode" column="Barcode"/>
+        <result property="CCD6_FAI1" column="CCD6_FAI1"/>
+        <result property="CCD7_FAI17" column="CCD7_FAI17"/>
+        <result property="CCD7_FAI12" column="CCD7_FAI12"/>
+        <result property="CCD7_FAI626_1" column="CCD7_FAI626-1"/>
+        <result property="CCD7_FAI626_2" column="CCD7_FAI626-2"/>
+        <result property="CCD7_FAI626_3" column="CCD7_FAI626-3"/>
+        <result property="CCD7_FAI626_4" column="CCD7_FAI626-4"/>
+        <result property="CCD7_FAI626_5" column="CCD7_FAI626-5"/>
+        <result property="CCD7_FAI626_6" column="CCD7_FAI626-6"/>
+        <result property="CCD7_FAI626_7" column="CCD7_FAI626-7"/>
+        <result property="CCD7_FAI626_8" column="CCD7_FAI626-8"/>
+        <result property="CCD7_FAI626_9" column="CCD7_FAI626-9"/>
+        <result property="CCD7_FAI626_10" column="CCD7_FAI626-10"/>
+        <result property="CCD7_FAI626_11" column="CCD7_FAI626-11"/>
+        <result property="CCD7_FAI626_12" column="CCD7_FAI626-12"/>
+        <result property="CCD7_FAI626_13" column="CCD7_FAI626-13"/>
+        <result property="CCD7_FAI626_14" column="CCD7_FAI626-14"/>
+        <result property="CCD7_FAI626_15" column="CCD7_FAI626-15"/>
+        <result property="CCD7_FAI626_16" column="CCD7_FAI626-16"/>
+        <result property="CCD7_FAI626_17" column="CCD7_FAI626-17"/>
+        <result property="CCD7_FAI626_18" column="CCD7_FAI626-18"/>
+        <result property="CCD7_FAI626_19" column="CCD7_FAI626-19"/>
+        <result property="CCD7_FAI626_20" column="CCD7_FAI626-20"/>
+        <result property="CCD7_FAI626_21" column="CCD7_FAI626-21"/>
+        <result property="CCD7_FAI626_22" column="CCD7_FAI626-22"/>
+        <result property="CCD7_FAI626_23" column="CCD7_FAI626-23"/>
+        <result property="CCD7_FAI626_24" column="CCD7_FAI626-24"/>
+        <result property="CCD7_FAI626_25" column="CCD7_FAI626-25"/>
+        <result property="CCD7_FAI626_26" column="CCD7_FAI626-26"/>
+        <result property="CCD7_FAI626_27" column="CCD7_FAI626-27"/>
+        <result property="CCD7_FAI626_28" column="CCD7_FAI626-28"/>
+        <result property="CCD7_FAI28_1" column="CCD7_FAI28-1"/>
+        <result property="CCD7_FAI28_2" column="CCD7_FAI28-2"/>
+        <result property="CCD7_FAI28_3" column="CCD7_FAI28-3"/>
+        <result property="CCD7_FAI28_4" column="CCD7_FAI28-4"/>
+        <result property="CCD7_FAI28_5" column="CCD7_FAI28-5"/>
+        <result property="CCD7_FAI28_6" column="CCD7_FAI28-6"/>
+        <result property="CCD7_FAI28_7" column="CCD7_FAI28-7"/>
+        <result property="CCD7_FAI28_8" column="CCD7_FAI28-8"/>
+        <result property="CCD7_FAI28_9" column="CCD7_FAI28-9"/>
+        <result property="CCD7_FAI28_10" column="CCD7_FAI28-10"/>
+        <result property="CCD7_FAI28_11" column="CCD7_FAI28-11"/>
+        <result property="CCD7_FAI28_12" column="CCD7_FAI28-12"/>
+        <result property="CCD7_FAI28_13" column="CCD7_FAI28-13"/>
+        <result property="CCD7_FAI28_14" column="CCD7_FAI28-14"/>
+        <result property="CCD7_FAI28_15" column="CCD7_FAI28-15"/>
+        <result property="CCD7_FAI28_16" column="CCD7_FAI28-16"/>
+        <result property="CCD7_FAI28_17" column="CCD7_FAI28-17"/>
+        <result property="CCD7_FAI28_18" column="CCD7_FAI28-18"/>
+        <result property="CCD7_FAI28_19" column="CCD7_FAI28-19"/>
+        <result property="CCD7_FAI28_20" column="CCD7_FAI28-20"/>
+        <result property="CCD7_FAI28_21" column="CCD7_FAI28-21"/>
+        <result property="CCD7_FAI28_22" column="CCD7_FAI28-22"/>
+        <result property="CCD7_FAI28_23" column="CCD7_FAI28-23"/>
+        <result property="CCD7_FAI28_24" column="CCD7_FAI28-24"/>
+        <result property="CCD7_FAI28_25" column="CCD7_FAI28-25"/>
+        <result property="CCD7_FAI28_26" column="CCD7_FAI28-26"/>
+        <result property="CCD7_FAI28_27" column="CCD7_FAI28-27"/>
+        <result property="CCD7_FAI28_28" column="CCD7_FAI28-28"/>
+        <result property="Scan_FAI2_1" column="3D Scan_FAI2-1"/>
+        <result property="Scan_FAI2_2" column="3D Scan_FAI2-2"/>
+        <result property="Scan_FAI2_3" column="3D Scan_FAI2-3"/>
+        <result property="Scan_FAI2_4" column="3D Scan_FAI2-4"/>
+        <result property="Scan_FAI2_5" column="3D Scan_FAI2-5"/>
+        <result property="Scan_FAI2_6" column="3D Scan_FAI2-6"/>
+        <result property="Scan_FAI2_7" column="3D Scan_FAI2-7"/>
+        <result property="Scan_FAI2_8" column="3D Scan_FAI2-8"/>
+        <result property="Scan_FAI2_9" column="3D Scan_FAI2-9"/>
+        <result property="Scan_FAI2_10" column="3D Scan_FAI2-10"/>
+        <result property="Scan_FAI2_11" column="3D Scan_FAI2-11"/>
+        <result property="Scan_FAI2_12" column="3D Scan_FAI2-12"/>
+        <result property="Scan_FAI2_13" column="3D Scan_FAI2-13"/>
+        <result property="Scan_FAI2_14" column="3D Scan_FAI2-14"/>
+        <result property="Scan_FAI2_15" column="3D Scan_FAI2-15"/>
+        <result property="Scan_FAI2_16" column="3D Scan_FAI2-16"/>
+        <result property="Scan_FAI2_17" column="3D Scan_FAI2-17"/>
+        <result property="Scan_FAI2_18" column="3D Scan_FAI2-18"/>
+        <result property="Scan_FAI2_19" column="3D Scan_FAI2-19"/>
+        <result property="Scan_FAI2_20" column="3D Scan_FAI2-20"/>
+        <result property="Scan_FAI2_21" column="3D Scan_FAI2-21"/>
+        <result property="Scan_FAI2_22" column="3D Scan_FAI2-22"/>
+        <result property="Scan_FAI2_23" column="3D Scan_FAI2-23"/>
+        <result property="Scan_FAI2_24" column="3D Scan_FAI2-24"/>
+        <result property="Scan_FAI2_25" column="3D Scan_FAI2-25"/>
+        <result property="Scan_FAI2_26" column="3D Scan_FAI2-26"/>
+        <result property="Scan_FAI2_27" column="3D Scan_FAI2-27"/>
+        <result property="Scan_FAI2_28" column="3D Scan_FAI2-28"/>
+        <result property="Scan_FAI2_29" column="3D Scan_FAI2-29"/>
+        <result property="Scan_FAI2_30" column="3D Scan_FAI2-30"/>
+        <result property="Scan_FAI2_31" column="3D Scan_FAI2-31"/>
+        <result property="Scan_FAI2_32" column="3D Scan_FAI2-32"/>
+        <result property="Scan_FAI2_33" column="3D Scan_FAI2-33"/>
+        <result property="Scan_FAI2_34" column="3D Scan_FAI2-34"/>
+        <result property="Scan_FAI2_35" column="3D Scan_FAI2-35"/>
+        <result property="Scan_FAI2_36" column="3D Scan_FAI2-36"/>
+        <result property="Scan_FAI2_37" column="3D Scan_FAI2-37"/>
+        <result property="TestResult" column="TestResult"/>
+        <result property="TestTime" column="TestTime"/>
+        <result property="ModuleID" column="ModuleID"/>
+        <result property="LineID" column="LineID"/>
+        <result property="LineType" column="LineType"/>
+        <result property="rn" column="rn"/>
+    </resultMap>
+
+    <!-- 从视图里捞取需要补正的数据集合 -->
+    <select id="getStation52ListByTime" parameterType="String" resultMap="Station52Result">
+        SELECT [Barcode]
+             , [CCD6_FAI1]
+             , [CCD7_FAI17]
+             , [CCD7_FAI12]
+             , [CCD7_FAI626-1]
+             , [CCD7_FAI626-2]
+             , [CCD7_FAI626-3]
+             , [CCD7_FAI626-4]
+             , [CCD7_FAI626-5]
+             , [CCD7_FAI626-6]
+             , [CCD7_FAI626-7]
+             , [CCD7_FAI626-8]
+             , [CCD7_FAI626-9]
+             , [CCD7_FAI626-10]
+             , [CCD7_FAI626-11]
+             , [CCD7_FAI626-12]
+             , [CCD7_FAI626-13]
+             , [CCD7_FAI626-14]
+             , [CCD7_FAI626-15]
+             , [CCD7_FAI626-16]
+             , [CCD7_FAI626-17]
+             , [CCD7_FAI626-18]
+             , [CCD7_FAI626-19]
+             , [CCD7_FAI626-20]
+             , [CCD7_FAI626-21]
+             , [CCD7_FAI626-22]
+             , [CCD7_FAI626-23]
+             , [CCD7_FAI626-24]
+             , [CCD7_FAI626-25]
+             , [CCD7_FAI626-26]
+             , [CCD7_FAI626-27]
+             , [CCD7_FAI626-28]
+             , [CCD7_FAI28-1]
+             , [CCD7_FAI28-2]
+             , [CCD7_FAI28-3]
+             , [CCD7_FAI28-4]
+             , [CCD7_FAI28-5]
+             , [CCD7_FAI28-6]
+             , [CCD7_FAI28-7]
+             , [CCD7_FAI28-8]
+             , [CCD7_FAI28-9]
+             , [CCD7_FAI28-10]
+             , [CCD7_FAI28-11]
+             , [CCD7_FAI28-12]
+             , [CCD7_FAI28-13]
+             , [CCD7_FAI28-14]
+             , [CCD7_FAI28-15]
+             , [CCD7_FAI28-16]
+             , [CCD7_FAI28-17]
+             , [CCD7_FAI28-18]
+             , [CCD7_FAI28-19]
+             , [CCD7_FAI28-20]
+             , [CCD7_FAI28-21]
+             , [CCD7_FAI28-22]
+             , [CCD7_FAI28-23]
+             , [CCD7_FAI28-24]
+             , [CCD7_FAI28-25]
+             , [CCD7_FAI28-26]
+             , [CCD7_FAI28-27]
+             , [CCD7_FAI28-28]
+             , [3D Scan_FAI2-1]
+             , [3D Scan_FAI2-2]
+             , [3D Scan_FAI2-3]
+             , [3D Scan_FAI2-4]
+             , [3D Scan_FAI2-5]
+             , [3D Scan_FAI2-6]
+             , [3D Scan_FAI2-7]
+             , [3D Scan_FAI2-8]
+             , [3D Scan_FAI2-9]
+             , [3D Scan_FAI2-10]
+             , [3D Scan_FAI2-11]
+             , [3D Scan_FAI2-12]
+             , [3D Scan_FAI2-13]
+             , [3D Scan_FAI2-14]
+             , [3D Scan_FAI2-15]
+             , [3D Scan_FAI2-16]
+             , [3D Scan_FAI2-17]
+             , [3D Scan_FAI2-18]
+             , [3D Scan_FAI2-19]
+             , [3D Scan_FAI2-20]
+             , [3D Scan_FAI2-21]
+             , [3D Scan_FAI2-22]
+             , [3D Scan_FAI2-23]
+             , [3D Scan_FAI2-24]
+             , [3D Scan_FAI2-25]
+             , [3D Scan_FAI2-26]
+             , [3D Scan_FAI2-27]
+             , [3D Scan_FAI2-28]
+             , [3D Scan_FAI2-29]
+             , [3D Scan_FAI2-30]
+             , [3D Scan_FAI2-31]
+             , [3D Scan_FAI2-32]
+             , [3D Scan_FAI2-33]
+             , [3D Scan_FAI2-34]
+             , [3D Scan_FAI2-35]
+             , [3D Scan_FAI2-36]
+             , [3D Scan_FAI2-37]
+             , [TestResult]
+             , [TestTime]
+             , [ModuleID]
+             , [LineID]
+             , [LineType]
+             , [rn]
+        FROM [MESDataCenter].[dbo].[m_D9X_MainLine3_M10-2_v]
+        WHERE convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode NOT LIKE '%\u0000%'
+          AND Barcode NOT LIKE '%?%'
+          AND Barcode NOT LIKE '%ERROR%'
+          AND Barcode != ''
+    </select>
+
+    <!-- 从补正后的表里捞取SN的测试数据 -->
+    <select id="getStation52BySN" parameterType="String" resultMap="Station52Result">
+        SELECT TOP(1) [Barcode]
+             , [CCD6_FAI1]
+             , [CCD7_FAI17]
+             , [CCD7_FAI12]
+             , [CCD7_FAI626-1]
+             , [CCD7_FAI626-2]
+             , [CCD7_FAI626-3]
+             , [CCD7_FAI626-4]
+             , [CCD7_FAI626-5]
+             , [CCD7_FAI626-6]
+             , [CCD7_FAI626-7]
+             , [CCD7_FAI626-8]
+             , [CCD7_FAI626-9]
+             , [CCD7_FAI626-10]
+             , [CCD7_FAI626-11]
+             , [CCD7_FAI626-12]
+             , [CCD7_FAI626-13]
+             , [CCD7_FAI626-14]
+             , [CCD7_FAI626-15]
+             , [CCD7_FAI626-16]
+             , [CCD7_FAI626-17]
+             , [CCD7_FAI626-18]
+             , [CCD7_FAI626-19]
+             , [CCD7_FAI626-20]
+             , [CCD7_FAI626-21]
+             , [CCD7_FAI626-22]
+             , [CCD7_FAI626-23]
+             , [CCD7_FAI626-24]
+             , [CCD7_FAI626-25]
+             , [CCD7_FAI626-26]
+             , [CCD7_FAI626-27]
+             , [CCD7_FAI626-28]
+             , [CCD7_FAI28-1]
+             , [CCD7_FAI28-2]
+             , [CCD7_FAI28-3]
+             , [CCD7_FAI28-4]
+             , [CCD7_FAI28-5]
+             , [CCD7_FAI28-6]
+             , [CCD7_FAI28-7]
+             , [CCD7_FAI28-8]
+             , [CCD7_FAI28-9]
+             , [CCD7_FAI28-10]
+             , [CCD7_FAI28-11]
+             , [CCD7_FAI28-12]
+             , [CCD7_FAI28-13]
+             , [CCD7_FAI28-14]
+             , [CCD7_FAI28-15]
+             , [CCD7_FAI28-16]
+             , [CCD7_FAI28-17]
+             , [CCD7_FAI28-18]
+             , [CCD7_FAI28-19]
+             , [CCD7_FAI28-20]
+             , [CCD7_FAI28-21]
+             , [CCD7_FAI28-22]
+             , [CCD7_FAI28-23]
+             , [CCD7_FAI28-24]
+             , [CCD7_FAI28-25]
+             , [CCD7_FAI28-26]
+             , [CCD7_FAI28-27]
+             , [CCD7_FAI28-28]
+             , [3D Scan_FAI2-1]
+             , [3D Scan_FAI2-2]
+             , [3D Scan_FAI2-3]
+             , [3D Scan_FAI2-4]
+             , [3D Scan_FAI2-5]
+             , [3D Scan_FAI2-6]
+             , [3D Scan_FAI2-7]
+             , [3D Scan_FAI2-8]
+             , [3D Scan_FAI2-9]
+             , [3D Scan_FAI2-10]
+             , [3D Scan_FAI2-11]
+             , [3D Scan_FAI2-12]
+             , [3D Scan_FAI2-13]
+             , [3D Scan_FAI2-14]
+             , [3D Scan_FAI2-15]
+             , [3D Scan_FAI2-16]
+             , [3D Scan_FAI2-17]
+             , [3D Scan_FAI2-18]
+             , [3D Scan_FAI2-19]
+             , [3D Scan_FAI2-20]
+             , [3D Scan_FAI2-21]
+             , [3D Scan_FAI2-22]
+             , [3D Scan_FAI2-23]
+             , [3D Scan_FAI2-24]
+             , [3D Scan_FAI2-25]
+             , [3D Scan_FAI2-26]
+             , [3D Scan_FAI2-27]
+             , [3D Scan_FAI2-28]
+             , [3D Scan_FAI2-29]
+             , [3D Scan_FAI2-30]
+             , [3D Scan_FAI2-31]
+             , [3D Scan_FAI2-32]
+             , [3D Scan_FAI2-33]
+             , [3D Scan_FAI2-34]
+             , [3D Scan_FAI2-35]
+             , [3D Scan_FAI2-36]
+             , [3D Scan_FAI2-37]
+             , [TestResult]
+             , [TestTime]
+             , [ModuleID]
+             , [LineID]
+             , [LineType]
+             , [rn]
+        FROM [MESDataCenter].[dbo].[m_D9X_MainLine3_M10_BZ-2_t]
+        WHERE convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode = #{Barcode}
+    </select>
+
+    <!-- 插入补正后的数据，插入到补正表里 -->
+    <insert id="insertStation52">
+        insert into [MESDataCenter].[dbo].[m_D9X_MainLine3_M10_BZ-2_t]
+        ( [Barcode]
+        , [CCD6_FAI1]
+        , [CCD7_FAI17]
+        , [CCD7_FAI12]
+        , [CCD7_FAI626-1]
+        , [CCD7_FAI626-2]
+        , [CCD7_FAI626-3]
+        , [CCD7_FAI626-4]
+        , [CCD7_FAI626-5]
+        , [CCD7_FAI626-6]
+        , [CCD7_FAI626-7]
+        , [CCD7_FAI626-8]
+        , [CCD7_FAI626-9]
+        , [CCD7_FAI626-10]
+        , [CCD7_FAI626-11]
+        , [CCD7_FAI626-12]
+        , [CCD7_FAI626-13]
+        , [CCD7_FAI626-14]
+        , [CCD7_FAI626-15]
+        , [CCD7_FAI626-16]
+        , [CCD7_FAI626-17]
+        , [CCD7_FAI626-18]
+        , [CCD7_FAI626-19]
+        , [CCD7_FAI626-20]
+        , [CCD7_FAI626-21]
+        , [CCD7_FAI626-22]
+        , [CCD7_FAI626-23]
+        , [CCD7_FAI626-24]
+        , [CCD7_FAI626-25]
+        , [CCD7_FAI626-26]
+        , [CCD7_FAI626-27]
+        , [CCD7_FAI626-28]
+        , [CCD7_FAI28-1]
+        , [CCD7_FAI28-2]
+        , [CCD7_FAI28-3]
+        , [CCD7_FAI28-4]
+        , [CCD7_FAI28-5]
+        , [CCD7_FAI28-6]
+        , [CCD7_FAI28-7]
+        , [CCD7_FAI28-8]
+        , [CCD7_FAI28-9]
+        , [CCD7_FAI28-10]
+        , [CCD7_FAI28-11]
+        , [CCD7_FAI28-12]
+        , [CCD7_FAI28-13]
+        , [CCD7_FAI28-14]
+        , [CCD7_FAI28-15]
+        , [CCD7_FAI28-16]
+        , [CCD7_FAI28-17]
+        , [CCD7_FAI28-18]
+        , [CCD7_FAI28-19]
+        , [CCD7_FAI28-20]
+        , [CCD7_FAI28-21]
+        , [CCD7_FAI28-22]
+        , [CCD7_FAI28-23]
+        , [CCD7_FAI28-24]
+        , [CCD7_FAI28-25]
+        , [CCD7_FAI28-26]
+        , [CCD7_FAI28-27]
+        , [CCD7_FAI28-28]
+        , [3D Scan_FAI2-1]
+        , [3D Scan_FAI2-2]
+        , [3D Scan_FAI2-3]
+        , [3D Scan_FAI2-4]
+        , [3D Scan_FAI2-5]
+        , [3D Scan_FAI2-6]
+        , [3D Scan_FAI2-7]
+        , [3D Scan_FAI2-8]
+        , [3D Scan_FAI2-9]
+        , [3D Scan_FAI2-10]
+        , [3D Scan_FAI2-11]
+        , [3D Scan_FAI2-12]
+        , [3D Scan_FAI2-13]
+        , [3D Scan_FAI2-14]
+        , [3D Scan_FAI2-15]
+        , [3D Scan_FAI2-16]
+        , [3D Scan_FAI2-17]
+        , [3D Scan_FAI2-18]
+        , [3D Scan_FAI2-19]
+        , [3D Scan_FAI2-20]
+        , [3D Scan_FAI2-21]
+        , [3D Scan_FAI2-22]
+        , [3D Scan_FAI2-23]
+        , [3D Scan_FAI2-24]
+        , [3D Scan_FAI2-25]
+        , [3D Scan_FAI2-26]
+        , [3D Scan_FAI2-27]
+        , [3D Scan_FAI2-28]
+        , [3D Scan_FAI2-29]
+        , [3D Scan_FAI2-30]
+        , [3D Scan_FAI2-31]
+        , [3D Scan_FAI2-32]
+        , [3D Scan_FAI2-33]
+        , [3D Scan_FAI2-34]
+        , [3D Scan_FAI2-35]
+        , [3D Scan_FAI2-36]
+        , [3D Scan_FAI2-37]
+        , [TestResult]
+        , [TestTime]
+        , [ModuleID]
+        , [LineID]
+        , [LineType]
+        , [rn])
+        values ( #{Barcode}
+               , #{CCD6_FAI1}
+               , #{CCD7_FAI17}
+               , #{CCD7_FAI12}
+               , #{CCD7_FAI626_1}
+               , #{CCD7_FAI626_2}
+               , #{CCD7_FAI626_3}
+               , #{CCD7_FAI626_4}
+               , #{CCD7_FAI626_5}
+               , #{CCD7_FAI626_6}
+               , #{CCD7_FAI626_7}
+               , #{CCD7_FAI626_8}
+               , #{CCD7_FAI626_9}
+               , #{CCD7_FAI626_10}
+               , #{CCD7_FAI626_11}
+               , #{CCD7_FAI626_12}
+               , #{CCD7_FAI626_13}
+               , #{CCD7_FAI626_14}
+               , #{CCD7_FAI626_15}
+               , #{CCD7_FAI626_16}
+               , #{CCD7_FAI626_17}
+               , #{CCD7_FAI626_18}
+               , #{CCD7_FAI626_19}
+               , #{CCD7_FAI626_20}
+               , #{CCD7_FAI626_21}
+               , #{CCD7_FAI626_22}
+               , #{CCD7_FAI626_23}
+               , #{CCD7_FAI626_24}
+               , #{CCD7_FAI626_25}
+               , #{CCD7_FAI626_26}
+               , #{CCD7_FAI626_27}
+               , #{CCD7_FAI626_28}
+               , #{CCD7_FAI28_1}
+               , #{CCD7_FAI28_2}
+               , #{CCD7_FAI28_3}
+               , #{CCD7_FAI28_4}
+               , #{CCD7_FAI28_5}
+               , #{CCD7_FAI28_6}
+               , #{CCD7_FAI28_7}
+               , #{CCD7_FAI28_8}
+               , #{CCD7_FAI28_9}
+               , #{CCD7_FAI28_10}
+               , #{CCD7_FAI28_11}
+               , #{CCD7_FAI28_12}
+               , #{CCD7_FAI28_13}
+               , #{CCD7_FAI28_14}
+               , #{CCD7_FAI28_15}
+               , #{CCD7_FAI28_16}
+               , #{CCD7_FAI28_17}
+               , #{CCD7_FAI28_18}
+               , #{CCD7_FAI28_19}
+               , #{CCD7_FAI28_20}
+               , #{CCD7_FAI28_21}
+               , #{CCD7_FAI28_22}
+               , #{CCD7_FAI28_23}
+               , #{CCD7_FAI28_24}
+               , #{CCD7_FAI28_25}
+               , #{CCD7_FAI28_26}
+               , #{CCD7_FAI28_27}
+               , #{CCD7_FAI28_28}
+               , #{Scan_FAI2_1}
+               , #{Scan_FAI2_2}
+               , #{Scan_FAI2_3}
+               , #{Scan_FAI2_4}
+               , #{Scan_FAI2_5}
+               , #{Scan_FAI2_6}
+               , #{Scan_FAI2_7}
+               , #{Scan_FAI2_8}
+               , #{Scan_FAI2_9}
+               , #{Scan_FAI2_10}
+               , #{Scan_FAI2_11}
+               , #{Scan_FAI2_12}
+               , #{Scan_FAI2_13}
+               , #{Scan_FAI2_14}
+               , #{Scan_FAI2_15}
+               , #{Scan_FAI2_16}
+               , #{Scan_FAI2_17}
+               , #{Scan_FAI2_18}
+               , #{Scan_FAI2_19}
+               , #{Scan_FAI2_20}
+               , #{Scan_FAI2_21}
+               , #{Scan_FAI2_22}
+               , #{Scan_FAI2_23}
+               , #{Scan_FAI2_24}
+               , #{Scan_FAI2_25}
+               , #{Scan_FAI2_26}
+               , #{Scan_FAI2_27}
+               , #{Scan_FAI2_28}
+               , #{Scan_FAI2_29}
+               , #{Scan_FAI2_30}
+               , #{Scan_FAI2_31}
+               , #{Scan_FAI2_32}
+               , #{Scan_FAI2_33}
+               , #{Scan_FAI2_34}
+               , #{Scan_FAI2_35}
+               , #{Scan_FAI2_36}
+               , #{Scan_FAI2_37}
+               , #{TestResult}
+               , #{TestTime}
+               , #{ModuleID}
+               , #{LineID}
+               , #{LineType}
+               , #{rn})
+    </insert>
+
+    <select id="getStation52SNList" parameterType="String" resultType="String">
+        select Barcode
+        from [MESDataCenter].[dbo].[m_D9X_MainLine3_M10-2_v]
+        where convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode NOT LIKE '%\u0000%'
+          AND Barcode NOT LIKE '%?%'
+          AND Barcode NOT LIKE '%ERROR%'
+          AND Barcode != ''
+    </select>
+
+</mapper>

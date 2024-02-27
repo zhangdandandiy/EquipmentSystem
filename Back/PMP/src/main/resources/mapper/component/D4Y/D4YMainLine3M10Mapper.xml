@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D4Y.D4YMainLine3M10Mapper">
+
+    <select id="getD4YMainLine3M10TPZList" parameterType="String" resultType="D4YMainLine3M10TPZ">
+        select [FAI2_1_Value]
+        ,[FAI2_2_Value]
+        ,[FAI2_3_Value]
+        ,[FAI2_4_Value]
+        ,[FAI2_5_Value]
+        ,[FAI2_6_Value]
+        ,[FAI2_7_Value]
+        ,[FAI2_8_Value]
+        ,[FAI2_9_Value]
+        ,[FAI2_10_Value]
+        ,[FAI2_11_Value]
+        ,[FAI2_12_Value]
+        ,[FAI2_13_Value]
+        ,[FAI2_14_Value]
+        ,[FAI2_15_Value]
+        ,[FAI2_16_Value]
+        ,[FAI2_17_Value]
+        ,[FAI2_18_Value]
+        ,[FAI2_19_Value]
+        ,[FAI2_20_Value]
+        ,[FAI2_21_Value]
+        ,[FAI2_22_Value]
+        ,[FAI2_23_Value]
+        ,[FAI2_24_Value]
+        ,[FAI2_25_Value]
+        ,[FAI2_26_Value]
+        ,[FAI2_27_Value]
+        ,[FAI2_28_Value]
+        ,[FAI2_32_Value]
+        ,[FAI2_33_Value]
+        ,[FAI2_34_Value]
+        ,[FAI2_35_Value]
+        ,[FAI2_36_Value]
+        ,[FAI2_37_Value]
+        ,[FAI2_29_Value]
+        ,[FAI2_30_Value]
+        ,[FAI2_31_Value]
+        from [MESDataCenter].[dbo].[m_D4Y_MainLine3_M10_XXT_v]
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getD4YMainLine3M10TPXList" parameterType="String" resultType="D4YMainLine3M10TPX">
+        select [FAI626_1_Value]
+        ,[FAI626_2_Value]
+        ,[FAI626_3_Value]
+        ,[FAI626_4_Value]
+        ,[FAI626_5_Value]
+        ,[FAI626_6_Value]
+        ,[FAI626_7_Value]
+        ,[FAI626_8_Value]
+        ,[FAI626_9_Value]
+        ,[FAI626_10_Value]
+        ,[FAI626_11_Value]
+        ,[FAI626_12_Value]
+        ,[FAI626_13_Value]
+        ,[FAI626_14_Value]
+        ,[FAI626_15_Value]
+        ,[FAI626_16_Value]
+        ,[FAI626_17_Value]
+        ,[FAI626_18_Value]
+        ,[FAI626_19_Value]
+        ,[FAI626_20_Value]
+        ,[FAI626_21_Value]
+        ,[FAI626_22_Value]
+        ,[FAI626_23_Value]
+        ,[FAI626_24_Value]
+        ,[FAI626_25_Value]
+        ,[FAI626_26_Value]
+        ,[FAI626_27_Value]
+        ,[FAI626_28_Value]
+        from [MESDataCenter].[dbo].[m_D4Y_MainLine3_M10_XXT_v]
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getD4YMainLine3M10TPYList" parameterType="String" resultType="D4YMainLine3M10TPY">
+        select [FAI26_1_Value]
+        ,[FAI26_2_Value]
+        ,[FAI26_3_Value]
+        ,[FAI26_4_Value]
+        ,[FAI26_5_Value]
+        ,[FAI26_6_Value]
+        ,[FAI26_7_Value]
+        ,[FAI26_8_Value]
+        ,[FAI26_9_Value]
+        ,[FAI26_10_Value]
+        ,[FAI26_11_Value]
+        ,[FAI26_12_Value]
+        ,[FAI26_13_Value]
+        ,[FAI26_14_Value]
+        ,[FAI26_15_Value]
+        ,[FAI26_16_Value]
+        ,[FAI26_17_Value]
+        ,[FAI26_18_Value]
+        ,[FAI26_19_Value]
+        ,[FAI26_20_Value]
+        ,[FAI26_21_Value]
+        ,[FAI26_22_Value]
+        ,[FAI26_23_Value]
+        ,[FAI26_24_Value]
+        ,[FAI26_25_Value]
+        ,[FAI26_26_Value]
+        ,[FAI26_27_Value]
+        ,[FAI26_28_Value]
+        from [MESDataCenter].[dbo].[m_D4Y_MainLine3_M10_XXT_v]
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getD4YMainLine3M10BarcodeList" parameterType="String" resultType="String">
+        select [Barcode]
+        from [MESDataCenter].[dbo].[m_D4Y_MainLine3_M10_XXT_v]
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

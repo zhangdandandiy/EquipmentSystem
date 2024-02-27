@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.hot.HotCodeMapper">
+
+    <resultMap id="HotCodeResult" type="HotCode">
+        <result property="ID" column="ID"/>
+        <result property="Name" column="Name"/>
+        <result property="FaceCode" column="Face_code"/>
+        <result property="NGCode" column="NG_code"/>
+        <result property="NGName" column="NG_name"/>
+        <result property="NGId" column="NG_id"/>
+        <result property="NGInfo" column="NG_info"/>
+    </resultMap>
+
+    <resultMap id="HotCodeKindResult" type="HotCodeKid">
+        <result property="NGCode" column="NG_code"/>
+        <result property="NGName" column="NG_name"/>
+    </resultMap>
+
+    <sql id="selectAllHotCodeVo">
+        select ID,
+               Name,
+               Face_code,
+               NG_code,
+               NG_name,
+               NG_id,
+               NG_info
+        from MESDB.dbo.m_Thermodynamic_Code_t
+    </sql>
+
+    <select id="getHotCodeList" parameterType="HotCode" resultMap="HotCodeResult">
+        <include refid="selectAllHotCodeVo"/>
+        <where>
+            <if test="Name != null and Name != ''">and Name = #{Name}</if>
+            <if test="FaceCode != null and FaceCode != ''">and Face_code = #{FaceCode}</if>
+            <if test="NGCode != null and NGCode != ''">and NG_code = #{NGCode}</if>
+            <if test="NGName != null and NGName != ''">and NG_name = #{NGName}</if>
+            <if test="NGId != null and NGId != ''">and NG_id = #{NGId}</if>
+            <if test="NGInfo != null and NGInfo != ''">NGInfo = #{NG_info}</if>
+        </where>
+    </select>
+
+    <select id="getHotCodeListNew" parameterType="HotCodeParamDto" resultMap="HotCodeResult">
+        SELECT [ID]
+        ,[Name]
+        ,[Face_code]
+        ,[NG_code]
+        ,[NG_name]
+        ,[NG_id]
+        ,[NG_info]
+        FROM [MESDB].[dbo].[m_Thermodynamic_Code_t]
+        WHERE NG_code IN
+        (
+        SELECT DISTINCT [ErrorCode]
+        FROM [MESDataCenter].[dbo].[m_ThermodynamicChart_t]
+        <where>
+            <if test="ProjectName != null and ProjectName != ''">and ProjectName like concat('%', #{ProjectName}, '%')
+            </if>
+            <if test="LineType != null and LineType != ''">and LineType like concat('%', #{LineType}, '%')</if>
+            <if test="LineName != null and LineName != ''">and LineName like concat('%', #{LineName}, '%')</if>
+            <if test="ModuleID != null and ModuleID != ''">and ModuleID like concat('%', #{ModuleID, '%')</if>
+            <if test="Direction != null and Direction != ''">and Direction = #{Direction}</if>
+            <if test="StartTime != null and StartTime != '' and EndTime != null and EndTime != ''">and convert(varchar,
+                TestTime, 121) between #{StartTime} and #{EndTime}
+            </if>
+        </where>
+        )
+    </select>
+
+    <select id="getHotCodeKidList" resultType="String" resultMap="HotCodeKindResult">
+        select distinct NG_code,
+                        NG_name
+        from MESDB.dbo.m_Thermodynamic_Code_t
+    </select>
+
+</mapper>

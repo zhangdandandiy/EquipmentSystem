@@ -1,0 +1,59 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8091
+  port: 8091
+
+spring:
+  datasource:
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://10.52.6.23:1433;DatabaseName=MESDataCenter;trustServerCertificate=true
+    # url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=Temporary;trustServerCertificate=true
+    username: ictsfc
+    password: XUh7tZN9j%yTps
+
+  # 异步加载的线程池配置
+  task:
+    execution:
+      pool:
+        max-threads: 200
+        queue-capacity: 2000
+
+  # 文件上传
+  servlet:
+    multipart:
+      # 单个文件大小
+      max-file-size: 5120MB
+      # 设置总上传的文件大小
+      max-request-size: 5120MB
+
+  mvc:
+    # 关于 Swagger 的配置
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    io.swagger.models.parameters.AbstractSerializableParameter: error
+
+# MyBatis配置
+mybatis:
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapper-locations:
+    - classpath:mapper/*/*.xml
+    - classpath:mapper/*/*/*.xml
+  type-aliases-package: com.example.pmp.pojo
+
+# 文件存放位置配置
+file:
+  # 文件存储路径
+  save-path-record-file: C:/PMP/temp/file-manager/record-file
+  save-path-standard-file: C:/PMP/temp/file-manager/standard-file
+  save-path-maintenance-file: C:/PMP/temp/file-manager/maintenance-file
+  # 用户头像存储路径
+  # save-path-user-avatar: C:/PMP/nginx/html/Equipment/dist/static/assets/user-avatar
+
+  # save-path-record-file: E:/Software/Nginx/nginx/html/Equipment/dist/static/assets/temp/file-manager/record-file
+  # save-path-standard-file: E:/Software/Nginx/nginx/html/Equipment/dist/static/assets/temp/file-manager/standard-file
+  # save-path-maintenance-file: E:/Software/Nginx/nginx/html/Equipment/dist/static/assets/temp/file-manager/maintenance-file
+  # 用户头像存储路径
+  #save-path-user-avatar: E:/Software/Nginx/nginx/html/Equipment/dist/static/assets/user-avatar/user-avatar

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.sense.CoplaneSysBasicMapper">
+
+    <resultMap type="CoplaneSysBasic" id="CoplaneSysBasicResult">
+        <result property="id" column="id"/>
+        <result property="project" column="project"/>
+        <result property="lineType" column="line_type"/>
+        <result property="lineName" column="line_name"/>
+        <result property="faiName" column="fai_name"/>
+        <result property="yaxisMax" column="yaxis_max"/>
+        <result property="yaxisMin" column="yaxis_min"/>
+        <result property="yaxisTopTarget" column="yaxis_top_target"/>
+        <result property="yaxisDownTarget" column="yaxis_down_target"/>
+    </resultMap>
+
+    <sql id="selectCoplaneSysBasicVo">
+        select id,
+               project,
+               line_type,
+               line_name,
+               fai_name,
+               yaxis_max,
+               yaxis_min,
+               yaxis_top_target,
+               yaxis_down_target
+        from cop_sys_basic
+    </sql>
+
+    <select id="selectCoplaneSysBasicList" parameterType="CoplaneSysBasic" resultMap="CoplaneSysBasicResult">
+        <include refid="selectCoplaneSysBasicVo"/>
+        <where>
+            <if test="project != null  and project != ''">and project = #{project}</if>
+            <if test="lineType != null  and lineType != ''">and line_type = #{lineType}</if>
+            <if test="lineName != null  and lineName != ''">and line_name like concat('%', #{lineName}, '%')</if>
+            <if test="faiName != null  and faiName != ''">and fai_name like concat('%', #{faiName}, '%')</if>
+            <if test="yaxisMax != null  and yaxisMax != ''">and yaxis_max = #{yaxisMax}</if>
+            <if test="yaxisMin != null  and yaxisMin != ''">and yaxis_min = #{yaxisMin}</if>
+            <if test="yaxisTopTarget != null  and yaxisTopTarget != ''">and yaxis_top_target = #{yaxisTopTarget}</if>
+            <if test="yaxisDownTarget != null  and yaxisDownTarget != ''">and yaxis_down_target = #{yaxisDownTarget}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectCoplaneSysBasicById" parameterType="Long" resultMap="CoplaneSysBasicResult">
+        <include refid="selectCoplaneSysBasicVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertCoplaneSysBasic" parameterType="CoplaneSysBasic">
+        insert into cop_sys_basic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="project != null">project,</if>
+            <if test="lineType != null">line_type,</if>
+            <if test="lineName != null">line_name,</if>
+            <if test="faiName != null">fai_name,</if>
+            <if test="yaxisMax != null">yaxis_max,</if>
+            <if test="yaxisMin != null">yaxis_min,</if>
+            <if test="yaxisTopTarget != null">yaxis_top_target,</if>
+            <if test="yaxisDownTarget != null">yaxis_down_target,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="project != null">#{project},</if>
+            <if test="lineType != null">#{lineType},</if>
+            <if test="lineName != null">#{lineName},</if>
+            <if test="faiName != null">#{faiName},</if>
+            <if test="yaxisMax != null">#{yaxisMax},</if>
+            <if test="yaxisMin != null">#{yaxisMin},</if>
+            <if test="yaxisTopTarget != null">#{yaxisTopTarget},</if>
+            <if test="yaxisDownTarget != null">#{yaxisDownTarget},</if>
+        </trim>
+    </insert>
+
+    <update id="updateCoplaneSysBasic" parameterType="CoplaneSysBasic">
+        update cop_sys_basic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="project != null">project = #{project},</if>
+            <if test="lineType != null">line_type = #{lineType},</if>
+            <if test="lineName != null">line_name = #{lineName},</if>
+            <if test="faiName != null">fai_name = #{faiName},</if>
+            <if test="yaxisMax != null">yaxis_max = #{yaxisMax},</if>
+            <if test="yaxisMin != null">yaxis_min = #{yaxisMin},</if>
+            <if test="yaxisTopTarget != null">yaxis_top_target = #{yaxisTopTarget},</if>
+            <if test="yaxisDownTarget != null">yaxis_down_target = #{yaxisDownTarget},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCoplaneSysBasicById" parameterType="Long">
+        delete
+        from cop_sys_basic
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteCoplaneSysBasicByIds" parameterType="String">
+        delete from cop_sys_basic where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.SpecificationMapper">
+
+    <resultMap type="Specification" id="SpecificationResult">
+        <result property="Project" column="Project"/>
+        <result property="LineType" column="LineType"/>
+        <result property="LineName" column="LineName"/>
+        <result property="EquName" column="EquName"/>
+        <result property="Station" column="station"/>
+        <result property="ItemKey" column="ItemKey"/>
+        <result property="Upper" column="upper"/>
+        <result property="Lower" column="lower"/>
+        <result property="Units" column="units"/>
+        <result property="RandomL" column="RandomL"/>
+        <result property="RandomU" column="RandomU"/>
+        <result property="TargetYieldL" column="targetYieldL"/>
+        <result property="TargetYieldU" column="targetYieldU"/>
+        <result property="ActualYield" column="actualYield"/>
+    </resultMap>
+
+    <sql id="selectAllSpecificationVo">
+        select Project,
+               LineType,
+               LineName,
+               EquName,
+               station,
+               ItemKey,
+               upper,
+               lower,
+               units,
+               RandomL,
+               RandomU,
+               targetYieldL,
+               targetYieldU,
+               actualYield
+        from [MESDB].[dbo].[ParametrickeySet]
+    </sql>
+
+    <select id="getSpecList" parameterType="Specification" resultMap="SpecificationResult">
+        <include refid="selectAllSpecificationVo"/>
+        <where>
+            <if test="Project != null and Project != ''">and Project = #{Project}</if>
+            <if test="LineType != null and Project != ''">and LineType = #{LineType}</if>
+            <if test="LineName != null and LineName != ''">and LineName = #{LineName}</if>
+            <if test="EquName != null and EquName != ''">and EquName = #{EquName}</if>
+            <if test="Station != null and Station != ''">and station = #{Station}</if>
+            <if test="ItemKey != null and ItemKey != ''">and ItemKey = #{ItemKey}</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.hot.HotFaceMapper">
+
+    <resultMap id="HotFaceResult" type="HotFace">
+        <result property="ID" column="ID"/>
+        <result property="FaceName" column="Face_name"/>
+        <result property="XAxis" column="XAxis"/>
+        <result property="YAxis" column="YAxis"/>
+    </resultMap>
+
+    <select id="selectHotFaceByName" parameterType="String" resultMap="HotFaceResult">
+        SELECT ID,
+        Face_name,
+        XAxis,
+        YAxis
+        FROM [MESDB].[dbo].[m_Thermodynamic_Face_t]
+        <where>
+            <if test="FaceName != null and FaceName != ''">and Face_name = #{FaceName}</if>
+            <if test="LineID != null and LineID != ''">and lineID = #{LineID}</if>
+        </where>
+    </select>
+
+</mapper>

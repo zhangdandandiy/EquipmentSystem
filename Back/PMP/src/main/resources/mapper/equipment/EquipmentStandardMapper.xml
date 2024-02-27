@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.equipment.EquipmentStandardMapper">
+
+    <resultMap id="EquipmentStandardFileMap" type="com.example.pmp.pojo.equipment.EquipmentStandard">
+        <result property="product" column="product"/>
+        <result property="remark" column="line"/>
+        <result property="standard_file_name" column="standard_file_name"/>
+        <result property="standard_file_type" column="standard_file_type"/>
+        <result property="standard_file_path" column="standard_file_path"/>
+        <result property="standard_file_size" column="standard_file_size"/>
+        <result property="standard_file_flag" column="standard_file_flag"/>
+        <result property="standard_file_upload_time" column="standard_file_upload_time"/>
+    </resultMap>
+
+    <insert id="saveEquipmentStandardFile" parameterType="com.example.pmp.pojo.equipment.EquipmentStandard">
+        INSERT INTO equipment_standard (product, remark, standard_file_name, standard_file_type,
+                                        standard_file_path, standard_file_size, standard_file_flag,
+                                        standard_file_upload_time)
+        VALUES (#{product}, #{remark}, #{standard_file_name}, #{standard_file_type},
+                #{standard_file_path}, #{standard_file_size}, #{standard_file_flag}, #{standard_file_upload_time})
+    </insert>
+
+    <select id="searchEquipmentStandardFile" parameterType="map" resultMap="EquipmentStandardFileMap">
+        SELECT *
+        FROM equipment_standard
+        <where>
+            <if test="product != null and product != ''">
+                AND product like concat('%', #{product}, '%')
+            </if>
+            <if test="remark != null and remark != ''">
+                AND remark like concat('%', #{remark}, '%')
+            </if>
+            <if test="standard_file_flag != null and standard_file_flag != ''">
+                AND standard_file_flag=#{standard_file_flag}
+            </if>
+            <if test="standard_file_name != null and standard_file_name != ''">
+                AND standard_file_name like concat('%', #{standard_file_name}, '%')
+            </if>
+        </where>
+        ORDER BY standard_file_upload_time DESC
+
+    </select>
+
+
+    <delete id="deteteEquipmentStandardFileById" parameterType="java.lang.Long">
+        DELETE
+        FROM equipment_standard
+        WHERE id = #{id}
+    </delete>
+
+    <select id="searchEquipmentStandardFileById" resultType="com.example.pmp.pojo.equipment.EquipmentStandard">
+        SELECT *
+        FROM equipment_standard
+        WHERE id = #{id}
+    </select>
+
+    <select id="searchEquipmentStandardFileByFileName"
+            resultType="com.example.pmp.pojo.equipment.EquipmentStandard">
+        SELECT *
+        FROM equipment_standard
+        WHERE standard_file_name = #{standard_file_name}
+    </select>
+
+    <update id="updateEquipmentStandardFileByFileName"
+            parameterType="com.example.pmp.pojo.equipment.EquipmentStandard">
+        UPDATE equipment_standard
+        SET remark=#{remark},
+            standard_file_size=#{standard_file_size},
+            standard_file_upload_time=#{standard_file_upload_time},
+            standard_file_flag=#{standard_file_flag}
+        WHERE standard_file_name = #{standard_file_name}
+    </update>
+
+</mapper>

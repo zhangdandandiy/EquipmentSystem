@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.pmp.E85AutoMapper">
+
+    <select id="QueryConfig" resultType="java.lang.String">
+        SELECT DISTINCT Config
+        FROM m_PMP2023_t
+    </select>
+
+    <select id="QueryLineType" resultType="java.lang.String">
+        SELECT DISTINCT Line_name FROM m_PMP2023_t
+        <where>
+            <if test="Config!=null">
+                AND Config=#{Config}
+            </if>
+        </where>
+    </select>
+
+    <select id="QueryLineid" resultType="java.lang.String">
+        SELECT DISTINCT Line_number FROM m_PMP2023_t
+        <where>
+            <if test="Config!=null">
+                AND Config=#{Config}
+            </if>
+            <if test="Line_name!=null">
+                AND Line_name=#{Line_name}
+            </if>
+        </where>
+    </select>
+
+    <select id="QueryStationName" resultType="java.lang.String">
+        SELECT DISTINCT Station_name FROM m_PMP2023_t
+        <where>
+            <if test="Config!=null">
+                AND Config=#{Config}
+            </if>
+            <if test="Line_name!=null">
+                AND Line_name=#{Line_name}
+            </if>
+            <if test="Line_number!=null">
+                AND Line_number=#{Line_number}
+            </if>
+        </where>
+    </select>
+
+    <select id="QueryE85AutoPMP" resultType="com.example.pmp.pojo.pmp.E85AutoPMP">
+        {CALL E85AutoPMP(#{Config}, #{Line_name}, #{Line_number}, #{Station_name})}
+    </select>
+
+</mapper>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.hot.HotNGRateMapper">
+
+    <resultMap id="HotNGRateResult" type="com.example.pmp.pojo.hot.HotNGRate">
+        <result property="ProjectName" column="ProjectName"/>
+        <result property="LineType" column="LineType"/>
+        <result property="LineName" column="LineName"/>
+        <result property="ModuleID" column="ModuleID"/>
+        <result property="Direction" column="Direction"/>
+        <result property="NGNum" column="NGNum"/>
+        <result property="Output" column="Output"/>
+        <result property="NGRate" column="NGRate"/>
+    </resultMap>
+
+    <resultMap id="HotNGFaceResult" type="com.example.pmp.pojo.hot.HotNGFace">
+        <result property="ProjectName" column="ProjectName"/>
+        <result property="LineType" column="LineType"/>
+        <result property="LineName" column="LineName"/>
+        <result property="ModuleID" column="ModuleID"/>
+        <result property="Direction" column="Direction"/>
+        <result property="NG_name" column="NG_name"/>
+        <result property="NGRate" column="NGRate"/>
+        <result property="HotNgrate" column="HotNgrate"/>
+    </resultMap>
+
+    <select id="getHotNGRate" parameterType="String" resultMap="HotNGRateResult">
+        {CALL MESDB.dbo.m_D9X_HOTface_NG_p(#{pid}, #{lineType}, #{lineId}, #{starttime}, #{endtime})}
+    </select>
+
+    <select id="getHotNGFace" parameterType="String" resultMap="HotNGFaceResult">
+        {CALL MESDB.dbo.m_D9X_HOTinfo_NG_p(#{pid}, #{lineType}, #{lineId}, #{face}, #{starttime}, #{endtime})}
+    </select>
+
+</mapper>

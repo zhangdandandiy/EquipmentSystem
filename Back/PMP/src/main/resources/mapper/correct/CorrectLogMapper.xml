@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.CorrectLogMapper">
+
+    <resultMap type="CorrectLog" id="CorrectLogResult">
+        <result property="Id" column="Id"/>
+        <result property="Project" column="Project"/>
+        <result property="LineType" column="LineType"/>
+        <result property="LineName" column="LineName"/>
+        <result property="EquName" column="EquName"/>
+        <result property="Station" column="Station"/>
+        <result property="ItemKey" column="ItemKey"/>
+        <result property="StartTime" column="StartTime"/>
+        <result property="EndTime" column="EndTime"/>
+        <result property="DataCount" column="DataCount"/>
+        <result property="BeforeGoodCount" column="BeforeGoodCount"/>
+        <result property="BeforeYield" column="BeforeYield"/>
+        <result property="AfterGoodCount" column="AfterGoodCount"/>
+        <result property="AfterYield" column="AfterYield"/>
+        <result property="CreateTime" column="CreateTime"/>
+    </resultMap>
+
+    <sql id="selectCorrectLogVo">
+        select Id,
+               Project,
+               LineType,
+               LineName,
+               EquName,
+               Station,
+               ItemKey,
+               StartTime,
+               EndTime,
+               DataCount,
+               BeforeGoodCount,
+               BeforeYield,
+               AfterGoodCount,
+               AfterYield,
+               CreateTime
+        from [MESDB].[dbo].[Correct_Log]
+    </sql>
+
+    <select id="selectCorrectLogList" parameterType="CorrectLog" resultMap="CorrectLogResult">
+        <include refid="selectCorrectLogVo"/>
+        <where>
+            <if test="Id != null ">and Id = #{Id}</if>
+            <if test="Project != null  and Project != ''">and Project = #{Project}</if>
+            <if test="LineType != null  and LineType != ''">and LineType = #{LineType}</if>
+            <if test="LineName != null  and LineName != ''">and LineName = #{LineName}</if>
+            <if test="EquName != null  and EquName != ''">and EquName = #{EquName}</if>
+            <if test="Station != null  and Station != ''">and Station = #{Station}</if>
+            <if test="ItemKey != null  and ItemKey != ''">and ItemKey = #{ItemKey}</if>
+        </where>
+    </select>
+
+    <select id="selectCorrectLogById" parameterType="Long" resultMap="CorrectLogResult">
+        <include refid="selectCorrectLogVo"/>
+        where Id = #{Id}
+    </select>
+
+    <insert id="insertCorrectLog" parameterType="CorrectLog">
+        insert into [MESDB].[dbo].[Correct_Log]
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="Project != null">Project,</if>
+            <if test="LineType != null">LineType,</if>
+            <if test="LineName != null">LineName,</if>
+            <if test="EquName != null">EquName,</if>
+            <if test="Station != null">Station,</if>
+            <if test="ItemKey != null">ItemKey,</if>
+            <if test="StartTime != null">StartTime,</if>
+            <if test="EndTime != null">EndTime,</if>
+            <if test="DataCount != null">DataCount,</if>
+            <if test="BeforeGoodCount != null">BeforeGoodCount,</if>
+            <if test="BeforeYield != null">BeforeYield,</if>
+            <if test="AfterGoodCount != null">AfterGoodCount,</if>
+            <if test="AfterYield != null">AfterYield,</if>
+            CreateTime
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="Project != null">#{Project},</if>
+            <if test="LineType != null">#{LineType},</if>
+            <if test="LineName != null">#{LineName},</if>
+            <if test="EquName != null">#{EquName},</if>
+            <if test="Station != null">#{Station},</if>
+            <if test="ItemKey != null">#{ItemKey},</if>
+            <if test="StartTime != null">#{StartTime},</if>
+            <if test="EndTime != null">#{EndTime},</if>
+            <if test="DataCount != null">#{DataCount},</if>
+            <if test="BeforeGoodCount != null">#{BeforeGoodCount},</if>
+            <if test="BeforeYield != null">#{BeforeYield},</if>
+            <if test="AfterGoodCount != null">#{AfterGoodCount},</if>
+            <if test="AfterYield != null">#{AfterYield},</if>
+            getdate()
+        </trim>
+    </insert>
+
+    <select id="selectCorrectLogListByTime" parameterType="String" resultMap="CorrectLogResult">
+        <include refid="selectCorrectLogVo"/>
+        where Project=#{Project} and StartTime = #{StartTime} and EndTime = #{EndTime}
+    </select>
+
+</mapper>

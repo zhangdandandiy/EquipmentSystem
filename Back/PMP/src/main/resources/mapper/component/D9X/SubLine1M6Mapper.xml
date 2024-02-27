@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.SubLine1M6Mapper">
+
+    <select id="getSubLine1M6TPZList" resultType="SubLine1M6TPZ" parameterType="java.util.List">
+        select [FAI15_1_Value]
+        ,[FAI15_2_Value]
+        ,[FAI15_3_Value]
+        ,[FAI15_4_Value]
+        ,[FAI15_5_Value]
+        ,[FAI15_6_Value]
+        ,[FAI15_7_Value]
+        ,[FAI15_8_Value]
+        ,[FAI15_9_Value]
+        ,[FAI15_10_Value]
+        ,[FAI15_11_Value]
+        ,[FAI15_12_Value]
+        ,[FAI15_13_Value]
+        ,[FAI15_14_Value]
+        ,[FAI15_15_Value]
+        ,[FAI15_16_Value]
+        ,[FAI15_17_Value]
+        ,[FAI15_18_Value]
+        ,[FAI15_19_Value]
+        ,[FAI15_20_Value]
+        ,[FAI15_21_Value]
+        ,[FAI15_22_Value]
+        ,[FAI15_23_Value]
+        ,[FAI15_24_Value]
+        ,[FAI15_25_Value]
+        ,[FAI15_26_Value]
+        ,[FAI15_27_Value]
+        ,[FAI15_28_Value]
+        ,[FAI15_29_Value]
+        ,[FAI15_30_Value]
+        ,[FAI15_31_Value]
+        ,[FAI15_32_Value]
+        ,[FAI15_33_Value]
+        ,[FAI15_34_Value]
+        ,[FAI15_D_Value]
+        from MESDataCenter.dbo.m_D9X_SubassemblyLine1_M6_XXT_v
+        where Barcode_MidPlate in
+        <foreach item="BarcodeMidPlate" collection="BarcodeMidPlateList" open="(" separator="," close=")">
+            #{BarcodeMidPlate}
+        </foreach>
+    </select>
+
+    <select id="getSubLine1M6TPXList" resultType="SubLine1M6TPX" parameterType="java.util.List">
+        select [FAI2_1_Value]
+        ,[FAI2_2_Value]
+        ,[FAI2_3_Value]
+        ,[FAI2_4_Value]
+        ,[FAI2_5_Value]
+        ,[FAI2_6_Value]
+        ,[FAI2_7_Value]
+        ,[FAI2_8_Value]
+        ,[FAI2_9_Value]
+        ,[FAI2_10_Value]
+        ,[FAI2_11_Value]
+        ,[FAI2_12_Value]
+        ,[FAI2_13_Value]
+        ,[FAI2_14_Value]
+        ,[FAI2_15_Value]
+        ,[FAI2_16_Value]
+        ,[FAI2_17_Value]
+        ,[FAI2_18_Value]
+        ,[FAI2_19_Value]
+        ,[FAI2_20_Value]
+        ,[FAI2_21_Value]
+        ,[FAI2_22_Value]
+        ,[FAI2_23_Value]
+        ,[FAI2_24_Value]
+        ,[FAI2_25_Value]
+        ,[FAI2_26_Value]
+        ,[FAI2_27_Value]
+        ,[FAI2_28_Value]
+        from [MESDataCenter].[dbo].[m_D9X_SubassemblyLine1_M6_XXT_v]
+        where Barcode_MidPlate in
+        <foreach item="BarcodeMidPlate" collection="BarcodeMidPlateList" open="(" separator="," close=")">
+            #{BarcodeMidPlate}
+        </foreach>
+    </select>
+
+    <select id="getSubLine1M6TPYList" resultType="SubLine1M6TPY" parameterType="java.util.List">
+        select [FAI29_1_Value]
+        ,[FAI29_2_Value]
+        ,[FAI29_3_Value]
+        ,[FAI29_4_Value]
+        ,[FAI29_5_Value]
+        ,[FAI29_6_Value]
+        ,[FAI29_7_Value]
+        ,[FAI29_8_Value]
+        ,[FAI29_9_Value]
+        ,[FAI29_10_Value]
+        ,[FAI29_11_Value]
+        ,[FAI29_12_Value]
+        ,[FAI29_13_Value]
+        ,[FAI29_14_Value]
+        ,[FAI30_1_Value]
+        ,[FAI30_2_Value]
+        ,[FAI30_3_Value]
+        ,[FAI30_4_Value]
+        ,[FAI30_5_Value]
+        ,[FAI30_6_Value]
+        ,[FAI30_7_Value]
+        ,[FAI30_8_Value]
+        ,[FAI30_9_Value]
+        ,[FAI30_10_Value]
+        ,[FAI30_11_Value]
+        ,[FAI30_12_Value]
+        ,[FAI30_13_Value]
+        ,[FAI30_14_Value]
+        from [MESDataCenter].[dbo].[m_D9X_SubassemblyLine1_M6_XXT_v]
+        where Barcode_MidPlate in
+        <foreach item="BarcodeMidPlate" collection="BarcodeMidPlateList" open="(" separator="," close=")">
+            #{BarcodeMidPlate}
+        </foreach>
+    </select>
+
+</mapper>

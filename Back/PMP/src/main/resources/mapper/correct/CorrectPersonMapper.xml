@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.CorrectPersonMapper">
+
+    <resultMap type="CorrectPerson" id="CorrectPersonResult">
+        <result property="id" column="id"/>
+        <result property="project" column="project"/>
+        <result property="person" column="person"/>
+        <result property="flag" column="flag"/>
+        <result property="createTime" column="createTime"/>
+    </resultMap>
+
+    <sql id="selectCorrectPersonVo">
+        select id, project, person, flag, createTime
+        from [MESDB].[dbo].[Correct_Person]
+    </sql>
+
+    <select id="selectCorrectPersonList" parameterType="CorrectPerson" resultMap="CorrectPersonResult">
+        <include refid="selectCorrectPersonVo"/>
+        <where>
+            <if test="project != null  and project != ''">and project = #{project}</if>
+            <if test="person != null  and person != ''">and person = #{person}</if>
+            <if test="createTime != null ">and createTime = #{createTime}</if>
+        </where>
+    </select>
+
+    <select id="selectCorrectPersonById" parameterType="Long" resultMap="CorrectPersonResult">
+        <include refid="selectCorrectPersonVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectCorrectPersonListByProject" parameterType="String" resultType="String">
+        select person
+        from [MESDB].[dbo].[Correct_Person]
+        where project = #{project}
+          and flag = 1
+    </select>
+
+</mapper>

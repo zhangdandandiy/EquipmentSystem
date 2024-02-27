@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.equipment.EquipmentMaintenanceMapper">
+
+    <resultMap id="EquipmentMaintenanceFileMap" type="com.example.pmp.pojo.equipment.EquipmentMaintenance">
+        <result property="product" column="product"/>
+        <result property="remark" column="remark"/>
+        <result property="maintenance_file_name" column="maintenance_file_name"/>
+        <result property="maintenance_file_type" column="maintenance_file_type"/>
+        <result property="maintenance_file_path" column="maintenance_file_path"/>
+        <result property="maintenance_file_size" column="maintenance_file_size"/>
+        <result property="maintenance_file_flag" column="maintenance_file_flag"/>
+        <result property="maintenance_file_upload_time" column="maintenance_file_upload_time"/>
+    </resultMap>
+
+    <insert id="saveEquipmentMaintenanceFile" parameterType="com.example.pmp.pojo.equipment.EquipmentMaintenance">
+        INSERT INTO equipment_Maintenance (product, remark, maintenance_file_name,
+                                           maintenance_file_type, maintenance_file_path, maintenance_file_size,
+                                           maintenance_file_flag, maintenance_file_upload_time)
+        VALUES (#{product}, #{remark}, #{maintenance_file_name}, #{maintenance_file_type},
+                #{maintenance_file_path},
+                #{maintenance_file_size}, #{maintenance_file_flag}, #{maintenance_file_upload_time})
+    </insert>
+
+    <select id="searchEquipmentMaintenanceFile" parameterType="map" resultMap="EquipmentMaintenanceFileMap">
+        SELECT *
+        FROM equipment_Maintenance
+        <where>
+            <if test="product != null and product != ''">
+                AND product like concat('%', #{product}, '%')
+            </if>
+            <if test="remark != null and remark != ''">
+                AND remark like concat('%', #{remark}, '%')
+            </if>
+            <if test="maintenance_file_flag != null and maintenance_file_flag != ''">
+                AND maintenance_file_flag=#{maintenance_file_flag}
+            </if>
+            <if test="maintenance_file_name != null and maintenance_file_name != ''">
+                AND maintenance_file_name like concat('%', #{maintenance_file_name}, '%')
+            </if>
+        </where>
+        ORDER BY Maintenance_file_upload_time DESC
+
+    </select>
+
+    <delete id="deteteEquipmentMaintenanceFileById" parameterType="java.lang.Long">
+        DELETE
+        FROM equipment_Maintenance
+        WHERE id = #{id}
+    </delete>
+
+    <select id="searchEquipmentMaintenanceFileById" resultType="com.example.pmp.pojo.equipment.EquipmentMaintenance">
+        SELECT *
+        FROM equipment_Maintenance
+        WHERE id = #{id}
+    </select>
+
+    <select id="searchEquipmentMaintenanceFileByFileName"
+            resultType="com.example.pmp.pojo.equipment.EquipmentMaintenance">
+        SELECT *
+        FROM equipment_maintenance
+        WHERE maintenance_file_name = #{maintenance_file_name}
+    </select>
+
+    <update id="updateEquipmentMaintenanceFileByFileName"
+            parameterType="com.example.pmp.pojo.equipment.EquipmentMaintenance">
+        UPDATE equipment_maintenance
+        SET remark=#{remark},
+            maintenance_file_size=#{maintenance_file_size},
+            maintenance_file_upload_time=#{maintenance_file_upload_time},
+            maintenance_file_flag=#{maintenance_file_flag}
+        WHERE maintenance_file_name = #{maintenance_file_name}
+    </update>
+
+</mapper>

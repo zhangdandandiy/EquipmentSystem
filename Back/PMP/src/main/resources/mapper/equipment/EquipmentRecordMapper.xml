@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.equipment.EquipmentRecordMapper">
+
+    <resultMap id="EquipmentRecordFileMap" type="com.example.pmp.pojo.equipment.EquipmentRecord">
+        <result property="product" column="product"/>
+        <result property="remark" column="remark"/>
+        <result property="record_file_name" column="record_file_name"/>
+        <result property="record_file_type" column="record_file_type"/>
+        <result property="record_file_path" column="record_file_path"/>
+        <result property="record_file_size" column="record_file_size"/>
+        <result property="record_file_upload_time" column="record_file_upload_time"/>
+    </resultMap>
+
+    <insert id="saveEquipmentRecordFile" parameterType="com.example.pmp.pojo.equipment.EquipmentRecord">
+        INSERT INTO equipment_record (product, remark, record_file_name, record_file_type,
+                                      record_file_path, record_file_size, record_file_upload_time)
+        VALUES (#{product}, #{remark}, #{record_file_name}, #{record_file_type}, #{record_file_path},
+                #{record_file_size}, #{record_file_upload_time})
+    </insert>
+
+    <select id="searchEquipmentRecordFile" parameterType="map" resultMap="EquipmentRecordFileMap">
+        SELECT *
+        FROM equipment_record
+        <where>
+            <if test="product != null and product != ''">
+                AND product like concat('%', #{product}, '%')
+            </if>
+            <if test="remark != null and remark != ''">
+                AND line like concat('%', #{remark}, '%')
+            </if>
+            <if test="record_file_name != null and record_file_name != ''">
+                AND record_file_name like concat('%', #{record_file_name}, '%')
+            </if>
+        </where>
+        ORDER BY record_file_upload_time DESC
+
+    </select>
+
+
+    <delete id="deteteEquipmentRecordFileById" parameterType="java.lang.Long">
+        DELETE
+        FROM equipment_record
+        WHERE id = #{id}
+    </delete>
+
+    <select id="searchEquipmentRecordFileById" resultType="com.example.pmp.pojo.equipment.EquipmentRecord">
+        SELECT *
+        FROM equipment_record
+        WHERE id = #{id}
+    </select>
+
+    <select id="searchEquipmentRecordFileByFileName"
+            resultType="com.example.pmp.pojo.equipment.EquipmentRecord">
+        SELECT *
+        FROM equipment_record
+        WHERE record_file_name = #{record_file_name}
+    </select>
+
+    <update id="updateEquipmentRecordFileByFileName"
+            parameterType="com.example.pmp.pojo.equipment.EquipmentRecord">
+        UPDATE equipment_record
+        SET remark=#{remark},
+            record_file_size=#{record_file_size},
+            record_file_upload_time=#{record_file_upload_time}
+        WHERE record_file_name = #{record_file_name}
+    </update>
+
+    <select id="searchEquipmentFileList" parameterType="map" resultMap="EquipmentRecordFileMap">
+        {CALL Equipment_Query_File_List(#{product}, #{remark})}
+    </select>
+
+</mapper>

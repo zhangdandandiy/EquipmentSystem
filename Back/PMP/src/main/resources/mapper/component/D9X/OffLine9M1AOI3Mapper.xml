@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.OffLine9M1AOI3Mapper">
+
+    <select id="getOffLine9M1AOI3List" resultType="OffLine9M1AOI3" parameterType="java.util.List">
+        select [FAI547_1D]
+        ,[FAI547_2D]
+        ,[FAI547_3D]
+        ,[FAI547_4D]
+        ,[FAI547_5D]
+        ,[FAI547_6D]
+        ,[FAI547_7D]
+        ,[FAI547_8D]
+        ,[FAI547_9D]
+        ,[FAI547_10D]
+        ,[FAI547_11D]
+        ,[FAI547_12D]
+        ,[FAI547_13D]
+        from [MESDataCenter].[dbo].[D9X_Off_Line9_01_M1_AOI3_XXT_v]
+        where IM_Lot in
+        <foreach item="LowerContactIMReelLOT" collection="LowerContactIMReelLOTList" open="(" separator="," close=")">
+            #{LowerContactIMReelLOT}
+        </foreach>
+    </select>
+
+    <select id="getOffLine9M1AOI3StampingLotList" resultType="String" parameterType="java.util.List">
+        select Stamping_Lot
+        from [MESDataCenter].[dbo].[D9X_Off_Line9_01_M1_AOI3_XXT_v]
+        where IM_Lot in
+        <foreach item="LowerContactIMReelLOT" collection="LowerContactIMReelLOTList" open="(" separator="," close=")">
+            #{LowerContactIMReelLOT}
+        </foreach>
+    </select>
+
+</mapper>

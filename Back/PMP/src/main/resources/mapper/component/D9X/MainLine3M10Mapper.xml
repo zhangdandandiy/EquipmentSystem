@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D9X.MainLine3M10Mapper">
+
+    <select id="getMainLine3M10TPZList" parameterType="String" resultType="MainLine3M10TPZ">
+        select [FAI2_1_Value]
+        ,[FAI2_2_Value]
+        ,[FAI2_3_Value]
+        ,[FAI2_4_Value]
+        ,[FAI2_5_Value]
+        ,[FAI2_6_Value]
+        ,[FAI2_7_Value]
+        ,[FAI2_8_Value]
+        ,[FAI2_9_Value]
+        ,[FAI2_10_Value]
+        ,[FAI2_11_Value]
+        ,[FAI2_12_Value]
+        ,[FAI2_13_Value]
+        ,[FAI2_14_Value]
+        ,[FAI2_15_Value]
+        ,[FAI2_16_Value]
+        ,[FAI2_17_Value]
+        ,[FAI2_18_Value]
+        ,[FAI2_19_Value]
+        ,[FAI2_20_Value]
+        ,[FAI2_21_Value]
+        ,[FAI2_22_Value]
+        ,[FAI2_23_Value]
+        ,[FAI2_24_Value]
+        ,[FAI2_25_Value]
+        ,[FAI2_26_Value]
+        ,[FAI2_27_Value]
+        ,[FAI2_28_Value]
+        ,[FAI2_32_Value]
+        ,[FAI2_33_Value]
+        ,[FAI2_34_Value]
+        ,[FAI2_35_Value]
+        ,[FAI2_36_Value]
+        ,[FAI2_37_Value]
+        ,[FAI2_29_Value]
+        ,[FAI2_30_Value]
+        ,[FAI2_31_Value]
+        from MESDataCenter.dbo.m_D9X_MainLine3_M10_XXT_v
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getMainLine3M10TPXList" parameterType="String" resultType="MainLine3M10TPX">
+        select [FAI34_1_Value]
+        ,[FAI34_2_Value]
+        ,[FAI34_3_Value]
+        ,[FAI34_4_Value]
+        ,[FAI34_5_Value]
+        ,[FAI34_6_Value]
+        ,[FAI34_7_Value]
+        ,[FAI34_8_Value]
+        ,[FAI34_9_Value]
+        ,[FAI34_10_Value]
+        ,[FAI34_11_Value]
+        ,[FAI34_12_Value]
+        ,[FAI34_13_Value]
+        ,[FAI34_14_Value]
+        ,[FAI34_15_Value]
+        ,[FAI34_16_Value]
+        ,[FAI34_17_Value]
+        ,[FAI34_18_Value]
+        ,[FAI34_19_Value]
+        ,[FAI34_20_Value]
+        ,[FAI34_21_Value]
+        ,[FAI34_22_Value]
+        ,[FAI34_23_Value]
+        ,[FAI34_24_Value]
+        ,[FAI34_25_Value]
+        ,[FAI34_26_Value]
+        ,[FAI34_27_Value]
+        ,[FAI34_28_Value]
+        from MESDataCenter.dbo.m_D9X_MainLine3_M10_XXT_v
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getMainLine3M10TPYList" parameterType="String" resultType="MainLine3M10TPY">
+        select [FAI43_1_Value]
+        ,[FAI43_2_Value]
+        ,[FAI43_3_Value]
+        ,[FAI43_4_Value]
+        ,[FAI43_5_Value]
+        ,[FAI43_6_Value]
+        ,[FAI43_7_Value]
+        ,[FAI43_8_Value]
+        ,[FAI43_9_Value]
+        ,[FAI43_10_Value]
+        ,[FAI43_11_Value]
+        ,[FAI43_12_Value]
+        ,[FAI43_13_Value]
+        ,[FAI43_14_Value]
+        ,[FAI43_15_Value]
+        ,[FAI43_16_Value]
+        ,[FAI43_17_Value]
+        ,[FAI43_18_Value]
+        ,[FAI43_19_Value]
+        ,[FAI43_20_Value]
+        ,[FAI43_21_Value]
+        ,[FAI43_22_Value]
+        ,[FAI43_23_Value]
+        ,[FAI43_24_Value]
+        ,[FAI43_25_Value]
+        ,[FAI43_26_Value]
+        ,[FAI43_27_Value]
+        ,[FAI43_28_Value]
+        from MESDataCenter.dbo.m_D9X_MainLine3_M10_XXT_v
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+    <select id="getMainLine3M10BarcodeList" parameterType="String" resultType="String">
+        select [Barcode]
+        from MESDataCenter.dbo.m_D9X_MainLine3_M10_XXT_v
+        <where>
+            <if test="startTime != null and startTime != '' and endTime != null and endTime != ''">
+                and convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

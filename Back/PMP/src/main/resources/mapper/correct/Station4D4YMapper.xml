@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.correct.d4y.Station4D4YMapper">
+
+    <resultMap id="Station4Result" type="com.example.pmp.pojo.correct.d4y.Station4D4Y">
+        <result property="Barcode" column="Barcode"/>
+        <result property="CCD2_FAI19" column="CCD2_FAI19"/>
+        <result property="CCD2_FAI698" column="CCD2_FAI698"/>
+        <result property="CCD2_FAI44_1" column="CCD2_FAI44-1"/>
+        <result property="CCD2_FAI44_2" column="CCD2_FAI44-2"/>
+        <result property="CCD2_FAI44_3" column="CCD2_FAI44-3"/>
+        <result property="CCD2_FAI44_4" column="CCD2_FAI44-4"/>
+        <result property="CCD2_FAI44_5" column="CCD2_FAI44-5"/>
+        <result property="CCD2_FAI44_6" column="CCD2_FAI44-6"/>
+        <result property="CCD2_FAI44_7" column="CCD2_FAI44-7"/>
+        <result property="CCD2_FAI44_8" column="CCD2_FAI44-8"/>
+        <result property="CCD2_FAI44_9" column="CCD2_FAI44-9"/>
+        <result property="CCD2_FAI44_10" column="CCD2_FAI44-10"/>
+        <result property="CCD2_FAI44_11" column="CCD2_FAI44-11"/>
+        <result property="CCD2_FAI44_12" column="CCD2_FAI44-12"/>
+        <result property="CCD2_FAI45_1" column="CCD2_FAI45-1"/>
+        <result property="CCD2_FAI45_2" column="CCD2_FAI45-2"/>
+        <result property="CCD2_FAI45_3" column="CCD2_FAI45-3"/>
+        <result property="CCD2_FAI45_4" column="CCD2_FAI45-4"/>
+        <result property="CCD2_FAI45_5" column="CCD2_FAI45-5"/>
+        <result property="CCD2_FAI45_6" column="CCD2_FAI45-6"/>
+        <result property="CCD2_FAI45_7" column="CCD2_FAI45-7"/>
+        <result property="CCD2_FAI45_8" column="CCD2_FAI45-8"/>
+        <result property="CCD2_FAI45_9" column="CCD2_FAI45-9"/>
+        <result property="CCD2_FAI45_10" column="CCD2_FAI45-10"/>
+        <result property="CCD2_FAI45_11" column="CCD2_FAI45-11"/>
+        <result property="CCD2_FAI45_12" column="CCD2_FAI45-12"/>
+        <result property="TestResult" column="TestResult"/>
+        <result property="TestTime" column="TestTime"/>
+        <result property="ModuleID" column="ModuleID"/>
+        <result property="LineID" column="LineID"/>
+        <result property="LineType" column="LineType"/>
+        <result property="rn" column="rn"/>
+    </resultMap>
+
+    <!-- 从视图里捞取需要补正的数据集合 -->
+    <select id="getStation4ListByTime" parameterType="String" resultMap="Station4Result">
+        SELECT [Barcode]
+             , [CCD2_FAI19]
+             , [CCD2_FAI698]
+             , [CCD2_FAI44-1]
+             , [CCD2_FAI44-2]
+             , [CCD2_FAI44-3]
+             , [CCD2_FAI44-4]
+             , [CCD2_FAI44-5]
+             , [CCD2_FAI44-6]
+             , [CCD2_FAI44-7]
+             , [CCD2_FAI44-8]
+             , [CCD2_FAI44-9]
+             , [CCD2_FAI44-10]
+             , [CCD2_FAI44-11]
+             , [CCD2_FAI44-12]
+             , [CCD2_FAI45-1]
+             , [CCD2_FAI45-2]
+             , [CCD2_FAI45-3]
+             , [CCD2_FAI45-4]
+             , [CCD2_FAI45-5]
+             , [CCD2_FAI45-6]
+             , [CCD2_FAI45-7]
+             , [CCD2_FAI45-8]
+             , [CCD2_FAI45-9]
+             , [CCD2_FAI45-10]
+             , [CCD2_FAI45-11]
+             , [CCD2_FAI45-12]
+             , [TestResult]
+             , [TestTime]
+             , [ModuleID]
+             , [LineID]
+             , [LineType]
+             , [rn]
+        FROM [MESDataCenter].[dbo].[m_D4Y_MainLine3_M9_v]
+        WHERE convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode NOT LIKE '%\u0000%'
+          AND Barcode NOT LIKE '%?%'
+          AND Barcode NOT LIKE '%ERROR%'
+          AND Barcode != ''
+    </select>
+
+    <!-- 从补正后的表里捞取SN的测试数据 -->
+    <select id="getStation4BySN" parameterType="String" resultMap="Station4Result">
+        SELECT TOP(1) [Barcode]
+             , [CCD2_FAI19]
+             , [CCD2_FAI698]
+             , [CCD2_FAI44-1]
+             , [CCD2_FAI44-2]
+             , [CCD2_FAI44-3]
+             , [CCD2_FAI44-4]
+             , [CCD2_FAI44-5]
+             , [CCD2_FAI44-6]
+             , [CCD2_FAI44-7]
+             , [CCD2_FAI44-8]
+             , [CCD2_FAI44-9]
+             , [CCD2_FAI44-10]
+             , [CCD2_FAI44-11]
+             , [CCD2_FAI44-12]
+             , [CCD2_FAI45-1]
+             , [CCD2_FAI45-2]
+             , [CCD2_FAI45-3]
+             , [CCD2_FAI45-4]
+             , [CCD2_FAI45-5]
+             , [CCD2_FAI45-6]
+             , [CCD2_FAI45-7]
+             , [CCD2_FAI45-8]
+             , [CCD2_FAI45-9]
+             , [CCD2_FAI45-10]
+             , [CCD2_FAI45-11]
+             , [CCD2_FAI45-12]
+             , [TestResult]
+             , [TestTime]
+             , [ModuleID]
+             , [LineID]
+             , [LineType]
+             , [rn]
+        FROM [MESDataCenter].[dbo].[m_D4Y_MainLine3_M9_BZ_t]
+        WHERE convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode = #{Barcode}
+    </select>
+
+    <!-- 插入补正后的数据，插入到补正表里 -->
+    <insert id="insertStation4">
+        insert into [MESDataCenter].[dbo].[m_D4Y_MainLine3_M9_BZ_t]
+        ( [Barcode]
+        , [CCD2_FAI19]
+        , [CCD2_FAI698]
+        , [CCD2_FAI44-1]
+        , [CCD2_FAI44-2]
+        , [CCD2_FAI44-3]
+        , [CCD2_FAI44-4]
+        , [CCD2_FAI44-5]
+        , [CCD2_FAI44-6]
+        , [CCD2_FAI44-7]
+        , [CCD2_FAI44-8]
+        , [CCD2_FAI44-9]
+        , [CCD2_FAI44-10]
+        , [CCD2_FAI44-11]
+        , [CCD2_FAI44-12]
+        , [CCD2_FAI45-1]
+        , [CCD2_FAI45-2]
+        , [CCD2_FAI45-3]
+        , [CCD2_FAI45-4]
+        , [CCD2_FAI45-5]
+        , [CCD2_FAI45-6]
+        , [CCD2_FAI45-7]
+        , [CCD2_FAI45-8]
+        , [CCD2_FAI45-9]
+        , [CCD2_FAI45-10]
+        , [CCD2_FAI45-11]
+        , [CCD2_FAI45-12]
+        , [TestResult]
+        , [TestTime]
+        , [ModuleID]
+        , [LineID]
+        , [LineType]
+        , [rn])
+        values ( #{Barcode}
+               , #{CCD2_FAI19}
+               , #{CCD2_FAI698}
+               , #{CCD2_FAI44_1}
+               , #{CCD2_FAI44_2}
+               , #{CCD2_FAI44_3}
+               , #{CCD2_FAI44_4}
+               , #{CCD2_FAI44_5}
+               , #{CCD2_FAI44_6}
+               , #{CCD2_FAI44_7}
+               , #{CCD2_FAI44_8}
+               , #{CCD2_FAI44_9}
+               , #{CCD2_FAI44_10}
+               , #{CCD2_FAI44_11}
+               , #{CCD2_FAI44_12}
+               , #{CCD2_FAI45_1}
+               , #{CCD2_FAI45_2}
+               , #{CCD2_FAI45_3}
+               , #{CCD2_FAI45_4}
+               , #{CCD2_FAI45_5}
+               , #{CCD2_FAI45_6}
+               , #{CCD2_FAI45_7}
+               , #{CCD2_FAI45_8}
+               , #{CCD2_FAI45_9}
+               , #{CCD2_FAI45_10}
+               , #{CCD2_FAI45_11}
+               , #{CCD2_FAI45_12}
+               , #{TestResult}
+               , #{TestTime}
+               , #{ModuleID}
+               , #{LineID}
+               , #{LineType}
+               , #{rn})
+    </insert>
+
+    <select id="getStation4SNList" parameterType="String" resultType="String">
+        select Barcode
+        from [MESDataCenter].[dbo].[m_D4Y_MainLine3_M9_v]
+        where convert(varchar, TestTime, 121) between #{startTime} and #{endTime}
+          AND Barcode NOT LIKE '%\u0000%'
+          AND Barcode NOT LIKE '%?%'
+          AND Barcode NOT LIKE '%ERROR%'
+          AND Barcode != ''
+    </select>
+
+</mapper>

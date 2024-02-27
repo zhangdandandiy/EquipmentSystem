@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.hot.HotTypeMapper">
+
+    <resultMap id="HotTypeResult" type="HotType">
+        <result property="ProjectName" column="ProjectName"/>
+        <result property="LineType" column="LineType"/>
+        <result property="LineName" column="LineName"/>
+        <result property="ModuleID" column="ModuleID"/>
+        <result property="CameraID" column="CameraID"/>
+        <result property="Direction" column="Direction"/>
+        <result property="ErrorCode" column="ErrorCode"/>
+        <result property="ErrorNum" column="ErrorNum"/>
+        <result property="PositionX" column="PositionX"/>
+        <result property="PositionY" column="PositionY"/>
+        <result property="TestTime" column="TestTime"/>
+        <result property="NGName" column="NG_name"/>
+    </resultMap>
+
+    <sql id="selectAllHotTypeVo">
+        SELECT ProjectName,
+               LineType,
+               LineName,
+               ModuleID,
+               CameraID,
+               Direction,
+               ErrorCode,
+               ErrorNum,
+               PositionX,
+               PositionY,
+               TestTime
+        FROM [MESDataCenter].[dbo].[m_ThermodynamicChart_t]
+    </sql>
+
+    <select id="getHotTypeList" parameterType="HotTypeParamDto" resultMap="HotTypeResult">
+        <include refid="selectAllHotTypeVo"/>
+        <where>
+            <if test="ProjectName != null and ProjectName != ''">and ProjectName like concat('%', #{ProjectName}, '%')
+            </if>
+            <if test="LineType != null and LineType != ''">and LineType like concat('%', #{LineType}, '%')</if>
+            <if test="LineName != null and LineName != ''">and LineName like concat('%', #{LineName}, '%')</if>
+            <if test="ModuleID != null and ModuleID != ''">and ModuleID like concat('%', #{ModuleID, '%')</if>
+            <if test="CameraID != null and CameraID != ''">and CameraID = #{CameraID}</if>
+            <if test=" ErrorCode != 0">and ErrorCode = #{ErrorCode}</if>
+            <if test="StartTime != null and StartTime != '' and EndTime != null and EndTime != ''">and convert(varchar,
+                TestTime, 121) between #{StartTime} and #{EndTime}
+            </if>
+        </where>
+    </select>
+
+</mapper>

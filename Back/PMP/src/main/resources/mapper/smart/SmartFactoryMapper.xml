@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.smart.SmartFactoryMapper">
+
+    <!-- 根据线体类型和线体编号查询裁切刀信息列表 -->
+    <select id="searchLifeControlList" parameterType="LifeControl" resultType="LifeControl">
+        select LineType,
+        LineID,
+        ModuleID,
+        LifeControlName,
+        left(ModuleID, 3) + LifeControlName as Message,
+        Count,
+        WarningOfCount,
+        UpperOfCount
+        from Equment_Scada.dbo.AllLine_LifeControls2023
+        <where>
+            <if test="LineType != null  and LineType != ''">and LineType = #{LineType}</if>
+            <if test="LineID != null  and LineID != ''">and LineID = #{LineID}</if>
+            <if test="ModuleID != null  and ModuleID != ''">and ModuleID = #{ModuleID}</if>
+            <if test="LifeControlName != null  and LifeControlName != ''">and LifeControlName = #{LifeControlName}</if>
+        </where>
+        order by ModuleID desc
+    </select>
+
+    <!-- 根据线体编号查询胶水信息 -->
+    <select id="searchGlueInfoList" parameterType="String" resultType="GlueInfo">
+        {CALL Equment_Scada.dbo.eyes_gule_KB(#{lineId})}
+    </select>
+
+    <!-- 根据线体类型和线体编号查询停机信息 -->
+    <select id="searchDownTimeList" parameterType="String" resultType="DownTime">
+        {CALL MESDB.dbo.eyes_DT_KB(#{lineId}, #{lineType})}
+    </select>
+
+    <select id="searchHumiture" resultType="Humiture">
+        select top 1 DeviceName,
+                     DeviceAddr,
+                     NodeId,
+                     Hum,
+                     Tem,
+                     Lng,
+                     Lat,
+                     IsAlarmData,
+                     Source,
+                     RecordTime
+        from rkmonitor.dbo.tbhistory
+        where Lng = '1'
+          and Lat = '1'
+        order by RecordTime desc
+    </select>
+
+    <select id="searchInputOutput" parameterType="String" resultType="InputOutput">
+        {CALL correctionA.dbo.m_E85_LeftData_p(#{lineType}, #{lineId})}
+    </select>
+
+    <select id="searchYieldRank" parameterType="String" resultType="YieldRank">
+        {CALL correctionA.dbo.eyes_yield(#{lineType})}
+    </select>
+
+    <select id="searchMachineYield" parameterType="String" resultType="MachineYield">
+        {CALL correctionA.dbo.m_E85_Yield_M_p(#{lineType}, #{lineId})}
+    </select>
+
+    <select id="searchActivation" parameterType="ActivationDto" resultType="Activation">
+        {CALL MESDB.dbo.m_D8X_2023_Click_Efficiency_p(#{lineType}, #{lineId}, #{machineId_B})}
+    </select>
+
+</mapper>

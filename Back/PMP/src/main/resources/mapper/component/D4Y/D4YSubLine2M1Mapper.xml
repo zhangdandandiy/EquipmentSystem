@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmp.mapper.component.D4Y.D4YSubLine2M1Mapper">
+
+    <select id="getD4YSubLine2M1List" resultType="D4YSubLine2M1" parameterType="java.util.List">
+        select [Barcode_MidPlate]
+        ,[Barcode_EMI]
+        , [TestTime]
+        from [MESDataCenter].[dbo].[m_D4Y_SubassemblyLine2_M1_XXT_v]
+        where Barcode_EMI in
+        <foreach item="BarcodeEMI" collection="BarcodeEMIList" open="(" separator="," close=")">
+            #{BarcodeEMI}
+        </foreach>
+    </select>
+
+    <select id="getD4YSubLine2M1BarcodeMidPlateList" resultType="String" parameterType="java.util.List">
+        select [Barcode_MidPlate]
+        from [MESDataCenter].[dbo].[m_D4Y_SubassemblyLine2_M1_XXT_v]
+        where Barcode_EMI in
+        <foreach item="BarcodeEMI" collection="BarcodeEMIList" open="(" separator="," close=")">
+            #{BarcodeEMI}
+        </foreach>
+    </select>
+
+</mapper>
