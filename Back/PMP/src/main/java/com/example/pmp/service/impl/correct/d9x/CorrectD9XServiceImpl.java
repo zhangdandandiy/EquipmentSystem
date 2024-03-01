@@ -71,13 +71,13 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     /**
      * 设置开始时间
      */
-    String startTime = "2024-02-26 08:00:00.000" ;
-    // String startTime = CorrectUtils.getCurrentCorrectStartTime();
+    // String startTime = "2024-02-26 08:00:00.000";
+    String startTime = CorrectUtils.getCurrentCorrectStartTime();
     /**
      * 设置结束时间
      */
-    String endTime = "2024-02-27 08:00:00.000";
-    // String endTime = CorrectUtils.getCurrentCorrectEndTime();
+    // String endTime = "2024-02-27 08:00:00.000";
+    String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
      * 实际第一站中SN的数据集合
      */
@@ -104,6 +104,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      */
     @Override
     public void startCurrentData() throws IllegalAccessException {
+        // System.out.println("开始时间：" + startTime);
+        // System.out.println("结束时间：" + endTime);
         startD9XCurrentData();
     }
 
@@ -113,10 +115,10 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * @param
      */
     @Transactional
-    // 每天 10 点执行
-    // @Scheduled(cron = "0 0 14 * * *")
+    // 每天 21 点执行
+    @Scheduled(cron = "0 0 21 * * *")
     public void CurrentData() throws IllegalAccessException {
-        // System.out.println("每天 10点 开始执行");
+        // System.out.println("每天 21 点开始执行");
         startD9XCurrentData();
     }
 
