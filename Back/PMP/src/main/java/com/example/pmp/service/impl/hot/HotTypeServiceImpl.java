@@ -60,7 +60,7 @@ public class HotTypeServiceImpl implements HotTypeService {
             // 获取线体类型
             String lineType = hotTypeParamDto.getLineType();
             // 获取偏移量
-            HotFace hotFace = getHotFace(lineType, direction);
+            // HotFace hotFace = getHotFace(lineType, direction);
             // 统计x和y坐标相同的数据
             Map<String, HotData> tempMap = new HashMap<>();
 
@@ -80,8 +80,11 @@ public class HotTypeServiceImpl implements HotTypeService {
                     HotData hotData = tempMap.get(key);
                     hotData.setCount(hotData.getCount().add(new BigDecimal("1")));
                 } else {
+                    // HotData hotData = new HotData(
+                    //        direction, (x.subtract(hotFace.getXAxis()).setScale(1, BigDecimal.ROUND_HALF_UP)), (y.subtract(hotFace.getYAxis()).setScale(1, BigDecimal.ROUND_HALF_UP)), new BigDecimal("1"), sum, new BigDecimal("0"));
                     HotData hotData = new HotData(
-                            direction, (x.subtract(hotFace.getXAxis()).setScale(1, BigDecimal.ROUND_HALF_UP)), (y.subtract(hotFace.getYAxis()).setScale(1, BigDecimal.ROUND_HALF_UP)), new BigDecimal("1"), sum, new BigDecimal("0"));
+                            direction, (x.setScale(1, BigDecimal.ROUND_HALF_UP)), y.setScale(1, BigDecimal.ROUND_HALF_UP), new BigDecimal("1"), sum, new BigDecimal("0"));
+
                     tempMap.put(key, hotData);
                 }
             }
