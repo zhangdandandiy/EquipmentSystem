@@ -72,6 +72,11 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     // String endTime = "2024-02-27 08:00:00.000";
     String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
+     * 设置日志的创建时间
+     */
+    String createTime = CorrectUtils.getCorrectLogCreateTime();
+
+    /**
      * 实际第一站中SN的数据集合
      */
     List<String> station1SNList = new ArrayList<>();
@@ -91,6 +96,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     public void startCurrentData() throws IllegalAccessException {
         // System.out.println("开始时间：" + startTime);
         // System.out.println("结束时间：" + endTime);
+        // System.out.println("日志创建时间：" + createTime);
         startD4YCurrentData();
     }
 
@@ -100,10 +106,10 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * @param
      */
     @Transactional
-    // 每天 21 点执行
-    @Scheduled(cron = "0 0 21 * * *")
+    // D4Y 每天 20 点执行
+    @Scheduled(cron = "0 0 20 * * *")
     public void CurrentData() throws IllegalAccessException {
-        // System.out.println("每天 21 点开始执行");
+        // System.out.println("每天 20 点开始执行");
         startD4YCurrentData();
     }
 
@@ -142,18 +148,18 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 全部补正完，将所有的状态更新为0，以便后续再次补正
         correctStatusMapper.updateCorrectStatus(pid);
         // 补完之后，发送企业微信通知
-        sendMessage(pid, startTime, endTime);
+        sendMessage(pid, startTime, endTime, createTime);
     }
 
     /**
      * 发送企业微信消息
      */
-    private void sendMessage(String project, String startTime, String endTime) {
+    private void sendMessage(String project, String startTime, String endTime, String createTime) {
 
         // 根据专案获取负责人列表
         List<String> personList = correctPersonMapper.selectCorrectPersonListByProject(project);
         // 根据时间和专案获取补正日志集合
-        List<CorrectLog> correctLogList = correctLogMapper.selectCorrectLogListByTime(project, startTime, endTime);
+        List<CorrectLog> correctLogList = correctLogMapper.selectCorrectLogListByTime(project, startTime, endTime, createTime);
 
         CorrectUtils.sendMessage(personList, correctLogList);
     }

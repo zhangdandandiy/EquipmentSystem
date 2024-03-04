@@ -98,6 +98,7 @@
     <select id="selectCorrectLogListByTime" parameterType="String" resultMap="CorrectLogResult">
         <include refid="selectCorrectLogVo"/>
         where Project=#{Project} and StartTime = #{StartTime} and EndTime = #{EndTime}
+        and convert(varchar,CreateTime,121) >= CreateTime
     </select>
 
 </mapper>

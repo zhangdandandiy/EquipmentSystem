@@ -44,6 +44,6 @@ public interface CorrectLogMapper {
      * @param EndTime
      * @return
      */
-    public List<CorrectLog> selectCorrectLogListByTime(@Param("Project") String Project, @Param("StartTime") String StartTime, @Param("EndTime") String EndTime);
+    public List<CorrectLog> selectCorrectLogListByTime(@Param("Project") String Project, @Param("StartTime") String StartTime, @Param("EndTime") String EndTime, @Param("CreateTime") String CreateTime);
 
 }

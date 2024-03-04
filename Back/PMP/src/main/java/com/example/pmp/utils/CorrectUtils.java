@@ -62,14 +62,12 @@ public class CorrectUtils {
                     counter = 0;
                 }
 
-            /*
-            // 每隔5秒进行下一次循环
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-             */
+                // 每隔 1 秒进行下一次循环(发送下一条消息)，防止有时候发送消息不全
+                try {
+                    Thread.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
             }
 
@@ -312,6 +310,15 @@ public class CorrectUtils {
      */
     public static String getCurrentCorrectEndTime() {
         return getTodayTimeString(8);
+    }
+
+    /**
+     * 获取今天日志的创建时间
+     *
+     * @return
+     */
+    public static String getCorrectLogCreateTime() {
+        return getTodayTimeString(21);
     }
 
     /**

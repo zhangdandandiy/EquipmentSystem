@@ -28,8 +28,8 @@ public class CorrectLogServiceImpl implements CorrectLogService {
      * @return
      */
     @Override
-    public List<CorrectLog> selectCorrectLogListByTime(String project, String startTime, String endTime) {
-        return correctLogMapper.selectCorrectLogListByTime(project, startTime, endTime);
+    public List<CorrectLog> selectCorrectLogListByTime(String project, String startTime, String endTime, String CreateTime) {
+        return correctLogMapper.selectCorrectLogListByTime(project, startTime, endTime, CreateTime);
     }
 
 }

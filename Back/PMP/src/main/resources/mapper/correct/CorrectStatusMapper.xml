@@ -30,6 +30,7 @@
                updateTime
         from [MESDB].[dbo].[Correct_Status]
         where pid = #{pid}
+        order by sort
     </select>
 
     <update id="updateCorrectStatusByName" parameterType="CorrectStatus">
