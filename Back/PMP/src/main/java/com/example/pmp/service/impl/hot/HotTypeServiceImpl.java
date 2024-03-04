@@ -83,7 +83,7 @@ public class HotTypeServiceImpl implements HotTypeService {
                     // HotData hotData = new HotData(
                     //        direction, (x.subtract(hotFace.getXAxis()).setScale(1, BigDecimal.ROUND_HALF_UP)), (y.subtract(hotFace.getYAxis()).setScale(1, BigDecimal.ROUND_HALF_UP)), new BigDecimal("1"), sum, new BigDecimal("0"));
                     HotData hotData = new HotData(
-                            direction, (x.setScale(1, BigDecimal.ROUND_HALF_UP)), y.setScale(1, BigDecimal.ROUND_HALF_UP), new BigDecimal("1"), sum, new BigDecimal("0"));
+                            direction, (x.setScale(1, RoundingMode.HALF_UP)), y.setScale(1, RoundingMode.HALF_UP), new BigDecimal("1"), sum, new BigDecimal("0"));
 
                     tempMap.put(key, hotData);
                 }
@@ -114,10 +114,8 @@ public class HotTypeServiceImpl implements HotTypeService {
 
             // 将结果存入result
             result.put(direction, resultData);
-            // result.put(direction, new ArrayList<>(tempMap.values()));
         }
 
-        // System.out.println("resultData" + resultData);
         return result;
     }
 
