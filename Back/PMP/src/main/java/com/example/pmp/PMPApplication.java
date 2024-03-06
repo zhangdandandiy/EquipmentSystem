@@ -1,7 +1,6 @@
 package com.example.pmp;
 
 import com.example.pmp.config.CorsConfig;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

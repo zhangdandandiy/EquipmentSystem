@@ -111,6 +111,19 @@ public class Station52D9X {
     private String Scan_FAI2_35;
     private String Scan_FAI2_36;
     private String Scan_FAI2_37;
+
+    private String CCD7_FAI712_1;
+    private String CCD7_FAI712_2;
+    private String CCD7_FAI712_3;
+    private String CCD7_FAI711_1;
+    private String CCD7_FAI711_2;
+    private String CCD7_FAI711_3;
+    private String CCD7_FAI24_1;
+    private String CCD7_FAI24_2;
+    private String CCD7_FAI24_3;
+    private String CCD7_FAI24_4;
+    private String CCD7_FAI24_5;
+
     private String TestResult;
     private String TestTime;
     private String ModuleID;
@@ -223,6 +236,19 @@ public class Station52D9X {
         template.setScan_FAI2_35(CorrectUtils.convertString(0, 0.10));
         template.setScan_FAI2_36(CorrectUtils.convertString(0, 0.10));
         template.setScan_FAI2_37(CorrectUtils.convertString(0, 0.10));
+
+        template.setCCD7_FAI712_1(CorrectUtils.convertString(-0.065, 0.065));
+        template.setCCD7_FAI712_2(CorrectUtils.convertString(-0.065, 0.065));
+        template.setCCD7_FAI712_3(CorrectUtils.convertString(-0.065, 0.065));
+        template.setCCD7_FAI711_1(CorrectUtils.convertString(-0.065, 0.065));
+        template.setCCD7_FAI711_2(CorrectUtils.convertString(-0.065, 0.065));
+        template.setCCD7_FAI711_3(CorrectUtils.convertString(-0.065, 0.065));
+        template.setCCD7_FAI24_1(CorrectUtils.convertString(0, 0.15));
+        template.setCCD7_FAI24_2(CorrectUtils.convertString(0, 0.15));
+        template.setCCD7_FAI24_3(CorrectUtils.convertString(0, 0.15));
+        template.setCCD7_FAI24_4(CorrectUtils.convertString(0, 0.15));
+        template.setCCD7_FAI24_5(CorrectUtils.convertString(0, 0.15));
+
         template.setTestResult("PASS");
         template.setRn("1");
         return template;

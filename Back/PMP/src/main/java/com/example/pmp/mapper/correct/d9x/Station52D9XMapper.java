@@ -35,14 +35,6 @@ public interface Station52D9XMapper {
     public Station52D9X getStation52BySN(@Param("startTime") String startTime, @Param("endTime") String endTime, @Param("Barcode") String Barcode);
 
     /**
-     * 批量插入补正后的数据
-     *
-     * @param station52List
-     * @return
-     */
-    public int batchInsertStation52(List<Station52D9X> station52List);
-
-    /**
      * 插入补正后的数据
      *
      * @param station52

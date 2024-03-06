@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Station51D9X {
 
+    // 模板对象
+    private static Station51D9X template;
     private String Barcode;
     private String CCD6_FAI1;
     private String CCD7_FAI31_1;
@@ -120,15 +122,23 @@ public class Station51D9X {
     private String Scan_FAI2_35;
     private String Scan_FAI2_36;
     private String Scan_FAI2_37;
+
+    private String CCD7_FAI75_1;
+    private String CCD7_FAI75_2;
+    private String CCD7_FAI75_3;
+    private String CCD7_FAI74_1;
+    private String CCD7_FAI74_2;
+    private String CCD7_FAI74_3;
+    private String CCD7_FAI31_3;
+    private String CCD7_FAI31_4;
+    private String CCD7_FAI31_5;
+
     private String TestResult;
     private String TestTime;
     private String ModuleID;
     private String LineID;
     private String LineType;
     private String rn;
-
-    // 模板对象
-    private static Station51D9X template;
 
     /**
      * 获取模板对象
@@ -240,6 +250,17 @@ public class Station51D9X {
         template.setScan_FAI2_35(CorrectUtils.convertString(0, 0.10));
         template.setScan_FAI2_36(CorrectUtils.convertString(0, 0.10));
         template.setScan_FAI2_37(CorrectUtils.convertString(0, 0.10));
+
+        template.setCCD7_FAI75_1(CorrectUtils.convertString(-0.06, 0.06));
+        template.setCCD7_FAI75_2(CorrectUtils.convertString(-0.06, 0.06));
+        template.setCCD7_FAI75_3(CorrectUtils.convertString(-0.06, 0.06));
+        template.setCCD7_FAI74_1(CorrectUtils.convertString(-0.06, 0.06));
+        template.setCCD7_FAI74_2(CorrectUtils.convertString(-0.06, 0.06));
+        template.setCCD7_FAI74_3(CorrectUtils.convertString(-0.06, 0.06));
+        template.setCCD7_FAI31_3(CorrectUtils.convertString(0, 0.15));
+        template.setCCD7_FAI31_4(CorrectUtils.convertString(0, 0.15));
+        template.setCCD7_FAI31_5(CorrectUtils.convertString(0, 0.15));
+
         template.setTestResult("PASS");
         template.setRn("1");
         return template;
