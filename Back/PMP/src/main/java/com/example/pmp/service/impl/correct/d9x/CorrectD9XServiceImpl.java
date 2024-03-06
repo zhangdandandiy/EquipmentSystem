@@ -81,7 +81,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     /**
      * 设置日志的创建时间
      */
-    String createTime = CorrectUtils.getCorrectLogCreateTime();
+    String createTime = CorrectUtils.getCorrectLogD9XCreateTime();
 
     /**
      * 实际第一站中SN的数据集合

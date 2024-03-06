@@ -74,7 +74,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     /**
      * 设置日志的创建时间
      */
-    String createTime = CorrectUtils.getCorrectLogCreateTime();
+    String createTime = CorrectUtils.getCorrectLogD4YCreateTime();
 
     /**
      * 实际第一站中SN的数据集合

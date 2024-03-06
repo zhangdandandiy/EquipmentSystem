@@ -313,12 +313,21 @@ public class CorrectUtils {
     }
 
     /**
-     * 获取今天日志的创建时间
+     * 获取今天 D9X 日志的创建时间
      *
      * @return
      */
-    public static String getCorrectLogCreateTime() {
+    public static String getCorrectLogD9XCreateTime() {
         return getTodayTimeString(21);
+    }
+
+    /**
+     * 获取今天 D4Y 日志的创建时间
+     *
+     * @return
+     */
+    public static String getCorrectLogD4YCreateTime() {
+        return getTodayTimeString(20);
     }
 
     /**
