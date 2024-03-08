@@ -1,12 +1,10 @@
 package com.example.pmp.service.impl.correct.d4y;
 
-import com.example.pmp.mapper.correct.CorrectLogMapper;
-import com.example.pmp.mapper.correct.CorrectPersonMapper;
-import com.example.pmp.mapper.correct.CorrectStatusMapper;
-import com.example.pmp.mapper.correct.SpecificationMapper;
+import com.example.pmp.mapper.correct.*;
 import com.example.pmp.mapper.correct.d4y.*;
 import com.example.pmp.pojo.correct.CorrectLog;
 import com.example.pmp.pojo.correct.CorrectStatus;
+import com.example.pmp.pojo.correct.CorrectTime;
 import com.example.pmp.pojo.correct.Specification;
 import com.example.pmp.pojo.correct.d4y.*;
 import com.example.pmp.service.correct.d4y.CorrectD4YService;
@@ -18,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,6 +31,9 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
 
     @Autowired
     private CorrectStatusMapper correctStatusMapper;
+
+    @Autowired
+    private CorrectTimeMapper correctTimeMapper;
 
     @Autowired
     private SpecificationMapper specificationMapper;
@@ -64,13 +62,13 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     /**
      * 设置开始时间
      */
-    // String startTime = "2024-02-26 08:00:00.000";
-    String startTime = CorrectUtils.getCurrentCorrectStartTime();
+    String startTime = "";
+    // String startTime = CorrectUtils.getCurrentCorrectStartTime();
     /**
      * 设置结束时间
      */
-    // String endTime = "2024-02-27 08:00:00.000";
-    String endTime = CorrectUtils.getCurrentCorrectEndTime();
+    String endTime = "";
+    // String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
      * 设置日志的创建时间
      */
@@ -114,8 +112,10 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     }
 
     private void startD4YCurrentData() throws IllegalAccessException {
+        String project = "D4Y";
         Specification specification = new Specification();
-        specification.setProject("D4Y");
+        specification.setProject(project);
+        getCorrectTime(project);
         // 专案
         String pid = specification.getProject();
         // 查询所有需要补正的站点
@@ -149,6 +149,22 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         correctStatusMapper.updateCorrectStatus(pid);
         // 补完之后，发送企业微信通知
         sendMessage(pid, startTime, endTime, createTime);
+    }
+
+    /**
+     * 获取补正开始时间及结束时间
+     */
+    private void getCorrectTime(String Product) {
+        CorrectTime correctTime = correctTimeMapper.getCorrectTimeByProduct(Product);
+        if (!CorrectUtils.judgeTimeIsSame(CorrectUtils.getCurrentTimeString(), correctTime.getEndTime())) {
+            // 不相等加一，并更新
+            correctTime.setStartTime(CorrectUtils.getCorrectTime(correctTime.getStartTime()));
+            correctTime.setEndTime(CorrectUtils.getCorrectTime(correctTime.getEndTime()));
+            correctTime.setUpdateTime(new Date());
+            correctTimeMapper.updateCorrectTime(correctTime);
+        }
+        startTime = correctTime.getStartTime();
+        endTime = correctTime.getEndTime();
     }
 
     /**

@@ -165,6 +165,22 @@ public class SwaggerConfig {
                 .build();
     }
 
+    @Bean
+    public Docket webApiModule() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .groupName("模具系统相关接口")
+                //调用apiInfo方法,创建一个ApiInfo实例,
+                // 里面是展示在文档页面信息内容
+                .apiInfo(webApiInfo())
+                .select()
+                //不显示错误的接口地址
+                //.paths(Predicates.not(PathSelectors.regex("/error.*")))//错误路径不监控
+                .apis(RequestHandlerSelectors.basePackage("com.example.pmp.controller.module"))
+                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
+                .paths(PathSelectors.regex("/.*"))// 对根下所有路径进行监控
+                .build();
+    }
+
     // api文档的详细信息
     private ApiInfo webApiInfo() {
         //作者信息

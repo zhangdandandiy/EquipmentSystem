@@ -1,12 +1,10 @@
 package com.example.pmp.service.impl.correct.d9x;
 
-import com.example.pmp.mapper.correct.CorrectLogMapper;
-import com.example.pmp.mapper.correct.CorrectPersonMapper;
-import com.example.pmp.mapper.correct.CorrectStatusMapper;
-import com.example.pmp.mapper.correct.SpecificationMapper;
+import com.example.pmp.mapper.correct.*;
 import com.example.pmp.mapper.correct.d9x.*;
 import com.example.pmp.pojo.correct.CorrectLog;
 import com.example.pmp.pojo.correct.CorrectStatus;
+import com.example.pmp.pojo.correct.CorrectTime;
 import com.example.pmp.pojo.correct.Specification;
 import com.example.pmp.pojo.correct.d9x.*;
 import com.example.pmp.service.correct.d9x.CorrectD9XService;
@@ -18,10 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,6 +32,9 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
 
     @Autowired
     private CorrectStatusMapper correctStatusMapper;
+
+    @Autowired
+    private CorrectTimeMapper correctTimeMapper;
 
     @Autowired
     private SpecificationMapper specificationMapper;
@@ -71,13 +69,13 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     /**
      * 设置开始时间
      */
-    // String startTime = "2024-02-26 08:00:00.000";
-    String startTime = CorrectUtils.getCurrentCorrectStartTime();
+    String startTime = "";
+    // String startTime = CorrectUtils.getCurrentCorrectStartTime();
     /**
      * 设置结束时间
      */
-    // String endTime = "2024-02-27 08:00:00.000";
-    String endTime = CorrectUtils.getCurrentCorrectEndTime();
+    String endTime = "";
+    // String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
      * 设置日志的创建时间
      */
@@ -129,8 +127,10 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     }
 
     private void startD9XCurrentData() throws IllegalAccessException {
+        String project = "D9X";
         Specification specification = new Specification();
-        specification.setProject("D9X");
+        specification.setProject(project);
+        getCorrectTime(project);
         // 专案
         String pid = specification.getProject();
         // 查询所有需要补正的站点
@@ -171,6 +171,23 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 补完之后，发送企业微信通知
         sendMessage(pid, startTime, endTime, createTime);
     }
+
+    /**
+     * 获取补正开始时间及结束时间
+     */
+    private void getCorrectTime(String Product) {
+        CorrectTime correctTime = correctTimeMapper.getCorrectTimeByProduct(Product);
+        if (!CorrectUtils.judgeTimeIsSame(CorrectUtils.getCurrentTimeString(), correctTime.getEndTime())) {
+            // 不相等加一，并更新
+            correctTime.setStartTime(CorrectUtils.getCorrectTime(correctTime.getStartTime()));
+            correctTime.setEndTime(CorrectUtils.getCorrectTime(correctTime.getEndTime()));
+            correctTime.setUpdateTime(new Date());
+            correctTimeMapper.updateCorrectTime(correctTime);
+        }
+        startTime = correctTime.getStartTime();
+        endTime = correctTime.getEndTime();
+    }
+
 
     /**
      * 发送企业微信消息

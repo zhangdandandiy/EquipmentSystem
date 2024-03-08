@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -462,6 +463,53 @@ public class CorrectUtils {
         double randomValue = lowerBound + (upperBound - lowerBound) * random.nextDouble();
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         return Double.valueOf(decimalFormat.format(randomValue)) + "0";
+    }
+
+    /**
+     * 判断两个时间的年月日是否相同
+     */
+    public static boolean judgeTimeIsSame(String dateString1, String dateString2) {
+        // 定义日期时间格式
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+
+        // 将字符串解析为 LocalDate 对象（只提取年月日部分）
+        LocalDate date1 = LocalDate.parse(dateString1, formatter);
+        LocalDate date2 = LocalDate.parse(dateString2, formatter);
+
+        // 判断两个日期是否相同
+        return date1.isEqual(date2);
+    }
+
+    /**
+     * 将原始日期加一天
+     *
+     * @param oldTime
+     * @return
+     */
+    public static String getCorrectTime(String oldTime) {
+        // 定义日期时间格式
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+        // 将字符串解析为 LocalDateTime 对象
+        LocalDateTime inputDateTime = LocalDateTime.parse(oldTime, formatter);
+        // 加一天
+        LocalDateTime nextDay = inputDateTime.plusDays(1);
+
+        // 将结果格式化为字符串
+        return nextDay.format(formatter);
+    }
+
+    /**
+     * 获取当前时间的字符串
+     *
+     * @return
+     */
+    public static String getCurrentTimeString() {
+        // 获取当前时间
+        Date currentDate = new Date();
+        // 设置所需的日期格式
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        // 格式化当前时间并输出
+        return dateFormat.format(currentDate);
     }
 
 }
