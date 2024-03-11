@@ -18,7 +18,7 @@
         update [MESDB].[dbo].[Correct_Time]
         set StartTime=#{StartTime},
             EndTime=#{EndTime},
-            UpdateTime=#{UpdateTime}
+            UpdateTime=getdate()
         where Product = #{Product}
     </update>
 

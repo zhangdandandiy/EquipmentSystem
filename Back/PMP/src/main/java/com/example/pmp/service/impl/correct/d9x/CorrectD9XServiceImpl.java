@@ -16,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -69,13 +72,13 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     /**
      * 设置开始时间
      */
-    String startTime = "";
-    // String startTime = CorrectUtils.getCurrentCorrectStartTime();
+    // String startTime = "2024-03-08 08:00:00.000";
+    String startTime = CorrectUtils.getCurrentCorrectStartTime();
     /**
      * 设置结束时间
      */
-    String endTime = "";
-    // String endTime = CorrectUtils.getCurrentCorrectEndTime();
+    // String endTime = "2024-03-10 08:00:00.000";
+    String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
      * 设置日志的创建时间
      */
@@ -130,7 +133,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         String project = "D9X";
         Specification specification = new Specification();
         specification.setProject(project);
-        getCorrectTime(project);
+        // getCorrectTime(project);
         // 专案
         String pid = specification.getProject();
         // 查询所有需要补正的站点
@@ -181,7 +184,6 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
             // 不相等加一，并更新
             correctTime.setStartTime(CorrectUtils.getCorrectTime(correctTime.getStartTime()));
             correctTime.setEndTime(CorrectUtils.getCorrectTime(correctTime.getEndTime()));
-            correctTime.setUpdateTime(new Date());
             correctTimeMapper.updateCorrectTime(correctTime);
         }
         startTime = correctTime.getStartTime();
@@ -225,10 +227,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     station52.setBarcode(s);
                     // 测试时间设置
                     Station42D9X station4 = station42Mapper.getStation42BySN(startTime, endTime, s);
-                    station52.setLineID(station4.getLineID());
-                    station52.setLineType(station4.getLineType());
-                    station52.setModuleID(module);
-                    station52.setTestTime(CorrectUtils.addMilliseconds(station4.getTestTime(), 200));
+                    if (station4 != null) {
+                        station52.setLineID(station4.getLineID());
+                        station52.setLineType(station4.getLineType());
+                        station52.setModuleID(module);
+                        station52.setTestTime(CorrectUtils.addMilliseconds(station4.getTestTime(), 200));
+                    }
                     station52List.add(station52);
                 }
             }
@@ -300,10 +304,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     station51.setBarcode(s);
                     // 测试时间设置
                     Station41D9X station4 = station41Mapper.getStation41BySN(startTime, endTime, s);
-                    station51.setLineID(station4.getLineID());
-                    station51.setLineType(station4.getLineType());
-                    station51.setModuleID(module);
-                    station51.setTestTime(CorrectUtils.addMilliseconds(station4.getTestTime(), 200));
+                    if (station4 != null) {
+                        station51.setLineID(station4.getLineID());
+                        station51.setLineType(station4.getLineType());
+                        station51.setModuleID(module);
+                        station51.setTestTime(CorrectUtils.addMilliseconds(station4.getTestTime(), 200));
+                    }
                     station51List.add(station51);
                 }
             }
@@ -369,10 +375,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     station42.setBarcode(s);
                     // 测试时间设置
                     Station3D9X station3 = station3Mapper.getStation3BySN(startTime, endTime, s);
-                    station42.setLineID(station3.getLineID());
-                    station42.setLineType(station3.getLineType());
-                    station42.setModuleID(module);
-                    station42.setTestTime(CorrectUtils.addMilliseconds(station3.getTestTime(), 200));
+                    if (station3 != null) {
+                        station42.setLineID(station3.getLineID());
+                        station42.setLineType(station3.getLineType());
+                        station42.setModuleID(module);
+                        station42.setTestTime(CorrectUtils.addMilliseconds(station3.getTestTime(), 200));
+                    }
                     station42List.add(station42);
                 }
             }
@@ -446,10 +454,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     station41.setBarcode(s);
                     // 测试时间设置
                     Station3D9X station3 = station3Mapper.getStation3BySN(startTime, endTime, s);
-                    station41.setLineID(station3.getLineID());
-                    station41.setLineType(station3.getLineType());
-                    station41.setModuleID(module);
-                    station41.setTestTime(CorrectUtils.addMilliseconds(station3.getTestTime(), 200));
+                    if (station3 != null) {
+                        station41.setLineID(station3.getLineID());
+                        station41.setLineType(station3.getLineType());
+                        station41.setModuleID(module);
+                        station41.setTestTime(CorrectUtils.addMilliseconds(station3.getTestTime(), 200));
+                    }
                     station41List.add(station41);
                 }
             }
@@ -525,10 +535,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     station3.setBarcode(s);
                     // 测试时间设置
                     Station2D9X station2 = station2Mapper.getStation2BySN(startTime, endTime, s);
-                    station3.setLineID(station2.getLineID());
-                    station3.setLineType(station2.getLineType());
-                    station3.setModuleID(module);
-                    station3.setTestTime(CorrectUtils.addMilliseconds(station2.getTestTime(), 200));
+                    if (station2 != null) {
+                        station3.setLineID(station2.getLineID());
+                        station3.setLineType(station2.getLineType());
+                        station3.setModuleID(module);
+                        station3.setTestTime(CorrectUtils.addMilliseconds(station2.getTestTime(), 200));
+                    }
                     station3List.add(station3);
                 }
             }
@@ -586,10 +598,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     // 比上一站测试时间多 100ms/200ms，这一站存在的码，在上一站一定有
                     // 要在补正表里捞取
                     Station1D9X station1 = station1Mapper.getStation1BySN(startTime, endTime, s);
-                    station2.setLineID(station1.getLineID());
-                    station2.setLineType(station1.getLineType());
-                    station2.setModuleID(module);
-                    station2.setTestTime(CorrectUtils.addMilliseconds(station1.getTestTime(), 200));
+                    if (station1 != null) {
+                        station2.setLineID(station1.getLineID());
+                        station2.setLineType(station1.getLineType());
+                        station2.setModuleID(module);
+                        station2.setTestTime(CorrectUtils.addMilliseconds(station1.getTestTime(), 200));
+                    }
                     station2List.add(station2);
                 }
             }

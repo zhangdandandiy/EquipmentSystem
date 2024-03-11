@@ -16,7 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -62,13 +65,13 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     /**
      * 设置开始时间
      */
-    String startTime = "";
-    // String startTime = CorrectUtils.getCurrentCorrectStartTime();
+    // String startTime = "2024-03-08 08:00:00.000";
+    String startTime = CorrectUtils.getCurrentCorrectStartTime();
     /**
      * 设置结束时间
      */
-    String endTime = "";
-    // String endTime = CorrectUtils.getCurrentCorrectEndTime();
+    // String endTime = "2024-03-10 08:00:00.000";
+    String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
      * 设置日志的创建时间
      */
@@ -115,7 +118,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         String project = "D4Y";
         Specification specification = new Specification();
         specification.setProject(project);
-        getCorrectTime(project);
+        // getCorrectTime(project);
         // 专案
         String pid = specification.getProject();
         // 查询所有需要补正的站点
@@ -160,7 +163,6 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
             // 不相等加一，并更新
             correctTime.setStartTime(CorrectUtils.getCorrectTime(correctTime.getStartTime()));
             correctTime.setEndTime(CorrectUtils.getCorrectTime(correctTime.getEndTime()));
-            correctTime.setUpdateTime(new Date());
             correctTimeMapper.updateCorrectTime(correctTime);
         }
         startTime = correctTime.getStartTime();
@@ -209,10 +211,12 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     station5.setBarcode(s);
                     // 测试时间设置
                     Station4D4Y station4 = station4Mapper.getStation4BySN(startTime, endTime, s);
-                    station5.setLineID(station4.getLineID());
-                    station5.setLineType(station4.getLineType());
-                    station5.setModuleID(module);
-                    station5.setTestTime(CorrectUtils.addMilliseconds(station4.getTestTime(), 200));
+                    if(station4!=null){
+                        station5.setLineID(station4.getLineID());
+                        station5.setLineType(station4.getLineType());
+                        station5.setModuleID(module);
+                        station5.setTestTime(CorrectUtils.addMilliseconds(station4.getTestTime(), 200));
+                    }
                     station5List.add(station5);
                 }
             }
@@ -284,10 +288,12 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     station4.setBarcode(s);
                     // 测试时间设置
                     Station3D4Y station3 = station3Mapper.getStation3BySN(startTime, endTime, s);
-                    station4.setLineID(station3.getLineID());
-                    station4.setLineType(station3.getLineType());
-                    station4.setModuleID(module);
-                    station4.setTestTime(CorrectUtils.addMilliseconds(station3.getTestTime(), 200));
+                    if(station3!=null){
+                        station4.setLineID(station3.getLineID());
+                        station4.setLineType(station3.getLineType());
+                        station4.setModuleID(module);
+                        station4.setTestTime(CorrectUtils.addMilliseconds(station3.getTestTime(), 200));
+                    }
                     station4List.add(station4);
                 }
             }
@@ -367,10 +373,12 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     station3.setBarcode(s);
                     // 测试时间设置
                     Station2D4Y station2 = station2Mapper.getStation2BySN(startTime, endTime, s);
-                    station3.setLineID(station2.getLineID());
-                    station3.setLineType(station2.getLineType());
-                    station3.setModuleID(module);
-                    station3.setTestTime(CorrectUtils.addMilliseconds(station2.getTestTime(), 200));
+                    if (station2!=null){
+                        station3.setLineID(station2.getLineID());
+                        station3.setLineType(station2.getLineType());
+                        station3.setModuleID(module);
+                        station3.setTestTime(CorrectUtils.addMilliseconds(station2.getTestTime(), 200));
+                    }
                     station3List.add(station3);
                 }
             }
@@ -432,10 +440,12 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     // 比上一站测试时间多 100ms/200ms，这一站存在的码，在上一站一定有
                     // 要在补正表里捞取
                     Station1D4Y station1 = station1Mapper.getStation1BySN(startTime, endTime, s);
-                    station2.setLineID(station1.getLineID());
-                    station2.setLineType(station1.getLineType());
-                    station2.setModuleID(module);
-                    station2.setTestTime(CorrectUtils.addMilliseconds(station1.getTestTime(), 200));
+                    if (station1!=null){
+                        station2.setLineID(station1.getLineID());
+                        station2.setLineType(station1.getLineType());
+                        station2.setModuleID(module);
+                        station2.setTestTime(CorrectUtils.addMilliseconds(station1.getTestTime(), 200));
+                    }
                     station2List.add(station2);
                 }
             }

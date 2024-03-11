@@ -49,6 +49,9 @@ public class HotTypeServiceImpl implements HotTypeService {
 
         // 遍历countMap
         for (String direction : countMap.keySet()) {
+
+            // 将不在范围内的删掉
+
             Map<String, Object> resultData = new HashMap<>();
             // 统计最大的占比
             BigDecimal maxPercentage = new BigDecimal("0");
@@ -58,7 +61,7 @@ public class HotTypeServiceImpl implements HotTypeService {
             List<HotType> hotTypes = countMap.get(direction);
             BigDecimal sum = BigDecimal.valueOf(hotTypes.size());
             // 获取线体类型
-            String lineType = hotTypeParamDto.getLineType();
+            // String lineType = hotTypeParamDto.getLineType();
             // 获取偏移量
             // HotFace hotFace = getHotFace(lineType, direction);
             // 统计x和y坐标相同的数据
@@ -69,8 +72,8 @@ public class HotTypeServiceImpl implements HotTypeService {
 
             for (HotType hotType : hotTypes) {
 
-                result1 = hotType.getPositionX().divide(decimalMultiplier, 0, RoundingMode.UP);
-                result2 = hotType.getPositionY().divide(decimalMultiplier, 0, RoundingMode.UP);
+                result1 = hotType.getPositionX().compareTo(new BigDecimal("0")) >= 1 ? hotType.getPositionX().divide(decimalMultiplier, 0, RoundingMode.UP) : hotType.getPositionX().divide(decimalMultiplier, 0, RoundingMode.DOWN);
+                result2 = hotType.getPositionY().compareTo(new BigDecimal("0")) >= 1 ? hotType.getPositionY().divide(decimalMultiplier, 0, RoundingMode.UP) : hotType.getPositionY().divide(decimalMultiplier, 0, RoundingMode.DOWN);
 
                 BigDecimal x = result1.multiply(decimalMultiplier);
                 BigDecimal y = result2.multiply(decimalMultiplier);
