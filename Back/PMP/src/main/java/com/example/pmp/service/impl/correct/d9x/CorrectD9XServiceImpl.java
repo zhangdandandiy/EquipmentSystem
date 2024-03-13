@@ -110,9 +110,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      */
     @Override
     public void startCurrentData() throws IllegalAccessException {
-        // System.out.println("开始时间：" + startTime);
-        // System.out.println("结束时间：" + endTime);
-        // System.out.println("日志创建时间：" + createTime);
+        startTime = CorrectUtils.getCurrentCorrectStartTime();
+        endTime = CorrectUtils.getCurrentCorrectEndTime();
         startD9XCurrentData();
     }
 
@@ -125,7 +124,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     // D9X 每天 21 点执行
     @Scheduled(cron = "0 0 21 * * *")
     public void CurrentData() throws IllegalAccessException {
-        // System.out.println("每天 21 点开始执行");
+        startTime = CorrectUtils.getCurrentCorrectStartTime();
+        endTime = CorrectUtils.getCurrentCorrectEndTime();
         startD9XCurrentData();
     }
 

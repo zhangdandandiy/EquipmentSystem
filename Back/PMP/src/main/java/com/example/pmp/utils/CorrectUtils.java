@@ -40,7 +40,7 @@ public class CorrectUtils {
         int counter = 0;
         // 发送消息批次大小
         // 太长会截断，会发送不成功
-        int batchSize = 10;
+        int batchSize = 5;
 
         if (correctLogList.size() > 0) {
             for (CorrectLog correctLog : correctLogList) {
@@ -50,9 +50,10 @@ public class CorrectUtils {
                 String beforeGoodCount = "补之前良品数：" + correctLog.getBeforeGoodCount() + "\n";
                 String beforeYield = "补之前良率：" + correctLog.getBeforeYield() + "\n";
                 String afterGoodCount = "补之后良品数：" + correctLog.getAfterGoodCount() + "\n";
-                String afterYield = "补之后良率：" + correctLog.getAfterYield() + "\n" + "\n";
+                String afterYield = "补之后良率：" + correctLog.getAfterYield() + "\n";
+                String time = "时间范围：" + correctLog.getStartTime() + "至" + correctLog.getEndTime() + "\n" + "\n";
 
-                String singleMsg = Project + itemKey + totalCount + beforeGoodCount + beforeYield + afterGoodCount + afterYield;
+                String singleMsg = Project + itemKey + totalCount + beforeGoodCount + beforeYield + afterGoodCount + afterYield + time;
                 totalMsg.append(singleMsg);
                 counter++;
 

@@ -65,12 +65,12 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     /**
      * 设置开始时间
      */
-    // String startTime = "2024-03-08 08:00:00.000";
+    // String startTime = "2024-03-10 08:00:00.00";
     String startTime = CorrectUtils.getCurrentCorrectStartTime();
     /**
      * 设置结束时间
      */
-    // String endTime = "2024-03-10 08:00:00.000";
+    // String endTime = "2024-03-12 08:00:00.00";
     String endTime = CorrectUtils.getCurrentCorrectEndTime();
     /**
      * 设置日志的创建时间
@@ -95,9 +95,8 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      */
     @Override
     public void startCurrentData() throws IllegalAccessException {
-        // System.out.println("开始时间：" + startTime);
-        // System.out.println("结束时间：" + endTime);
-        // System.out.println("日志创建时间：" + createTime);
+        startTime = CorrectUtils.getCurrentCorrectStartTime();
+        endTime = CorrectUtils.getCurrentCorrectEndTime();
         startD4YCurrentData();
     }
 
@@ -110,7 +109,8 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     // D4Y 每天 20 点执行
     @Scheduled(cron = "0 0 20 * * *")
     public void CurrentData() throws IllegalAccessException {
-        // System.out.println("每天 20 点开始执行");
+        startTime = CorrectUtils.getCurrentCorrectStartTime();
+        endTime = CorrectUtils.getCurrentCorrectEndTime();
         startD4YCurrentData();
     }
 
@@ -211,7 +211,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     station5.setBarcode(s);
                     // 测试时间设置
                     Station4D4Y station4 = station4Mapper.getStation4BySN(startTime, endTime, s);
-                    if(station4!=null){
+                    if (station4 != null) {
                         station5.setLineID(station4.getLineID());
                         station5.setLineType(station4.getLineType());
                         station5.setModuleID(module);
@@ -288,7 +288,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     station4.setBarcode(s);
                     // 测试时间设置
                     Station3D4Y station3 = station3Mapper.getStation3BySN(startTime, endTime, s);
-                    if(station3!=null){
+                    if (station3 != null) {
                         station4.setLineID(station3.getLineID());
                         station4.setLineType(station3.getLineType());
                         station4.setModuleID(module);
@@ -373,7 +373,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     station3.setBarcode(s);
                     // 测试时间设置
                     Station2D4Y station2 = station2Mapper.getStation2BySN(startTime, endTime, s);
-                    if (station2!=null){
+                    if (station2 != null) {
                         station3.setLineID(station2.getLineID());
                         station3.setLineType(station2.getLineType());
                         station3.setModuleID(module);
@@ -440,7 +440,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                     // 比上一站测试时间多 100ms/200ms，这一站存在的码，在上一站一定有
                     // 要在补正表里捞取
                     Station1D4Y station1 = station1Mapper.getStation1BySN(startTime, endTime, s);
-                    if (station1!=null){
+                    if (station1 != null) {
                         station2.setLineID(station1.getLineID());
                         station2.setLineType(station1.getLineType());
                         station2.setModuleID(module);
