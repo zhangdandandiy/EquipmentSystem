@@ -4,7 +4,6 @@ import com.example.pmp.mapper.correct.*;
 import com.example.pmp.mapper.correct.d9x.*;
 import com.example.pmp.pojo.correct.CorrectLog;
 import com.example.pmp.pojo.correct.CorrectStatus;
-import com.example.pmp.pojo.correct.CorrectTime;
 import com.example.pmp.pojo.correct.Specification;
 import com.example.pmp.pojo.correct.d9x.*;
 import com.example.pmp.service.correct.d9x.CorrectD9XService;
@@ -70,21 +69,6 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     private CorrectPersonMapper correctPersonMapper;
 
     /**
-     * 设置开始时间
-     */
-    // String startTime = "2024-03-08 08:00:00.000";
-    String startTime = CorrectUtils.getCurrentCorrectStartTime();
-    /**
-     * 设置结束时间
-     */
-    // String endTime = "2024-03-10 08:00:00.000";
-    String endTime = CorrectUtils.getCurrentCorrectEndTime();
-    /**
-     * 设置日志的创建时间
-     */
-    String createTime = CorrectUtils.getCorrectLogD9XCreateTime();
-
-    /**
      * 实际第一站中SN的数据集合
      */
     List<String> station1SNList = new ArrayList<>();
@@ -110,9 +94,9 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      */
     @Override
     public void startCurrentData() throws IllegalAccessException {
-        startTime = CorrectUtils.getCurrentCorrectStartTime();
-        endTime = CorrectUtils.getCurrentCorrectEndTime();
-        startD9XCurrentData();
+        String startTime = CorrectUtils.getCurrentCorrectStartTime();
+        String endTime = CorrectUtils.getCurrentCorrectEndTime();
+        startD9XCurrentData(startTime, endTime);
     }
 
     /**
@@ -124,12 +108,12 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     // D9X 每天 21 点执行
     @Scheduled(cron = "0 0 21 * * *")
     public void CurrentData() throws IllegalAccessException {
-        startTime = CorrectUtils.getCurrentCorrectStartTime();
-        endTime = CorrectUtils.getCurrentCorrectEndTime();
-        startD9XCurrentData();
+        String startTime = CorrectUtils.getCurrentCorrectStartTime();
+        String endTime = CorrectUtils.getCurrentCorrectEndTime();
+        startD9XCurrentData(startTime, endTime);
     }
 
-    private void startD9XCurrentData() throws IllegalAccessException {
+    private void startD9XCurrentData(String startTime, String endTime) throws IllegalAccessException {
         String project = "D9X";
         Specification specification = new Specification();
         specification.setProject(project);
@@ -144,25 +128,25 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                 // 未完成
                 if (Objects.equals(correctStatus.getName(), "STATION1")) {
                     // 补正第一站(良率100%)
-                    currentStation1();
+                    currentStation1(startTime, endTime);
                 } else if (Objects.equals(correctStatus.getName(), "STATION2")) {
                     // 补正第二站(良率100%)
-                    currentStation2(correctStatus.getModule());
+                    currentStation2(startTime, endTime, correctStatus.getModule());
                 } else if (Objects.equals(correctStatus.getName(), "STATION3")) {
                     // 补正第三站(良率100%)
-                    currentStation3(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation3(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 } else if (Objects.equals(correctStatus.getName(), "STATION41")) {
                     // 补正第四站(第一版)
-                    currentStation41(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation41(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 } else if (Objects.equals(correctStatus.getName(), "STATION42")) {
                     // 补正第四站(第二版)
-                    currentStation42(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation42(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 } else if (Objects.equals(correctStatus.getName(), "STATION51")) {
                     // 补正第五站(第一版)
-                    currentStation51(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation51(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 } else {
                     // 补正第五站(第二版)
-                    currentStation52(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation52(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 }
             }
             // 一个Station补正完了，更新状态
@@ -172,24 +156,9 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 全部补正完，将所有的状态更新为0，以便后续再次补正
         correctStatusMapper.updateCorrectStatus(pid);
         // 补完之后，发送企业微信通知
+        String createTime = CorrectUtils.getCorrectLogD9XCreateTime();
         sendMessage(pid, startTime, endTime, createTime);
     }
-
-    /**
-     * 获取补正开始时间及结束时间
-     */
-    private void getCorrectTime(String Product) {
-        CorrectTime correctTime = correctTimeMapper.getCorrectTimeByProduct(Product);
-        if (!CorrectUtils.judgeTimeIsSame(CorrectUtils.getCurrentTimeString(), correctTime.getEndTime())) {
-            // 不相等加一，并更新
-            correctTime.setStartTime(CorrectUtils.getCorrectTime(correctTime.getStartTime()));
-            correctTime.setEndTime(CorrectUtils.getCorrectTime(correctTime.getEndTime()));
-            correctTimeMapper.updateCorrectTime(correctTime);
-        }
-        startTime = correctTime.getStartTime();
-        endTime = correctTime.getEndTime();
-    }
-
 
     /**
      * 发送企业微信消息
@@ -207,7 +176,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     /**
      * 补正第五站(第二版)
      */
-    private void currentStation52(Specification specification, String module, String station, String lid) throws IllegalAccessException {
+    private void currentStation52(String startTime, String endTime, Specification specification, String module, String station, String lid) throws IllegalAccessException {
         List<String> station52SNList = station52Mapper.getStation52SNList(startTime, endTime);
         List<Station52D9X> station52List = station52Mapper.getStation52ListByTime(startTime, endTime);
 
@@ -245,7 +214,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 获取第五站规格数据
         List<Specification> specification52List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification52List, station52Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification52List, station52Map);
         // 将hashMap转为List集合
         station52List = CorrectUtils.getCurrentStationAfterSpecList(station52Map, Station52D9X.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -283,7 +252,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * 补正第五站(第一版)
      * 第五站中绝不可能出现第四站FAIL的码
      */
-    private void currentStation51(Specification specification, String module, String station, String lid) throws IllegalAccessException {
+    private void currentStation51(String startTime, String endTime, Specification specification, String module, String station, String lid) throws IllegalAccessException {
         List<String> station51SNList = station51Mapper.getStation51SNList(startTime, endTime);
         List<Station51D9X> station51List = station51Mapper.getStation51ListByTime(startTime, endTime);
 
@@ -322,7 +291,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 获取第五站规格数据
         List<Specification> specification51List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification51List, station51Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification51List, station51Map);
         // 将hashMap转为List集合
         station51List = CorrectUtils.getCurrentStationAfterSpecList(station51Map, Station51D9X.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -359,7 +328,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     /**
      * 补正第四站(第二版)
      */
-    private void currentStation42(Specification specification, String module, String station, String lid) throws IllegalAccessException {
+    private void currentStation42(String startTime, String endTime, Specification specification, String module, String station, String lid) throws IllegalAccessException {
         List<String> station42SNList = station42Mapper.getStation42SNList(startTime, endTime);
         List<Station42D9X> station42List = station42Mapper.getStation42ListByTime(startTime, endTime);
 
@@ -393,7 +362,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 获取第四站规格数据
         List<Specification> specification42List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification42List, station42Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification42List, station42Map);
         // 将hashMap转为List集合
         station42List = CorrectUtils.getCurrentStationAfterSpecList(station42Map, Station42D9X.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -404,6 +373,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * 设置第四站结果(第二版)
      */
     private void setStation42Result(List<Station42D9X> station42List, List<Specification> specification42List) throws IllegalAccessException {
+        station42PassNList = null;
+        station42FailSNList = null;
         for (Station42D9X station4 : station42List) {
             String result = "FAIL";
             String SN = station4.getBarcode();
@@ -438,7 +409,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * 第四站的良率不是百分百，有 PASS FAIL
      * 补正后要记录 Station4 中 FAIL 的码的集合
      */
-    private void currentStation41(Specification specification, String module, String station, String lid) throws IllegalAccessException {
+    private void currentStation41(String startTime, String endTime, Specification specification, String module, String station, String lid) throws IllegalAccessException {
         List<String> station41SNList = station41Mapper.getStation41SNList(startTime, endTime);
         List<Station41D9X> station41List = station41Mapper.getStation41ListByTime(startTime, endTime);
 
@@ -472,7 +443,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 获取第三站规格数据
         List<Specification> specification41List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification41List, station41Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification41List, station41Map);
         // 将hashMap转为List集合
         station41List = CorrectUtils.getCurrentStationAfterSpecList(station41Map, Station41D9X.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -483,6 +454,9 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * 设置第四站结果(第一版)
      */
     private void setStation41Result(List<Station41D9X> station41List, List<Specification> specification41List) throws IllegalAccessException {
+        // 每次补之前都置空
+        station41PassNList = null;
+        station41FailSNList = null;
         for (Station41D9X station4 : station41List) {
             String result = "FAIL";
             String SN = station4.getBarcode();
@@ -519,7 +493,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * 但要注意，实际情况是第二站有FAIL，会直接排掉，不会再到第三站测
      * 所以要根据第一站所有的码将第一站排掉的码补到第三站
      */
-    private void currentStation3(Specification specification, String module, String station, String lid) {
+    private void currentStation3(String startTime, String endTime, Specification specification, String module, String station, String lid) {
         List<String> station3SNList = station3Mapper.getStation3SNList(startTime, endTime);
         List<Station3D9X> station3List = station3Mapper.getStation3ListByTime(startTime, endTime);
 
@@ -553,7 +527,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 获取第三站规格数据
         List<Specification> specification3List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification3List, station3Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification3List, station3Map);
         // 将hashMap转为List集合
         station3List = CorrectUtils.getCurrentStationAfterSpecList(station3Map, Station3D9X.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -580,7 +554,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * OK	NG需要改成OK
      * PASS	FAIL改为PASS
      */
-    private void currentStation2(String module) {
+    private void currentStation2(String startTime, String endTime, String module) {
         List<String> station2SNList = station2Mapper.getStation2SNList(startTime, endTime);
         List<Station2D9X> station2List = station2Mapper.getStation2ListByTime(startTime, endTime);
 
@@ -635,9 +609,10 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * NG 需要改成 OK
      * FAIL 改为 PASS
      */
-    private void currentStation1() {
+    private void currentStation1(String startTime, String endTime) {
         // 第一站是最全的码
         // 过滤掉 ERROR \u0000 ????
+        station1SNList = null;
         station1SNList = station1Mapper.getStation1SNList(startTime, endTime);
         List<Station1D9X> station1List = station1Mapper.getStation1ListByTime(startTime, endTime);
         // 将补正好的数据插入到数据库(将 DEF 需要改成 C，NG 需要改成 OK，FAIL 改为 PASS)
@@ -726,7 +701,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * @param needCorrectMap
      * @return
      */
-    private HashMap<String, List<Object>> getCurrentAfterSpecHashMap(List<Specification> specificationList, HashMap<String, List<Object>> needCorrectMap) {
+    private HashMap<String, List<Object>> getCurrentAfterSpecHashMap(String startTime, String endTime, List<Specification> specificationList, HashMap<String, List<Object>> needCorrectMap) {
         ExecutorService executor = Executors.newFixedThreadPool(specificationList.size());
         // 根据规格数量初始化CountDownLatch
         CountDownLatch latch = new CountDownLatch(specificationList.size());
@@ -743,7 +718,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                         List<Object> objects = needCorrectMap.get(Name);
                         // 开始补正
                         try {
-                            Current(objects, spaceLower, spaceUpper, targetYield, spec, Name);
+                            Current(startTime, endTime, objects, spaceLower, spaceUpper, targetYield, spec, Name);
                             // 保存补正数据
                             needCorrectMap.put(Name, objects);
                         } catch (Exception e) {
@@ -778,7 +753,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * @param specLower
      * @param specUpper
      */
-    private void Current(List<Object> objects, double specLower, double specUpper, double targetYield, Specification spec, String Name) {
+    private void Current(String startTime, String endTime, List<Object> objects, double specLower, double specUpper, double targetYield, Specification spec, String Name) {
         if (objects.size() > 0) {
             int goodCount = 0;
             // 记录非良品索引

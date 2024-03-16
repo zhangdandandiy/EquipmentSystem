@@ -63,21 +63,6 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     private CorrectPersonMapper correctPersonMapper;
 
     /**
-     * 设置开始时间
-     */
-    // String startTime = "2024-03-10 08:00:00.00";
-    String startTime = CorrectUtils.getCurrentCorrectStartTime();
-    /**
-     * 设置结束时间
-     */
-    // String endTime = "2024-03-12 08:00:00.00";
-    String endTime = CorrectUtils.getCurrentCorrectEndTime();
-    /**
-     * 设置日志的创建时间
-     */
-    String createTime = CorrectUtils.getCorrectLogD4YCreateTime();
-
-    /**
      * 实际第一站中SN的数据集合
      */
     List<String> station1SNList = new ArrayList<>();
@@ -95,9 +80,9 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      */
     @Override
     public void startCurrentData() throws IllegalAccessException {
-        startTime = CorrectUtils.getCurrentCorrectStartTime();
-        endTime = CorrectUtils.getCurrentCorrectEndTime();
-        startD4YCurrentData();
+        String startTime = CorrectUtils.getCurrentCorrectStartTime();
+        String endTime = CorrectUtils.getCurrentCorrectEndTime();
+        startD4YCurrentData(startTime, endTime);
     }
 
     /**
@@ -109,12 +94,12 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     // D4Y 每天 20 点执行
     @Scheduled(cron = "0 0 20 * * *")
     public void CurrentData() throws IllegalAccessException {
-        startTime = CorrectUtils.getCurrentCorrectStartTime();
-        endTime = CorrectUtils.getCurrentCorrectEndTime();
-        startD4YCurrentData();
+        String startTime = CorrectUtils.getCurrentCorrectStartTime();
+        String endTime = CorrectUtils.getCurrentCorrectEndTime();
+        startD4YCurrentData(startTime, endTime);
     }
 
-    private void startD4YCurrentData() throws IllegalAccessException {
+    private void startD4YCurrentData(String startTime, String endTime) throws IllegalAccessException {
         String project = "D4Y";
         Specification specification = new Specification();
         specification.setProject(project);
@@ -129,19 +114,19 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                 // 未完成
                 if (Objects.equals(correctStatus.getName(), "STATION1")) {
                     // 补正第一站(良率100%)
-                    currentStation1();
+                    currentStation1(startTime, endTime);
                 } else if (Objects.equals(correctStatus.getName(), "STATION2")) {
                     // 补正第二站(良率100%)
-                    currentStation2(correctStatus.getModule());
+                    currentStation2(startTime, endTime, correctStatus.getModule());
                 } else if (Objects.equals(correctStatus.getName(), "STATION3")) {
                     // 补正第三站(良率100%)
-                    currentStation3(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation3(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 } else if (Objects.equals(correctStatus.getName(), "STATION4")) {
                     // 补正第四站
-                    currentStation4(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation4(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 } else {
                     // 补正第五站
-                    currentStation5(specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
+                    currentStation5(startTime, endTime, specification, correctStatus.getModule(), correctStatus.getStation(), correctStatus.getLid());
                 }
             }
             // 一个Station补正完了，更新状态
@@ -151,13 +136,14 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 全部补正完，将所有的状态更新为0，以便后续再次补正
         correctStatusMapper.updateCorrectStatus(pid);
         // 补完之后，发送企业微信通知
+        String createTime = CorrectUtils.getCorrectLogD9XCreateTime();
         sendMessage(pid, startTime, endTime, createTime);
     }
 
     /**
      * 获取补正开始时间及结束时间
      */
-    private void getCorrectTime(String Product) {
+    private void getCorrectTime(String startTime, String endTime, String Product) {
         CorrectTime correctTime = correctTimeMapper.getCorrectTimeByProduct(Product);
         if (!CorrectUtils.judgeTimeIsSame(CorrectUtils.getCurrentTimeString(), correctTime.getEndTime())) {
             // 不相等加一，并更新
@@ -185,7 +171,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     /**
      * 补正第五站
      */
-    private void currentStation5(Specification specification, String module, String station, String lid) throws IllegalAccessException {
+    private void currentStation5(String startTime, String endTime, Specification specification, String module, String station, String lid) throws IllegalAccessException {
         List<String> station5SNList = station5Mapper.getStation5SNList(startTime, endTime);
         List<Station5D4Y> station5List = station5Mapper.getStation5ListByTime(startTime, endTime);
 
@@ -229,7 +215,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 获取第五站规格数据
         List<Specification> specification5List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification5List, station5Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification5List, station5Map);
         // 将hashMap转为List集合
         station5List = CorrectUtils.getCurrentStationAfterSpecList(station5Map, Station5D4Y.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -269,7 +255,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * 补正第四站
      * 按照自定义上下限进行补正
      */
-    private void currentStation4(Specification specification, String module, String station, String lid) throws IllegalAccessException {
+    private void currentStation4(String startTime, String endTime, Specification specification, String module, String station, String lid) throws IllegalAccessException {
         List<String> station4SNList = station4Mapper.getStation4SNList(startTime, endTime);
         List<Station4D4Y> station4List = station4Mapper.getStation4ListByTime(startTime, endTime);
 
@@ -306,7 +292,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 获取第四站规格数据
         List<Specification> specification4List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification4List, station4Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification4List, station4Map);
         // 将hashMap转为List集合
         station4List = CorrectUtils.getCurrentStationAfterSpecList(station4Map, Station4D4Y.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -354,7 +340,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * 但要注意，实际情况是第二站有FAIL，会直接排掉，不会再到第三站测
      * 所以要根据第一站所有的码将第一站排掉的码补到第三站
      */
-    private void currentStation3(Specification specification, String module, String station, String lid) {
+    private void currentStation3(String startTime, String endTime, Specification specification, String module, String station, String lid) {
         List<String> station3SNList = station3Mapper.getStation3SNList(startTime, endTime);
         List<Station3D4Y> station3List = station3Mapper.getStation3ListByTime(startTime, endTime);
 
@@ -391,7 +377,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 获取第三站规格数据
         List<Specification> specification3List = getSpecificationList(specification);
         // 开始补正(hashMap)
-        getCurrentAfterSpecHashMap(specification3List, station3Map);
+        getCurrentAfterSpecHashMap(startTime, endTime, specification3List, station3Map);
         // 将hashMap转为List集合
         station3List = CorrectUtils.getCurrentStationAfterSpecList(station3Map, Station3D4Y.class);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
@@ -419,7 +405,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * OK	NG需要改成OK
      * PASS	FAIL改为PASS
      */
-    private void currentStation2(String module) {
+    private void currentStation2(String startTime, String endTime, String module) {
         List<String> station2SNList = station2Mapper.getStation2SNList(startTime, endTime);
         List<Station2D4Y> station2List = station2Mapper.getStation2ListByTime(startTime, endTime);
 
@@ -479,7 +465,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * NG 需要改成 OK
      * FAIL 改为 PASS
      */
-    private void currentStation1() {
+    private void currentStation1(String startTime, String endTime) {
         // 第一站是最全的码
         // 过滤掉 ERROR \u0000 ????
         station1SNList = station1Mapper.getStation1SNList(startTime, endTime);
@@ -515,7 +501,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * @param needCorrectMap
      * @return
      */
-    private void getCurrentAfterSpecHashMap(List<Specification> specificationList, HashMap<String, List<Object>> needCorrectMap) {
+    private void getCurrentAfterSpecHashMap(String startTime, String endTime, List<Specification> specificationList, HashMap<String, List<Object>> needCorrectMap) {
         ExecutorService executor = Executors.newFixedThreadPool(specificationList.size());
         // 根据规格数量初始化CountDownLatch
         CountDownLatch latch = new CountDownLatch(specificationList.size());
@@ -534,7 +520,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
                         List<Object> objects = needCorrectMap.get(Name);
                         // 开始补正
                         try {
-                            Current(objects, spaceLower, spaceUpper, targetYield, spec, Name);
+                            Current(startTime, endTime, objects, spaceLower, spaceUpper, targetYield, spec, Name);
                             // 保存补正数据
                             needCorrectMap.put(Name, objects);
                         } catch (Exception e) {
@@ -567,7 +553,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * @param specLower
      * @param specUpper
      */
-    private void Current(List<Object> objects, double specLower, double specUpper, double targetYield, Specification spec, String Name) {
+    private void Current(String startTime, String endTime, List<Object> objects, double specLower, double specUpper, double targetYield, Specification spec, String Name) {
         if (objects.size() > 0) {
             int goodCount = 0;
             // 记录非良品索引
