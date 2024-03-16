@@ -1,6 +1,9 @@
 package com.example.pmp.service.impl.correct.d9x;
 
-import com.example.pmp.mapper.correct.*;
+import com.example.pmp.mapper.correct.CorrectLogMapper;
+import com.example.pmp.mapper.correct.CorrectPersonMapper;
+import com.example.pmp.mapper.correct.CorrectStatusMapper;
+import com.example.pmp.mapper.correct.SpecificationMapper;
 import com.example.pmp.mapper.correct.d9x.*;
 import com.example.pmp.pojo.correct.CorrectLog;
 import com.example.pmp.pojo.correct.CorrectStatus;
@@ -34,10 +37,6 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
 
     @Autowired
     private CorrectStatusMapper correctStatusMapper;
-
-    @Autowired
-    private CorrectTimeMapper correctTimeMapper;
-
     @Autowired
     private SpecificationMapper specificationMapper;
 

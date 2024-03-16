@@ -1,10 +1,12 @@
 package com.example.pmp.service.impl.correct.d4y;
 
-import com.example.pmp.mapper.correct.*;
+import com.example.pmp.mapper.correct.CorrectLogMapper;
+import com.example.pmp.mapper.correct.CorrectPersonMapper;
+import com.example.pmp.mapper.correct.CorrectStatusMapper;
+import com.example.pmp.mapper.correct.SpecificationMapper;
 import com.example.pmp.mapper.correct.d4y.*;
 import com.example.pmp.pojo.correct.CorrectLog;
 import com.example.pmp.pojo.correct.CorrectStatus;
-import com.example.pmp.pojo.correct.CorrectTime;
 import com.example.pmp.pojo.correct.Specification;
 import com.example.pmp.pojo.correct.d4y.*;
 import com.example.pmp.service.correct.d4y.CorrectD4YService;
@@ -34,9 +36,6 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
 
     @Autowired
     private CorrectStatusMapper correctStatusMapper;
-
-    @Autowired
-    private CorrectTimeMapper correctTimeMapper;
 
     @Autowired
     private SpecificationMapper specificationMapper;
@@ -103,7 +102,6 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         String project = "D4Y";
         Specification specification = new Specification();
         specification.setProject(project);
-        // getCorrectTime(project);
         // 专案
         String pid = specification.getProject();
         // 查询所有需要补正的站点
@@ -138,21 +136,6 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 补完之后，发送企业微信通知
         String createTime = CorrectUtils.getCorrectLogD9XCreateTime();
         sendMessage(pid, startTime, endTime, createTime);
-    }
-
-    /**
-     * 获取补正开始时间及结束时间
-     */
-    private void getCorrectTime(String startTime, String endTime, String Product) {
-        CorrectTime correctTime = correctTimeMapper.getCorrectTimeByProduct(Product);
-        if (!CorrectUtils.judgeTimeIsSame(CorrectUtils.getCurrentTimeString(), correctTime.getEndTime())) {
-            // 不相等加一，并更新
-            correctTime.setStartTime(CorrectUtils.getCorrectTime(correctTime.getStartTime()));
-            correctTime.setEndTime(CorrectUtils.getCorrectTime(correctTime.getEndTime()));
-            correctTimeMapper.updateCorrectTime(correctTime);
-        }
-        startTime = correctTime.getStartTime();
-        endTime = correctTime.getEndTime();
     }
 
     /**
@@ -303,6 +286,8 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * 设置第四站结果
      */
     private void setStation4Result(List<Station4D4Y> station4List, List<Specification> specification4List) throws IllegalAccessException {
+        station4PassNList = null;
+        station4FailSNList = null;
         for (Station4D4Y station4 : station4List) {
             String result = "FAIL";
             String SN = station4.getBarcode();
@@ -468,6 +453,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     private void currentStation1(String startTime, String endTime) {
         // 第一站是最全的码
         // 过滤掉 ERROR \u0000 ????
+        station1SNList = null;
         station1SNList = station1Mapper.getStation1SNList(startTime, endTime);
         List<Station1D4Y> station1List = station1Mapper.getStation1ListByTime(startTime, endTime);
         // 将补正好的数据插入到数据库(将 DEF 需要改成 C，NG 需要改成 OK，FAIL 改为 PASS)
