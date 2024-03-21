@@ -2,6 +2,7 @@ package com.example.pmp.controller.hot;
 
 import com.example.pmp.common.BaseController;
 import com.example.pmp.common.lang.AjaxResult;
+import com.example.pmp.pojo.hot.HotReportParam;
 import com.example.pmp.pojo.hot.dto.HotTypeParamDto;
 import com.example.pmp.service.hot.HotTypeService;
 import com.example.pmp.service.hot.MThermodynamicchartTService;
@@ -32,6 +33,12 @@ public class HotTypeController extends BaseController {
     @PostMapping("/get")
     public AjaxResult getHotDataList(@RequestBody HotTypeParamDto hotTypeParamDto) {
         return success(hotTypeService.getHotDataList(hotTypeParamDto));
+    }
+
+    @ApiOperation("获取热力图报表数据")
+    @PostMapping("/report")
+    public AjaxResult getHotReportData(@RequestBody HotReportParam hotReport) {
+        return success(hotTypeService.getHotReportData(hotReport));
     }
 
     @ApiOperation("插入测试数据")

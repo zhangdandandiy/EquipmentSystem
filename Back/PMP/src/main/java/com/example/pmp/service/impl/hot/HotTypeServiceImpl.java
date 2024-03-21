@@ -2,11 +2,11 @@ package com.example.pmp.service.impl.hot;
 
 import com.example.pmp.mapper.hot.HotFaceMapper;
 import com.example.pmp.mapper.hot.HotTypeMapper;
-import com.example.pmp.pojo.hot.HotData;
-import com.example.pmp.pojo.hot.HotFace;
-import com.example.pmp.pojo.hot.HotType;
+import com.example.pmp.mapper.hot.MThermodynamicchartTMapper;
+import com.example.pmp.pojo.hot.*;
 import com.example.pmp.pojo.hot.dto.HotTypeParamDto;
 import com.example.pmp.service.hot.HotTypeService;
+import com.example.pmp.utils.ComponentUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +30,9 @@ public class HotTypeServiceImpl implements HotTypeService {
 
     @Autowired
     private HotFaceMapper hotFaceMapper;
+
+    @Autowired
+    private MThermodynamicchartTMapper mThermodynamicchartTMapper;
 
     BigDecimal decimalMultiplier = new BigDecimal("0.4");
 
@@ -140,6 +143,36 @@ public class HotTypeServiceImpl implements HotTypeService {
      */
     private HotFace getHotFace(String LineID, String FaceName) {
         return hotFaceMapper.selectHotFaceByName(LineID, FaceName);
+    }
+
+
+    /**
+     * 根据参数获取热力图报表数据
+     *
+     * @param hotReport
+     * @return
+     */
+    public List<MThermodynamicchartT> getHotReportData(HotReportParam hotReport) {
+        BigDecimal x = hotReport.getPositionX();
+        BigDecimal y = hotReport.getPositionY();
+
+        List<MThermodynamicchartT> mThermodynamicchartTList = mThermodynamicchartTMapper.getHotReportData(hotReport);
+
+        List<MThermodynamicchartT> HotReportData = new ArrayList<>();
+        for (MThermodynamicchartT mThermodynamicchartT : mThermodynamicchartTList) {
+
+            BigDecimal x1 = ComponentUtils.StringChangeBigDecimal(mThermodynamicchartT.getPositionX());
+            BigDecimal y1 = ComponentUtils.StringChangeBigDecimal(mThermodynamicchartT.getPositionY());
+
+            x1 = x1.compareTo(new BigDecimal("0")) >= 1 ? x1.divide(decimalMultiplier, 0, RoundingMode.UP) : x1.divide(decimalMultiplier, 0, RoundingMode.DOWN);
+            y1 = y1.compareTo(new BigDecimal("0")) >= 1 ? y1.divide(decimalMultiplier, 0, RoundingMode.UP) : y1.divide(decimalMultiplier, 0, RoundingMode.DOWN);
+            x1 = x1.multiply(decimalMultiplier);
+            y1 = y1.multiply(decimalMultiplier);
+            if (x1.compareTo(x) == 0 && y1.compareTo(y) == 0) {
+                HotReportData.add(mThermodynamicchartT);
+            }
+        }
+        return HotReportData;
     }
 
 }

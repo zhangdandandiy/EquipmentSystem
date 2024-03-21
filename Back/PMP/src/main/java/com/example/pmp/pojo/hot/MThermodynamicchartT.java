@@ -38,9 +38,9 @@ public class MThermodynamicchartT {
 
     private String ErrorNum;
 
-    private BigDecimal PositionX;
+    private String PositionX;
 
-    private BigDecimal PositionY;
+    private String PositionY;
 
     private Date TestTime;
 
@@ -150,19 +150,19 @@ public class MThermodynamicchartT {
         return ErrorNum;
     }
 
-    public void setPositionX(BigDecimal PositionX) {
+    public void setPositionX(String PositionX) {
         this.PositionX = PositionX;
     }
 
-    public BigDecimal getPositionX() {
+    public String getPositionX() {
         return PositionX;
     }
 
-    public void setPositionY(BigDecimal PositionY) {
+    public void setPositionY(String PositionY) {
         this.PositionY = PositionY;
     }
 
-    public BigDecimal getPositionY() {
+    public String getPositionY() {
         return PositionY;
     }
 

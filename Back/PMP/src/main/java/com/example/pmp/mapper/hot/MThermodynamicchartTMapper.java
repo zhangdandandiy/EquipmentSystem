@@ -1,7 +1,10 @@
 package com.example.pmp.mapper.hot;
 
+import com.example.pmp.pojo.hot.HotReport;
 import com.example.pmp.pojo.hot.MThermodynamicchartT;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 /**
  * @author Dandan
@@ -18,5 +21,13 @@ public interface MThermodynamicchartTMapper {
      * @return 结果
      */
     public int insertMThermodynamicchartT(MThermodynamicchartT mThermodynamicchartT);
+
+    /**
+     * 根据参数获取热力图报表数据
+     *
+     * @param hotReport
+     * @return
+     */
+    public List<MThermodynamicchartT> getHotReportData(HotReport hotReport);
 
 }

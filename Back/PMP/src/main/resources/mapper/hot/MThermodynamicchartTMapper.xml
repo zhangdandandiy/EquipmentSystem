@@ -44,4 +44,18 @@
         </trim>
     </insert>
 
+    <select id="getHotReportData" parameterType="HotReport" resultType="MThermodynamicchartT">
+        select * from [MESDataCenter].[dbo].[m_ThermodynamicChart_t]
+        <where>
+            <if test="ProjectName != null and ProjectName != ''">and ProjectName like concat('%', #{ProjectName}, '%')
+            </if>
+            <if test="LineType != null and LineType != ''">and LineType like concat('%', #{LineType}, '%')</if>
+            <if test="LineName != null and LineName != ''">and LineName like concat('%', #{LineName}, '%')</if>
+            <if test="Direction != null and Direction != ''">and Direction=#{Direction}</if>
+            <if test="StartTime != null and StartTime != '' and EndTime != null and EndTime != ''">and convert(varchar,
+                TestTime, 121) between #{StartTime} and #{EndTime}
+            </if>
+        </where>
+    </select>
+
 </mapper>

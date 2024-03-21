@@ -3,6 +3,7 @@ package com.example.pmp.service.impl.hot;
 import com.example.pmp.mapper.hot.MThermodynamicchartTMapper;
 import com.example.pmp.pojo.hot.MThermodynamicchartT;
 import com.example.pmp.service.hot.MThermodynamicchartTService;
+import com.example.pmp.utils.ComponentUtils;
 import org.apache.commons.math3.distribution.NormalDistribution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,8 +56,8 @@ public class MThermodynamicchartTServiceImpl implements MThermodynamicchartTServ
             x = BigDecimal.valueOf(distribution.sample());
             y = BigDecimal.valueOf(distribution.sample());
 
-            mThermodynamicchartT.setPositionX(x);
-            mThermodynamicchartT.setPositionY(y);
+            mThermodynamicchartT.setPositionX(x.toString());
+            mThermodynamicchartT.setPositionY(y.toString());
             mThermodynamicchartTMapper.insertMThermodynamicchartT(mThermodynamicchartT);
 
         }
