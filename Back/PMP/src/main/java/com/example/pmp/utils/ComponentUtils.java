@@ -5,10 +5,8 @@ import com.example.pmp.pojo.component.ComponentFAI;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 /**
@@ -227,10 +225,15 @@ public class ComponentUtils {
      */
     public static BigDecimal StringChangeBigDecimal(String str) {
         BigDecimal decimal = null;
-        try {
-            decimal = new BigDecimal(str);
-        } catch (NumberFormatException e) {
+        if (str == null || str.isEmpty()) {
+            decimal = BigDecimal.ZERO;
+        } else {
+            try {
+                decimal = new BigDecimal(str);
+            } catch (NumberFormatException e) {
+            }
         }
+
         return decimal;
     }
 

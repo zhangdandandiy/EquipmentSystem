@@ -120,7 +120,7 @@
         <result property="CCD7_FAI31_3" column="CCD7_FAI31-3"/>
         <result property="CCD7_FAI31_4" column="CCD7_FAI31-4"/>
         <result property="CCD7_FAI31_5" column="CCD7_FAI31-5"/>
-
+        <result property="SCAN_FAI2" column="3DSCAN_FAI2"/>
 
         <result property="TestResult" column="TestResult"/>
         <result property="TestTime" column="TestTime"/>
@@ -247,6 +247,7 @@
              , [CCD7_FAI31-3]
              , [CCD7_FAI31-4]
              , [CCD7_FAI31-5]
+             , [3DSCAN_FAI2]
              , [TestResult]
              , [TestTime]
              , [ModuleID]
@@ -377,6 +378,7 @@
                      , [CCD7_FAI31-3]
                      , [CCD7_FAI31-4]
                      , [CCD7_FAI31-5]
+                     , [3DSCAN_FAI2]
                      , [TestResult]
                      , [TestTime]
                      , [ModuleID]
@@ -505,6 +507,7 @@
         , [CCD7_FAI31-3]
         , [CCD7_FAI31-4]
         , [CCD7_FAI31-5]
+        , [3DSCAN_FAI2]
         , [TestResult]
         , [TestTime]
         , [ModuleID]
@@ -625,6 +628,7 @@
                , #{CCD7_FAI31_3}
                , #{CCD7_FAI31_4}
                , #{CCD7_FAI31_5}
+               , #{SCAN_FAI2}
                , #{TestResult}
                , #{TestTime}
                , #{ModuleID}
@@ -642,5 +646,11 @@
           AND Barcode NOT LIKE '%ERROR%'
           AND Barcode != ''
     </select>
+
+    <update id="updateStation51" parameterType="Station51D9X">
+        update [MESDataCenter].[dbo].[m_D9X_MainLine3_M10_BZ_t]
+        set [3DSCAN_FAI2] = #{SCAN_FAI2}
+        where Barcode = #{Barcode}
+    </update>
 
 </mapper>

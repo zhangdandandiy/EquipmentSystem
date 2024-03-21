@@ -51,4 +51,12 @@ public interface Station51D9XMapper {
      */
     public List<String> getStation51SNList(@Param("startTime") String startTime, @Param("endTime") String endTime);
 
+    /**
+     * 更新补正后的数据 ，主要更新 3DSCAN_FAI2 字段
+     *
+     * @param station51
+     * @return
+     */
+    public int updateStation51(Station51D9X station51);
+
 }

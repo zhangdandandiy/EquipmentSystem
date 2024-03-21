@@ -133,6 +133,9 @@ public class Station51D9X {
     private String CCD7_FAI31_4;
     private String CCD7_FAI31_5;
 
+    // 注意这个字段
+    private String SCAN_FAI2;
+
     private String TestResult;
     private String TestTime;
     private String ModuleID;
@@ -260,6 +263,7 @@ public class Station51D9X {
         template.setCCD7_FAI31_3(CorrectUtils.convertString(0, 0.15));
         template.setCCD7_FAI31_4(CorrectUtils.convertString(0, 0.15));
         template.setCCD7_FAI31_5(CorrectUtils.convertString(0, 0.15));
+        template.setSCAN_FAI2(CorrectUtils.convertString(0, 0.10));
 
         template.setTestResult("PASS");
         template.setRn("1");

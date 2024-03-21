@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -19,6 +20,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 /**
  * @author Dandan
@@ -27,13 +30,60 @@ import java.util.*;
 public class CorrectUtils {
 
     /**
+     * 计算 SCANFAI2 的值
+     *
+     * @param entityList
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> calculateValueAsync(List<T> entityList) {
+        List<CompletableFuture<T>> futureList = entityList.stream()
+                .map(entity -> CompletableFuture.supplyAsync(() -> calculateValue(entity)))
+                .collect(Collectors.toList());
+
+        return futureList.stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList());
+    }
+
+    public static <T> T calculateValue(T entity) {
+        Class<? extends Object> entityClass = entity.getClass();
+        Field[] fields = entityClass.getDeclaredFields();
+
+        List<String> valueStrings = new ArrayList<>();
+        for (Field field : fields) {
+            if (field.getName().startsWith("Scan_FAI2")) {
+                try {
+                    field.setAccessible(true);
+                    valueStrings.add((String) field.get(entity));
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        List<BigDecimal> valueList = ComponentUtils.StringChangeDecimalList(valueStrings);
+        BigDecimal max = Collections.max(valueList);
+        BigDecimal min = Collections.min(valueList);
+        try {
+            Field scanField = entityClass.getDeclaredField("SCAN_FAI2");
+            scanField.setAccessible(true);
+            scanField.set(entity, max.subtract(min).toString());
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return entity;
+    }
+
+    /**
      * 发送企业微信消息
      * 注意要是消息体过长，超出限制，无法正常发送
      *
      * @param personList
      * @param correctLogList
      */
-    public static void sendMessage(List<String> personList, List<CorrectLog> correctLogList) {
+    public static void sendMessage(String project, List<String> personList, List<CorrectLog> correctLogList) {
         String personStr = String.join(",", personList);
 
         StringBuilder totalMsg = new StringBuilder();
@@ -79,7 +129,7 @@ public class CorrectUtils {
                 sendBatchMessage(personStr, totalMsg.toString());
             }
         } else {
-            totalMsg.append("昨天没有数据，未补正");
+            totalMsg.append(project).append("昨天没有数据，未补正");
             sendBatchMessage(personStr, totalMsg.toString());
         }
     }

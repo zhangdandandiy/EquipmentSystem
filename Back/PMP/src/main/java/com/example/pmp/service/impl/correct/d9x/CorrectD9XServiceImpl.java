@@ -105,7 +105,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      */
     @Transactional
     // D9X 每天 21 点执行
-    @Scheduled(cron = "0 0 21 * * *")
+    @Scheduled(cron = "0 0 20 * * *")
     public void CurrentData() throws IllegalAccessException {
         String startTime = CorrectUtils.getCurrentCorrectStartTime();
         String endTime = CorrectUtils.getCurrentCorrectEndTime();
@@ -169,7 +169,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 根据时间和专案获取补正日志集合
         List<CorrectLog> correctLogList = correctLogMapper.selectCorrectLogListByTime(project, startTime, endTime, createTime);
 
-        CorrectUtils.sendMessage(personList, correctLogList);
+        CorrectUtils.sendMessage(project, personList, correctLogList);
     }
 
     /**
@@ -216,6 +216,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         getCurrentAfterSpecHashMap(startTime, endTime, specification52List, station52Map);
         // 将hashMap转为List集合
         station52List = CorrectUtils.getCurrentStationAfterSpecList(station52Map, Station52D9X.class);
+        // 计算 SCANFAI2 的值
+        CorrectUtils.calculateValue(station52List);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
         setStation52Result(station52List, specification52List);
     }
@@ -293,6 +295,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         getCurrentAfterSpecHashMap(startTime, endTime, specification51List, station51Map);
         // 将hashMap转为List集合
         station51List = CorrectUtils.getCurrentStationAfterSpecList(station51Map, Station51D9X.class);
+        // 计算 SCANFAI2 的值
+        CorrectUtils.calculateValueAsync(station51List);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
         setStation51Result(station51List, specification51List);
     }
@@ -372,8 +376,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      * 设置第四站结果(第二版)
      */
     private void setStation42Result(List<Station42D9X> station42List, List<Specification> specification42List) throws IllegalAccessException {
-        station42PassNList = null;
-        station42FailSNList = null;
+        station42PassNList.clear();
+        station42FailSNList.clear();
         for (Station42D9X station4 : station42List) {
             String result = "FAIL";
             String SN = station4.getBarcode();
@@ -454,8 +458,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      */
     private void setStation41Result(List<Station41D9X> station41List, List<Specification> specification41List) throws IllegalAccessException {
         // 每次补之前都置空
-        station41PassNList = null;
-        station41FailSNList = null;
+        station41PassNList.clear();
+        station41FailSNList.clear();
         for (Station41D9X station4 : station41List) {
             String result = "FAIL";
             String SN = station4.getBarcode();
@@ -611,7 +615,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     private void currentStation1(String startTime, String endTime) {
         // 第一站是最全的码
         // 过滤掉 ERROR \u0000 ????
-        station1SNList = null;
+        station1SNList.clear();
         station1SNList = station1Mapper.getStation1SNList(startTime, endTime);
         List<Station1D9X> station1List = station1Mapper.getStation1ListByTime(startTime, endTime);
         // 将补正好的数据插入到数据库(将 DEF 需要改成 C，NG 需要改成 OK，FAIL 改为 PASS)
@@ -666,6 +670,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         String oldStr = "-";
         String newStr = "_";
         String Str1 = "Scan";
+        String Str2 = "SCAN";
         if (specification.getStation().equals("STATION4")) {
             for (Specification spec : specificationList) {
                 String itemKey = spec.getItemKey();
@@ -685,6 +690,10 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
                     if (itemKey.contains(Str1)) {
                         itemKey = itemKey.substring(3);
                     }
+                }
+                if (itemKey.contains(Str2)) {
+                    // 如果字符串中包含SCAN，截掉3D
+                    itemKey = itemKey.substring(2);
                 }
                 spec.setItemKey(itemKey);
             }

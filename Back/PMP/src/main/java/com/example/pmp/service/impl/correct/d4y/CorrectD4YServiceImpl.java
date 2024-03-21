@@ -148,7 +148,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
         // 根据时间和专案获取补正日志集合
         List<CorrectLog> correctLogList = correctLogMapper.selectCorrectLogListByTime(project, startTime, endTime, createTime);
 
-        CorrectUtils.sendMessage(personList, correctLogList);
+        CorrectUtils.sendMessage(project, personList, correctLogList);
     }
 
     /**
@@ -286,8 +286,8 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
      * 设置第四站结果
      */
     private void setStation4Result(List<Station4D4Y> station4List, List<Specification> specification4List) throws IllegalAccessException {
-        station4PassNList = null;
-        station4FailSNList = null;
+        station4PassNList.clear();
+        station4FailSNList.clear();
         for (Station4D4Y station4 : station4List) {
             String result = "FAIL";
             String SN = station4.getBarcode();
@@ -453,7 +453,7 @@ public class CorrectD4YServiceImpl implements CorrectD4YService {
     private void currentStation1(String startTime, String endTime) {
         // 第一站是最全的码
         // 过滤掉 ERROR \u0000 ????
-        station1SNList = null;
+        station1SNList.clear();
         station1SNList = station1Mapper.getStation1SNList(startTime, endTime);
         List<Station1D4Y> station1List = station1Mapper.getStation1ListByTime(startTime, endTime);
         // 将补正好的数据插入到数据库(将 DEF 需要改成 C，NG 需要改成 OK，FAIL 改为 PASS)

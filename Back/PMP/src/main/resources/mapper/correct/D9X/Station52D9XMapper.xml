@@ -114,7 +114,7 @@
         <result property="CCD7_FAI24_3" column="CCD7_FAI24-3"/>
         <result property="CCD7_FAI24_4" column="CCD7_FAI24-4"/>
         <result property="CCD7_FAI24_5" column="CCD7_FAI24-5"/>
-
+        <result property="SCAN_FAI2" column="3DSCAN_FAI2"/>
 
         <result property="TestResult" column="TestResult"/>
         <result property="TestTime" column="TestTime"/>
@@ -234,6 +234,7 @@
              , [CCD7_FAI24-3]
              , [CCD7_FAI24-4]
              , [CCD7_FAI24-5]
+             , [3DSCAN_FAI2]
              , [TestResult]
              , [TestTime]
              , [ModuleID]
@@ -358,6 +359,7 @@
                      , [CCD7_FAI24-3]
                      , [CCD7_FAI24-4]
                      , [CCD7_FAI24-5]
+                     , [3DSCAN_FAI2]
                      , [TestResult]
                      , [TestTime]
                      , [ModuleID]
@@ -480,6 +482,7 @@
         , [CCD7_FAI24-3]
         , [CCD7_FAI24-4]
         , [CCD7_FAI24-5]
+        , [3DSCAN_FAI2]
         , [TestResult]
         , [TestTime]
         , [ModuleID]
@@ -594,6 +597,7 @@
                , #{CCD7_FAI24_3}
                , #{CCD7_FAI24_4}
                , #{CCD7_FAI24_5}
+               , #{SCAN_FAI2}
                , #{TestResult}
                , #{TestTime}
                , #{ModuleID}
