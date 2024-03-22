@@ -95,6 +95,8 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
     public void startCurrentData() throws IllegalAccessException {
         String startTime = CorrectUtils.getCurrentCorrectStartTime();
         String endTime = CorrectUtils.getCurrentCorrectEndTime();
+        //String startTime = "2024-03-20 08:00:00.000";
+        //String endTime = "2024-03-21 08:00:00.000";
         startD9XCurrentData(startTime, endTime);
     }
 
@@ -105,7 +107,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
      */
     @Transactional
     // D9X 每天 21 点执行
-    @Scheduled(cron = "0 0 20 * * *")
+    @Scheduled(cron = "0 0 21 * * *")
     public void CurrentData() throws IllegalAccessException {
         String startTime = CorrectUtils.getCurrentCorrectStartTime();
         String endTime = CorrectUtils.getCurrentCorrectEndTime();
@@ -217,7 +219,7 @@ public class CorrectD9XServiceImpl implements CorrectD9XService {
         // 将hashMap转为List集合
         station52List = CorrectUtils.getCurrentStationAfterSpecList(station52Map, Station52D9X.class);
         // 计算 SCANFAI2 的值
-        CorrectUtils.calculateValue(station52List);
+        CorrectUtils.calculateValueAsync(station52List);
         // 将补正好的数据插入数据库(在插入之前还要做一件事，就是将规格内的数据的测试结果进行更正)，并插入到补正后的表里
         setStation52Result(station52List, specification52List);
     }
