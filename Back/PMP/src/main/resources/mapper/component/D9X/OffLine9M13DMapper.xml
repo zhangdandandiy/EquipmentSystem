@@ -5,7 +5,20 @@
 <mapper namespace="com.example.pmp.mapper.component.D9X.OffLine9M13DMapper">
 
     <select id="getOffLine9M13DList" resultType="OffLine9M13D" parameterType="java.util.List">
-        select FAI546_1D
+        select [FAI528_1D]
+        ,[FAI528_2D]
+        ,[FAI528_3D]
+        ,[FAI528_4D]
+        ,[FAI528_5D]
+        ,[FAI528_6D]
+        ,[FAI528_7D]
+        ,[FAI528_8D]
+        ,[FAI528_9D]
+        ,[FAI528_10D]
+        ,[FAI528_11D]
+        ,[FAI528_12D]
+        ,[FAI528_13D]
+        ,[FAI528_14D]
         from [MESDataCenter].[dbo].[D9X_Off_Line9_01_M1_3D_XXT_v]
         where IM_Lot in
         <foreach item="LowerContactIMReelLOT" collection="LowerContactIMReelLOTList" open="(" separator="," close=")">
