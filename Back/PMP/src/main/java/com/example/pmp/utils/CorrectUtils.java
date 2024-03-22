@@ -37,6 +37,7 @@ public class CorrectUtils {
      * @return
      */
     public static <T> List<T> calculateValueAsync(List<T> entityList) {
+        // 异步任务提交
         List<CompletableFuture<T>> futureList = entityList.stream()
                 .map(entity -> CompletableFuture.supplyAsync(() -> calculateValue(entity)))
                 .collect(Collectors.toList());

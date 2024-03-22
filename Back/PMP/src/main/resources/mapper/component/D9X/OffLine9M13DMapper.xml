@@ -24,6 +24,7 @@
         <foreach item="LowerContactIMReelLOT" collection="LowerContactIMReelLOTList" open="(" separator="," close=")">
             #{LowerContactIMReelLOT}
         </foreach>
+        and cast([FAI528_1D] as float) > 0 and cast([FAI528_1D] as float) &lt; 2
     </select>
 
     <select id="getOffLine9M13DStampingLotList" resultType="String" parameterType="java.util.List">

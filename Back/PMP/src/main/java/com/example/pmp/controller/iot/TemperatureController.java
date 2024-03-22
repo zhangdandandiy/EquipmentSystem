@@ -90,7 +90,7 @@ public class TemperatureController {
         String url = "jdbc:sqlserver://10.52.6.23:1433;DatabaseName=MESDataCenter;trustServerCertificate=true";
         String username = "ictsfc";
         String password = "XUh7tZN9j%yTps";
-        String columnName = "";
+        String columnName;
         String[] dataArr;
         List<String> tableHeaderList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, username, password)) {

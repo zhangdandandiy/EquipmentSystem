@@ -320,6 +320,7 @@
                  WHERE LineID like concat('%', #{senseDataDto.LineID}, '%')
                    AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
                    AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+                   AND HaveProduct='1'
              ) A
     </select>
 

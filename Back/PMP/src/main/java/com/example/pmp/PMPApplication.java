@@ -20,6 +20,17 @@ public class PMPApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PMPApplication.class, args);
+//        Dog dog = new Dog();
+//        dog.setAge(1);
+//        dog.setBreed("lab");
+//        dog.setColour("yellow");
+//        dog.setSize(20);
+//
+//        Field[] fields = dog.getClass().getDeclaredFields();
+//        for (Field field : fields){
+//            System.out.println(field.getName());
+//        }
+//        System.out.println(fields);
     }
 
     @Bean
