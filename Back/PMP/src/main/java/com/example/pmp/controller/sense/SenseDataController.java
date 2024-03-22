@@ -2,7 +2,6 @@ package com.example.pmp.controller.sense;
 
 import com.example.pmp.common.BaseController;
 import com.example.pmp.common.lang.AjaxResult;
-import com.example.pmp.pojo.sense.SenseDataD8X;
 import com.example.pmp.pojo.sense.dto.SenseDataDto;
 import com.example.pmp.service.sense.SenseDataService;
 import io.swagger.annotations.Api;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -55,6 +53,12 @@ public class SenseDataController extends BaseController {
             case "X3047":
                 distinctData = senseDataService.getX3047AllPins(senseDataDto);
                 break;
+            case "D9X":
+                distinctData = senseDataService.getD9XAllPins(senseDataDto);
+                break;
+            case "D4Y":
+                distinctData = senseDataService.getD4YAllPins(senseDataDto);
+                break;
         }
         ajaxResult.put("senseList", distinctData);
         return ajaxResult;
@@ -65,9 +69,10 @@ public class SenseDataController extends BaseController {
     @PostMapping("/senseAvgData")
     public AjaxResult searchAvgRealSenseData(@RequestBody SenseDataDto senseDataDto) {
         AjaxResult ajaxResult = AjaxResult.success();
-        String Product = senseDataDto.getProduct();
-        List<SenseDataD8X> senseAvgList = new ArrayList<>();
-        switch (Product) {
+        String product = senseDataDto.getProduct();
+        List<?> senseAvgList = null;
+
+        switch (product) {
             case "D8X":
                 senseAvgList = senseDataService.searchD8XAvgRealSenseData(senseDataDto);
                 break;
@@ -77,7 +82,14 @@ public class SenseDataController extends BaseController {
             case "X2757":
                 senseAvgList = senseDataService.searchX2757AvgRealSenseData(senseDataDto);
                 break;
+            case "D9X":
+                senseAvgList = senseDataService.searchD9XAvgRealSenseData(senseDataDto);
+                break;
+            case "D4Y":
+                senseAvgList = senseDataService.searchD4YAvgRealSenseData(senseDataDto);
+                break;
         }
+
         ajaxResult.put("senseAvgList", senseAvgList);
         return ajaxResult;
     }

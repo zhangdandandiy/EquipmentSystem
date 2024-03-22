@@ -1,9 +1,7 @@
 package com.example.pmp.service.impl.sense;
 
 import com.example.pmp.mapper.sense.SenseDataMapper;
-import com.example.pmp.pojo.sense.SenseDataD8X;
-import com.example.pmp.pojo.sense.SenseDataX2757;
-import com.example.pmp.pojo.sense.SenseDataX3047;
+import com.example.pmp.pojo.sense.*;
 import com.example.pmp.pojo.sense.dto.SenseDataDto;
 import com.example.pmp.service.sense.SenseDataService;
 import com.example.pmp.utils.SenseUtils;
@@ -12,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -42,6 +39,16 @@ public class SenseDataServiceImpl implements SenseDataService {
     }
 
     @Override
+    public List<SenseDataD9X> searchD9XAvgRealSenseData(SenseDataDto senseDataDto) {
+        return senseDataMapper.searchD9XAvgRealSenseData(senseDataDto);
+    }
+
+    @Override
+    public List<SenseDataD4Y> searchD4YAvgRealSenseData(SenseDataDto senseDataDto) {
+        return senseDataMapper.searchD4YAvgRealSenseData(senseDataDto);
+    }
+
+    @Override
     public HashMap<String, Set<BigDecimal>> getD8XAllPins(SenseDataDto senseDataDto) {
         List<SenseDataD8X> senseDataD8XList = senseDataMapper.getD8XAllPins(senseDataDto);
         return SenseUtils.getNeedCorrectMap(senseDataD8XList);
@@ -65,6 +72,20 @@ public class SenseDataServiceImpl implements SenseDataService {
     public HashMap<String, Set<BigDecimal>> getX3047AllPins(SenseDataDto senseDataDto) {
         List<SenseDataX3047> senseDataX3047List = senseDataMapper.getX3047AllPins(senseDataDto);
         HashMap<String, Set<BigDecimal>> map = SenseUtils.getNeedCorrectMap(senseDataX3047List);
+        return SenseUtils.changeKeys(map);
+    }
+
+    @Override
+    public HashMap<String, Set<BigDecimal>> getD9XAllPins(SenseDataDto senseDataDto) {
+        List<SenseDataD9X> senseDataD9XList = senseDataMapper.getSenseDataD9XPins(senseDataDto);
+        HashMap<String, Set<BigDecimal>> map = SenseUtils.getNeedCorrectMap(senseDataD9XList);
+        return SenseUtils.changeKeys(map);
+    }
+
+    @Override
+    public HashMap<String, Set<BigDecimal>> getD4YAllPins(SenseDataDto senseDataDto) {
+        List<SenseDataD4Y> senseDataD4YList = senseDataMapper.getSenseDataD4YPins(senseDataDto);
+        HashMap<String, Set<BigDecimal>> map = SenseUtils.getNeedCorrectMap(senseDataD4YList);
         return SenseUtils.changeKeys(map);
     }
 

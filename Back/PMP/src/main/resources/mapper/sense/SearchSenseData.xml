@@ -214,7 +214,7 @@
              , AVG(pin6)    'FAI9_6'
              , AVG(pin7)    'FAI9_7'
              , AVG(pin8)    'FAI9_8'
-             , AVG(pin1_28) FAI12
+             , AVG(pin1_28) 'FAI12'
         FROM (
                  SELECT CAST([3D_FAI9_1] AS float) pin1
                       , CAST([3D_FAI9_2] AS float) pin2
@@ -233,6 +233,186 @@
              ) A
     </select>
 
+    <select id="searchD9XAvgRealSenseData" resultType="SenseDataD9X"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT AVG(FAI2_1)  as 'FAI2_1'
+             , AVG(FAI2_2)  as 'FAI2_2'
+             , AVG(FAI2_3)  as 'FAI2_3'
+             , AVG(FAI2_4)  as 'FAI2_4'
+             , AVG(FAI2_5)  as 'FAI2_5'
+             , AVG(FAI2_6)  as 'FAI2_6'
+             , AVG(FAI2_7)  as 'FAI2_7'
+             , AVG(FAI2_8)  as 'FAI2_8'
+             , AVG(FAI2_9)  as 'FAI2_9'
+             , AVG(FAI2_10) as 'FAI2_10'
+             , AVG(FAI2_11) as 'FAI2_11'
+             , AVG(FAI2_12) as 'FAI2_12'
+             , AVG(FAI2_13) as 'FAI2_13'
+             , AVG(FAI2_14) as 'FAI2_14'
+             , AVG(FAI2_15) as 'FAI2_15'
+             , AVG(FAI2_16) as 'FAI2_16'
+             , AVG(FAI2_17) as 'FAI2_17'
+             , AVG(FAI2_18) as 'FAI2_18'
+             , AVG(FAI2_19) as 'FAI2_19'
+             , AVG(FAI2_20) as 'FAI2_20'
+             , AVG(FAI2_21) as 'FAI2_21'
+             , AVG(FAI2_22) as 'FAI2_22'
+             , AVG(FAI2_23) as 'FAI2_23'
+             , AVG(FAI2_24) as 'FAI2_24'
+             , AVG(FAI2_25) as 'FAI2_25'
+             , AVG(FAI2_26) as 'FAI2_26'
+             , AVG(FAI2_27) as 'FAI2_27'
+             , AVG(FAI2_28) as 'FAI2_28'
+             , AVG(FAI2_29) as 'FAI2_29'
+             , AVG(FAI2_30) as 'FAI2_30'
+             , AVG(FAI2_31) as 'FAI2_31'
+             , AVG(FAI2_32) as 'FAI2_32'
+             , AVG(FAI2_33) as 'FAI2_33'
+             , AVG(FAI2_34) as 'FAI2_34'
+             , AVG(FAI2_35) as 'FAI2_35'
+             , AVG(FAI2_36) as 'FAI2_36'
+             , AVG(FAI2_37) as 'FAI2_37'
+             , AVG(FAI2_38) as 'FAI2_38'
+             , AVG(FAI2_39) as 'FAI2_39'
+             , AVG(FAI2_40) as 'FAI2_40'
+        FROM (
+                 SELECT CAST([FAI2_1_Value] AS float)  FAI2_1
+                      , CAST([FAI2_2_Value] AS float)  FAI2_2
+                      , CAST([FAI2_3_Value] AS float)  FAI2_3
+                      , CAST([FAI2_4_Value] AS float)  FAI2_4
+                      , CAST([FAI2_5_Value] AS float)  FAI2_5
+                      , CAST([FAI2_6_Value] AS float)  FAI2_6
+                      , CAST([FAI2_7_Value] AS float)  FAI2_7
+                      , CAST([FAI2_8_Value] AS float)  FAI2_8
+                      , CAST([FAI2_9_Value] AS float)  FAI2_9
+                      , CAST([FAI2_10_Value] AS float) FAI2_10
+                      , CAST([FAI2_11_Value] AS float) FAI2_11
+                      , CAST([FAI2_12_Value] AS float) FAI2_12
+                      , CAST([FAI2_13_Value] AS float) FAI2_13
+                      , CAST([FAI2_14_Value] AS float) FAI2_14
+                      , CAST([FAI2_15_Value] AS float) FAI2_15
+                      , CAST([FAI2_16_Value] AS float) FAI2_16
+                      , CAST([FAI2_17_Value] AS float) FAI2_17
+                      , CAST([FAI2_18_Value] AS float) FAI2_18
+                      , CAST([FAI2_19_Value] AS float) FAI2_19
+                      , CAST([FAI2_20_Value] AS float) FAI2_20
+                      , CAST([FAI2_21_Value] AS float) FAI2_21
+                      , CAST([FAI2_22_Value] AS float) FAI2_22
+                      , CAST([FAI2_23_Value] AS float) FAI2_23
+                      , CAST([FAI2_24_Value] AS float) FAI2_24
+                      , CAST([FAI2_25_Value] AS float) FAI2_25
+                      , CAST([FAI2_26_Value] AS float) FAI2_26
+                      , CAST([FAI2_27_Value] AS float) FAI2_27
+                      , CAST([FAI2_28_Value] AS float) FAI2_28
+                      , CAST([FAI2_29_Value] AS float) FAI2_29
+                      , CAST([FAI2_30_Value] AS float) FAI2_30
+                      , CAST([FAI2_31_Value] AS float) FAI2_31
+                      , CAST([FAI2_32_Value] AS float) FAI2_32
+                      , CAST([FAI2_33_Value] AS float) FAI2_33
+                      , CAST([FAI2_34_Value] AS float) FAI2_34
+                      , CAST([FAI2_35_Value] AS float) FAI2_35
+                      , CAST([FAI2_36_Value] AS float) FAI2_36
+                      , CAST([FAI2_37_Value] AS float) FAI2_37
+                      , CAST([FAI2_38_Value] AS float) FAI2_38
+                      , CAST([FAI2_39_Value] AS float) FAI2_39
+                      , CAST([FAI2_40_Value] AS float) FAI2_40
+                 FROM [MESDataCenter].[dbo].[m_D9X_MainLine3_M10_t]
+                 WHERE LineID like concat('%', #{senseDataDto.LineID}, '%')
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+             ) A
+    </select>
+
+    <select id="searchD4YAvgRealSenseData" resultType="SenseDataD4Y"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        SELECT AVG(FAI2_1)  as 'FAI2_1'
+             , AVG(FAI2_2)  as 'FAI2_2'
+             , AVG(FAI2_3)  as 'FAI2_3'
+             , AVG(FAI2_4)  as 'FAI2_4'
+             , AVG(FAI2_5)  as 'FAI2_5'
+             , AVG(FAI2_6)  as 'FAI2_6'
+             , AVG(FAI2_7)  as 'FAI2_7'
+             , AVG(FAI2_8)  as 'FAI2_8'
+             , AVG(FAI2_9)  as 'FAI2_9'
+             , AVG(FAI2_10) as 'FAI2_10'
+             , AVG(FAI2_11) as 'FAI2_11'
+             , AVG(FAI2_12) as 'FAI2_12'
+             , AVG(FAI2_13) as 'FAI2_13'
+             , AVG(FAI2_14) as 'FAI2_14'
+             , AVG(FAI2_15) as 'FAI2_15'
+             , AVG(FAI2_16) as 'FAI2_16'
+             , AVG(FAI2_17) as 'FAI2_17'
+             , AVG(FAI2_18) as 'FAI2_18'
+             , AVG(FAI2_19) as 'FAI2_19'
+             , AVG(FAI2_20) as 'FAI2_20'
+             , AVG(FAI2_21) as 'FAI2_21'
+             , AVG(FAI2_22) as 'FAI2_22'
+             , AVG(FAI2_23) as 'FAI2_23'
+             , AVG(FAI2_24) as 'FAI2_24'
+             , AVG(FAI2_25) as 'FAI2_25'
+             , AVG(FAI2_26) as 'FAI2_26'
+             , AVG(FAI2_27) as 'FAI2_27'
+             , AVG(FAI2_28) as 'FAI2_28'
+             , AVG(FAI2_29) as 'FAI2_29'
+             , AVG(FAI2_30) as 'FAI2_30'
+             , AVG(FAI2_31) as 'FAI2_31'
+             , AVG(FAI2_32) as 'FAI2_32'
+             , AVG(FAI2_33) as 'FAI2_33'
+             , AVG(FAI2_34) as 'FAI2_34'
+             , AVG(FAI2_35) as 'FAI2_35'
+             , AVG(FAI2_36) as 'FAI2_36'
+             , AVG(FAI2_37) as 'FAI2_37'
+             , AVG(FAI2_38) as 'FAI2_38'
+             , AVG(FAI2_39) as 'FAI2_39'
+             , AVG(FAI2_40) as 'FAI2_40'
+        FROM (
+                 SELECT CAST([FAI2_1_Value] AS float)  FAI2_1
+                      , CAST([FAI2_2_Value] AS float)  FAI2_2
+                      , CAST([FAI2_3_Value] AS float)  FAI2_3
+                      , CAST([FAI2_4_Value] AS float)  FAI2_4
+                      , CAST([FAI2_5_Value] AS float)  FAI2_5
+                      , CAST([FAI2_6_Value] AS float)  FAI2_6
+                      , CAST([FAI2_7_Value] AS float)  FAI2_7
+                      , CAST([FAI2_8_Value] AS float)  FAI2_8
+                      , CAST([FAI2_9_Value] AS float)  FAI2_9
+                      , CAST([FAI2_10_Value] AS float) FAI2_10
+                      , CAST([FAI2_11_Value] AS float) FAI2_11
+                      , CAST([FAI2_12_Value] AS float) FAI2_12
+                      , CAST([FAI2_13_Value] AS float) FAI2_13
+                      , CAST([FAI2_14_Value] AS float) FAI2_14
+                      , CAST([FAI2_15_Value] AS float) FAI2_15
+                      , CAST([FAI2_16_Value] AS float) FAI2_16
+                      , CAST([FAI2_17_Value] AS float) FAI2_17
+                      , CAST([FAI2_18_Value] AS float) FAI2_18
+                      , CAST([FAI2_19_Value] AS float) FAI2_19
+                      , CAST([FAI2_20_Value] AS float) FAI2_20
+                      , CAST([FAI2_21_Value] AS float) FAI2_21
+                      , CAST([FAI2_22_Value] AS float) FAI2_22
+                      , CAST([FAI2_23_Value] AS float) FAI2_23
+                      , CAST([FAI2_24_Value] AS float) FAI2_24
+                      , CAST([FAI2_25_Value] AS float) FAI2_25
+                      , CAST([FAI2_26_Value] AS float) FAI2_26
+                      , CAST([FAI2_27_Value] AS float) FAI2_27
+                      , CAST([FAI2_28_Value] AS float) FAI2_28
+                      , CAST([FAI2_29_Value] AS float) FAI2_29
+                      , CAST([FAI2_30_Value] AS float) FAI2_30
+                      , CAST([FAI2_31_Value] AS float) FAI2_31
+                      , CAST([FAI2_32_Value] AS float) FAI2_32
+                      , CAST([FAI2_33_Value] AS float) FAI2_33
+                      , CAST([FAI2_34_Value] AS float) FAI2_34
+                      , CAST([FAI2_35_Value] AS float) FAI2_35
+                      , CAST([FAI2_36_Value] AS float) FAI2_36
+                      , CAST([FAI2_37_Value] AS float) FAI2_37
+                      , CAST([FAI2_38_Value] AS float) FAI2_38
+                      , CAST([FAI2_39_Value] AS float) FAI2_39
+                      , CAST([FAI2_40_Value] AS float) FAI2_40
+                 FROM [MESDataCenter].[dbo].[m_D4Y_MainLine3_M10_t]
+                 WHERE LineID like concat('%', #{senseDataDto.LineID}, '%')
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+                   AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+             ) A
+    </select>
+
     <select id="getX2757AllPins" resultType="SenseDataX2757"
             parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
         SELECT [3D_FAI9_1] AS 'FAI9_1',
@@ -245,14 +425,16 @@
                [3D_FAI9_3] AS 'FAI9_3',
                [3D_FAI9_2] AS 'FAI9_2'
         FROM [MESDataCenter].[dbo].[m_A90_M3_2_t]
-        WHERE CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+        WHERE LineName like concat('%', #{senseDataDto.LineID}, '%')
+          and CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
           AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
     </select>
 
     <select id="getX2987AllPins" resultType="String" parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
         SELECT DISTINCT [3D_FAI17] AS pin
         FROM [MESDataCenter].[dbo].[m_X2987_DATA_t]
-        WHERE CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+        WHERE LineName like concat('%', #{senseDataDto.LineID}, '%')
+          and CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
           AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
     </select>
 
@@ -268,7 +450,104 @@
                [FAI9-8_Value] AS 'FAI9_8',
                [FAI12_Value]  AS 'FAI12'
         FROM [MESDataCenter].[dbo].[X3047_Main_Line1_01_M1_AOI456]
-        WHERE CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+        WHERE LineID like concat('%', #{senseDataDto.LineID}, '%')
+          and CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+    </select>
+
+    <select id="getSenseDataD9XPins" resultType="SenseDataD9X"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        select [FAI2_1_Value]  as 'FAI2_1'
+             , [FAI2_2_Value]  as 'FAI2_2'
+             , [FAI2_3_Value]  as 'FAI2_3'
+             , [FAI2_4_Value]  as 'FAI2_4'
+             , [FAI2_5_Value]  as 'FAI2_5'
+             , [FAI2_6_Value]  as 'FAI2_6'
+             , [FAI2_7_Value]  as 'FAI2_7'
+             , [FAI2_8_Value]  as 'FAI2_8'
+             , [FAI2_9_Value]  as 'FAI2_9'
+             , [FAI2_10_Value] as 'FAI2_10'
+             , [FAI2_11_Value] as 'FAI2_11'
+             , [FAI2_12_Value] as 'FAI2_12'
+             , [FAI2_13_Value] as 'FAI2_13'
+             , [FAI2_14_Value] as 'FAI2_14'
+             , [FAI2_15_Value] as 'FAI2_15'
+             , [FAI2_16_Value] as 'FAI2_16'
+             , [FAI2_17_Value] as 'FAI2_17'
+             , [FAI2_18_Value] as 'FAI2_18'
+             , [FAI2_19_Value] as 'FAI2_19'
+             , [FAI2_20_Value] as 'FAI2_20'
+             , [FAI2_21_Value] as 'FAI2_21'
+             , [FAI2_22_Value] as 'FAI2_22'
+             , [FAI2_23_Value] as 'FAI2_23'
+             , [FAI2_24_Value] as 'FAI2_24'
+             , [FAI2_25_Value] as 'FAI2_25'
+             , [FAI2_26_Value] as 'FAI2_26'
+             , [FAI2_27_Value] as 'FAI2_27'
+             , [FAI2_28_Value] as 'FAI2_28'
+             , [FAI2_29_Value] as 'FAI2_29'
+             , [FAI2_30_Value] as 'FAI2_30'
+             , [FAI2_31_Value] as 'FAI2_31'
+             , [FAI2_32_Value] as 'FAI2_32'
+             , [FAI2_33_Value] as 'FAI2_33'
+             , [FAI2_34_Value] as 'FAI2_34'
+             , [FAI2_35_Value] as 'FAI2_35'
+             , [FAI2_36_Value] as 'FAI2_36'
+             , [FAI2_37_Value] as 'FAI2_37'
+             , [FAI2_38_Value] as 'FAI2_38'
+             , [FAI2_39_Value] as 'FAI2_39'
+             , [FAI2_40_Value] as 'FAI2_40'
+        FROM [MESDataCenter].[dbo].[m_D9X_MainLine3_M10_t]
+        WHERE LineID like concat('%', #{senseDataDto.LineID}, '%')
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
+    </select>
+
+    <select id="getSenseDataD4YPins" resultType="SenseDataD4Y"
+            parameterType="com.example.pmp.pojo.sense.dto.SenseDataDto">
+        select [FAI2_1_Value]  as 'FAI2_1'
+             , [FAI2_2_Value]  as 'FAI2_2'
+             , [FAI2_3_Value]  as 'FAI2_3'
+             , [FAI2_4_Value]  as 'FAI2_4'
+             , [FAI2_5_Value]  as 'FAI2_5'
+             , [FAI2_6_Value]  as 'FAI2_6'
+             , [FAI2_7_Value]  as 'FAI2_7'
+             , [FAI2_8_Value]  as 'FAI2_8'
+             , [FAI2_9_Value]  as 'FAI2_9'
+             , [FAI2_10_Value] as 'FAI2_10'
+             , [FAI2_11_Value] as 'FAI2_11'
+             , [FAI2_12_Value] as 'FAI2_12'
+             , [FAI2_13_Value] as 'FAI2_13'
+             , [FAI2_14_Value] as 'FAI2_14'
+             , [FAI2_15_Value] as 'FAI2_15'
+             , [FAI2_16_Value] as 'FAI2_16'
+             , [FAI2_17_Value] as 'FAI2_17'
+             , [FAI2_18_Value] as 'FAI2_18'
+             , [FAI2_19_Value] as 'FAI2_19'
+             , [FAI2_20_Value] as 'FAI2_20'
+             , [FAI2_21_Value] as 'FAI2_21'
+             , [FAI2_22_Value] as 'FAI2_22'
+             , [FAI2_23_Value] as 'FAI2_23'
+             , [FAI2_24_Value] as 'FAI2_24'
+             , [FAI2_25_Value] as 'FAI2_25'
+             , [FAI2_26_Value] as 'FAI2_26'
+             , [FAI2_27_Value] as 'FAI2_27'
+             , [FAI2_28_Value] as 'FAI2_28'
+             , [FAI2_29_Value] as 'FAI2_29'
+             , [FAI2_30_Value] as 'FAI2_30'
+             , [FAI2_31_Value] as 'FAI2_31'
+             , [FAI2_32_Value] as 'FAI2_32'
+             , [FAI2_33_Value] as 'FAI2_33'
+             , [FAI2_34_Value] as 'FAI2_34'
+             , [FAI2_35_Value] as 'FAI2_35'
+             , [FAI2_36_Value] as 'FAI2_36'
+             , [FAI2_37_Value] as 'FAI2_37'
+             , [FAI2_38_Value] as 'FAI2_38'
+             , [FAI2_39_Value] as 'FAI2_39'
+             , [FAI2_40_Value] as 'FAI2_40'
+        FROM [MESDataCenter].[dbo].[m_D4Y_MainLine3_M10_t]
+        WHERE LineID like concat('%', #{senseDataDto.LineID}, '%')
+          AND CONVERT(VARCHAR(20), Collecttime, 120) &gt;= #{senseDataDto.startTime}
           AND CONVERT(VARCHAR(20), Collecttime, 120) &lt;= #{senseDataDto.endTime}
     </select>
 
